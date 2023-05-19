@@ -18,7 +18,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@google-cloud/text-to-speech": "^4.2.1",
-    "@huggingface/inference": "^2.4.0",
+    "@huggingface/inference": "^1.8.0",
     "@microsoft/fetch-event-source": "^2.0.1",
     "@mui/material": "^5.11.4",
     "@next/font": "13.0.7",
