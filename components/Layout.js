@@ -13,7 +13,7 @@ export default function Layout({ children }) {
   return (
     <div className="bg-black">
       <Navbar />
-      <ToastContainer toastStyle={{ backgroundColor: "black" }} />
+      <ToastContainer hideProgressBar toastStyle={{ backgroundColor: "#cd4a1d", color: "#ffffff" }} />
       <div className="content">
         {children}
 
