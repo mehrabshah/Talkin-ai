@@ -66,7 +66,7 @@ const Navbar = () => {
                   </li>
 
                   <li className="p__opensans">
-                     <Link href="/q_a">Chat</Link>
+                     <Link href="/contact">Contact</Link>
                   </li>
                   <li onClick={handleSignout} className="p__opensans">
                      Logout
