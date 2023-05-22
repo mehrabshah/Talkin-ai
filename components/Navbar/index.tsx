@@ -51,15 +51,16 @@ const Navbar = () => {
                      <Link href="/">Home</Link>
                   </li>
                   <li className="p__opensans">
+                     <Link href="/about">About</Link>
+                  </li>
+                  <li className="p__opensans">
                      <Link href="/create">TalkingAvatar</Link>
                   </li>
                   <li className="p__opensans">
                      <Link href="/tube2lip">Tube2Lip</Link>
                   </li>
 
-                  <li className="p__opensans">
-                     <Link href="/chatgpt">GPT2Speech</Link>
-                  </li>
+
 
                   <li className="p__opensans">
                      <Link href="/pricing">Pricing</Link>
