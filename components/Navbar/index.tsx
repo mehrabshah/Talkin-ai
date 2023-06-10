@@ -38,15 +38,15 @@ const Navbar = () => {
 
 
    return (
-      <div className="app__navbar">
-         <div className="app__navbar-logo">
+      <div className="app_navbar">
+         <div className="app_navbar-logo">
             <img src='/talkinai_logo_white.png' alt="app logo" />
             <div className="header1 text-3xl font-bold">{' '}TALKIN.AI</div>
          </div>
 
          <div className="basis-2/4 flex items-center justify-end">
             {status === 'authenticated' ? (
-               <ul className="app__navbar-links">
+               <ul className="app_navbar-links">
                   <li className="p__opensans">
                      <Link href="/">Home</Link>
                   </li>
@@ -72,7 +72,7 @@ const Navbar = () => {
                   <li onClick={handleSignout} className="p__opensans">
                      Logout
                   </li>
-                  <li className="app__navbar-profile">
+                  <li className="app_navbar-profile">
                      <Link href="/profile">
                         {userProfile ? (<img alt="profile" src={userProfile} />) :
                            (<img alt="profile" src="/talkinai_bobo.jpeg" />)}
@@ -80,7 +80,7 @@ const Navbar = () => {
                   </li>
 
                </ul>) : (<>
-                  <div className="app__navbar-login">
+                  <div className="app_navbar-login">
                      <Link href="/auth/signin">
                         Log In / Register
                      </Link>
@@ -90,17 +90,17 @@ const Navbar = () => {
          </div>
 
          {/* small screen */}
-         <div className="app__navbar-smallscreen">
+         <div className="app_navbar-smallscreen">
             <GiHamburgerMenu color="#fff" fontSize={21} onClick={() => setToggleMenu(true)} />
             {toggleMenu && (
-               <div className="app__navbar-smallscreen_overlay flex__center slide-bottom">
+               <div className="app_navbar-smallscreen_overlay flex__center slide-bottom">
                   <MdOutlineRestaurantMenu
                      fontSize={16}
                      className="overlay__close"
                      onClick={() => setToggleMenu(false)}
                   />
                   <ul
-                     className="app__navbar-smallscreen_links"
+                     className="app_navbar-smallscreen_links"
                      onClick={() => setToggleMenu(false)}
                   >
 

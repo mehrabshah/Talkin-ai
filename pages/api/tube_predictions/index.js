@@ -12,7 +12,8 @@ export default async function handler(req, res) {
       //version: "37171cc1d17a37ff4192ad296b1964cf9345797a7907d6f472cfd34cd89e3e9f",
       //version: "c29e89e10e3c601ae3c60a6f64f120e0d279288120382c6a8bfecaf6ceec7213",
       //version: "aab2f75869a09559c7624cca903591bf425418bf7f3e3bcfd0ebe50a1e03fb87",
-      version: "5c3ec513526dae1cd86c5d6d25c71b6428c873b5cd93da1a6eb2e289ed5f53d1",
+      //version: "5c3ec513526dae1cd86c5d6d25c71b6428c873b5cd93da1a6eb2e289ed5f53d1",
+      version: "ec9f28eb1ded641f55569bcc59755fe0d3a9a61ef8c5b153eb30521b4d4962ae",
 
       // This is the text prompt that will be submitted by a form on the frontend
       input: req.body,

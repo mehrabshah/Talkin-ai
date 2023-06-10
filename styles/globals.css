@@ -211,8 +211,8 @@ a {
 
 
 
-/* Logo */
-.app__discord-logo {
+/* Discord */
+.app_discord-logo {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -220,13 +220,30 @@ a {
 
 }
 
-.app__discord-logo img {
+.app_discord-logo img {
   width: 80px;
 }
 
 
-/* Navbar Links */
-.app__social-links {
+
+
+/* Contact */
+.app_contact-logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5rem;
+
+}
+
+.app_contact-logo img {
+  width: 150px;
+}
+
+
+
+/* Social Bar */
+.app_social-links {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -236,12 +253,12 @@ a {
 
 
 
-.app__social-links li {
+.app_social-links li {
   margin: 0 1rem;
   cursor: pointer;
 }
 
-.app__social-links li:hover {
+.app_social-links li:hover {
   color: #cd4a1d;
 }
 
@@ -261,7 +278,7 @@ a {
 
 
 
-.app__navbar {
+.app_navbar {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -275,31 +292,31 @@ a {
 }
 
 /* Logo */
-.app__navbar-logo {
+.app_navbar-logo {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.app__navbar-logo img {
-  width: 80px;
+.app_navbar-logo img {
+  width: 110px;
 }
 
 
 /* profile picture */
-.app__navbar-profile {
+.app_navbar-profile {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.app__navbar-profile img {
+.app_navbar-profile img {
   width: 60px;
   border-radius: 50%;
 }
 
 /* Navbar Links */
-.app__navbar-links {
+.app_navbar-links {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -309,45 +326,45 @@ a {
 
 
 
-.app__navbar-links li {
+.app_navbar-links li {
   margin: 0 1rem;
   cursor: pointer;
 }
 
-.app__navbar-links li:hover {
+.app_navbar-links li:hover {
   color: #cd4a1d;
 }
 
 /* Login buttons */
-.app__navbar-login {
+.app_navbar-login {
   background: linear-gradient(to right, #cd4a1d, #cd4a1d);
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.app__navbar-login a {
+.app_navbar-login a {
   margin: 0 1rem;
   text-decoration: none;
   transition: 0.5s ease;
 }
 
-.app__navbar-login a:hover {
+.app_navbar-login a:hover {
   border-bottom: 1px solid var(--color-golden);
 }
 
-.app__navbar-login div {
+.app_navbar-login div {
   width: 1px;
   height: 30px;
   background-color: var(--color-grey);
 }
 
 /* Navbar smallscreen */
-.app__navbar-smallscreen {
+.app_navbar-smallscreen {
   display: none;
 }
 
-.app__navbar-smallscreen_overlay {
+.app_navbar-smallscreen_overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -360,7 +377,7 @@ a {
   z-index: 5;
 }
 
-.app__navbar-smallscreen_overlay .overlay__close {
+.app_navbar-smallscreen_overlay .overlay_close {
   font-size: 16px;
   color: var(--color-golden);
   cursor: pointer;
@@ -370,11 +387,11 @@ a {
   right: 20px;
 }
 
-.app__navbar-smallscreen_links {
+.app_navbar-smallscreen_links {
   list-style: none;
 }
 
-.app__navbar-smallscreen_links li {
+.app_navbar-smallscreen_links li {
   margin: 1rem;
   cursor: pointer;
   color: var(--color-golden);
@@ -383,37 +400,37 @@ a {
   font-family: var(--font-base);
 }
 
-.app__navbar-smallscreen_links li:hover {
+.app_navbar-smallscreen_links li:hover {
   font-family: var(--color-white);
 }
 
 /* Media Queries */
 @media screen and (max-width: 2000px) {
-  .app__navbar-logo img {
-    width: 210px;
+  .app_navbar-logo img {
+    width: 110px;
   }
 }
 
 @media screen and (max-width: 1150px) {
-  .app__navbar-links {
+  .app_navbar-links {
     display: none;
   }
 
-  .app__navbar-smallscreen {
+  .app_navbar-smallscreen {
     display: flex;
   }
 }
 
 @media screen and (max-width: 650px) {
-  .app__navbar {
+  .app_navbar {
     padding: 1rem;
   }
 
-  .app__navbar-login {
+  .app_navbar-login {
     display: none;
   }
 
-  .app__navbar-logo img {
+  .app_navbar-logo img {
     width: 110px;
   }
 }

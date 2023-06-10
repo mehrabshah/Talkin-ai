@@ -13,30 +13,23 @@ import DiscordButton from './DiscordButton';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function Dashboard() {
-  const [videoScription, setVideoScription] = useState("");
 
-  const [audioFile, setAudioFile] = useState();
   const [youtubeUrl, setYoutubeUrl] = useState("");
 
   const [speech, setSpeech] = useState("");
 
-  const [voice, setVoice] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+
   const [error, setError] = useState("");
   const [videoUrl, setVideoUrl] = useState('');
-
-  const [isGenerated, setIsGenerated] = useState(false);
-  const [isConverted, setIsConverted] = useState(false);
-  const [audioPrediction, setAudioPrediction] = useState(null);
   const [videoPrediction, setVideoPrediction] = useState(null);
-  const [audioSrc, setAudioSrc] = useState();
+
   const [videoSrc, setVideoSrc] = useState();
   const [usage, setUsage] = useState('');
   const [isOverUsageLimit, setIsOverUsageLimit] = useState(true);
-  const [audio, setAudio] = useState();
-  const [isCustomAudio, setIsCustomAudio] = useState(false);
-  const [customAudioUrl, setCustomAudioUrl] = useState(null);
+
   const [isGenerating, setIsGenerating] = useState(false);
-  const [audioError, setAudioError] = useState();
 
 
   const session = useSession();
@@ -100,215 +93,85 @@ export default function Dashboard() {
   });
 
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    //setIsGenerated(true);
-
-    // post request to prediction api to create talking avatar
-
-  };
-
-
-  const handleAudioChange = async (e) => {
-    setAudioError('');
-    const audio = e.target.files[0];
-    // if no audio selected
-    if (!audio) {
-      return;
-    }
-
-    // check if audio
-    const result = isAudio(audio.name);
-    if (!result) {
-      const error = 'File type should be a audio file';
-      toast(error, { type: 'error' });
-      setAudioError(error);
-      return;
-    }
-    const isAudioLarge = validateAudioSize(audio);
-    if (isAudioLarge) {
-      const error = 'File must be less or equal to 2MB';
-      toast(error, { type: 'error' });
-      setAudioError(error);
-      return;
-    }
-    const reader = new FileReader();
-    // converts to BASE 64
-    reader.readAsDataURL(audio);
-    reader.addEventListener('load', () => {
-      //setCustomAudioSrc(reader.result);
-      setIsCustomAudio(true);
-      setAudio(audio);
-      console.log(isCustomAudio);
-    });
-
-
-  };
-
-
-
-
-
   const handleOnSubmit = async (event) => {
 
     event.preventDefault();
 
-    const form = event.currentTarget;
-
-    const audio_fileInput = Array.from(form.elements).find(({ name }) => name === 'audio');
-
-
-
-
-    const audio_formData = new FormData();
-
-    for (const file of audio_fileInput.files) {
-      audio_formData.append('file', file);
-    }
-
-
-    audio_formData.append('upload_preset', 'app_users');
-
-    const audio_data = await fetch('https://api.cloudinary.com/v1_1/dbospsdwo/video/upload', {
-      method: 'POST',
-      body: audio_formData
-    }).then(r => r.json());
-
-    setCustomAudioUrl(audio_data.secure_url);
-
-
-
-
-    const customAudioUrl = audio_data.secure_url;
-
 
     // post request to prediction api to create talking avatar
-    if (isCustomAudio) {
+    const video_body = {
+      youtube_video_url: youtubeUrl,
+      Text: speech,
+      start_time: startTime,
+      end_time: endTime,
+    };
 
-      var audio_body = {
-        Text: speech,
-
-        //voice_a: voice,
-        custom_voice: customAudioUrl,
-      };
-    }
-    else {
-
-      var audio_body = {
-        Text: speech,
-
-        voice_a: voice,
-        //custom_voice: customAudioUrl,
-
-      };
-    }
-
-
-    const response = await fetch("/api/tts_predictions", {
+    const video_response = await fetch("/api/tube_predictions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(
-        audio_body),
+        video_body),
     });
-    let audioPrediction = await response.json();
-    if (response.status !== 201) {
-      setError(audioPrediction.detail);
+
+    let videoPrediction = await video_response.json();
+    if (video_response.status !== 201) {
+      setError(videoPrediction.detail);
+
       return;
     }
-    setAudioPrediction(audioPrediction);
 
+    setVideoPrediction(videoPrediction);
     while (
-      audioPrediction.status !== "succeeded" &&
-      audioPrediction.status !== "failed"
+      videoPrediction.status !== "succeeded" &&
+      videoPrediction.status !== "failed"
     ) {
       await sleep(1000);
-      const response = await fetch("/api/tts_predictions/" + audioPrediction.id);
-      audioPrediction = await response.json();
-      if (response.status !== 200) {
-        setError(audioPrediction.detail);
-        return;
-      }
-      console.log({ audioPrediction });
-      //setAudioPrediction(audioPrediction);
-    }
-    if (audioPrediction.status == "succeeded") {
-      setAudioPrediction(audioPrediction);
-      setAudioSrc(audioPrediction.output);
-
-      // post request to prediction api to create talking avatar
-      const video_body = {
-        youtube_video_url: youtubeUrl,
-        audio_in: audioPrediction.output,
-      };
-
-      const video_response = await fetch("/api/tube_predictions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(
-          video_body),
-      });
-
-      let videoPrediction = await video_response.json();
-      if (video_response.status !== 201) {
+      const video_response = await fetch("/api/tube_predictions/" + videoPrediction.id);
+      videoPrediction = await video_response.json();
+      if (video_response.status !== 200) {
         setError(videoPrediction.detail);
+        setVideoPrediction(videoPrediction);
         return;
       }
+      console.log({ videoPrediction });
+    }
 
+    if (videoPrediction.status == "succeeded") {
       setVideoPrediction(videoPrediction);
-      while (
-        videoPrediction.status !== "succeeded" &&
-        videoPrediction.status !== "failed"
-      ) {
-        await sleep(1000);
-        const video_response = await fetch("/api/tube_predictions/" + videoPrediction.id);
-        videoPrediction = await video_response.json();
-        if (video_response.status !== 200) {
-          setError(videoPrediction.detail);
-          return;
-        }
-        console.log({ videoPrediction });
+      setVideoSrc(videoPrediction.output);
+      const video_url = videoPrediction.output;
+
+      try {
+
+        // upload to cloudinary
+        const video_formData = new FormData();
+        video_formData.append('file', video_url);
+        video_formData.append('upload_preset', 'tube_video');
+
+        const video_data = await fetch('https://api.cloudinary.com/v1_1/dbospsdwo/video/upload', {
+          method: 'POST',
+          body: video_formData
+        }).then(r => r.json());
+
+        const cld_video_url = video_data.secure_url;
+        const cld_video_id = video_data.public_id;
+        const cld_video_duration = Math.floor(video_data.duration * 60);
+
+        setVideoUrl(video_data.secure_url);
+
+
+        const prisma_body = { cld_video_url, cld_video_id, cld_video_duration };
+        await fetch('/api/creation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(prisma_body),
+        });
+        //await Router.push('/drafts');
+      } catch (error) {
+        console.error(error);
       }
-      if (videoPrediction.status == "succeeded") {
-        setVideoPrediction(videoPrediction);
-        setVideoSrc(videoPrediction.output);
-        const video_url = videoPrediction.output;
-
-        try {
-
-          // upload to cloudinary
-          const video_formData = new FormData();
-          video_formData.append('file', video_url);
-          video_formData.append('upload_preset', 'tube_video');
-
-          const video_data = await fetch('https://api.cloudinary.com/v1_1/dbospsdwo/video/upload', {
-            method: 'POST',
-            body: video_formData
-          }).then(r => r.json());
-
-          const cld_video_url = video_data.secure_url;
-          const cld_video_id = video_data.public_id;
-          const cld_video_duration = Math.floor(video_data.duration * 60);
-
-          setVideoUrl(video_data.secure_url);
-
-
-          const prisma_body = { cld_video_url, cld_video_id, cld_video_duration };
-          await fetch('/api/creation', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(prisma_body),
-          });
-          //await Router.push('/drafts');
-        } catch (error) {
-          console.error(error);
-        }
-      }
-
     }
 
   }
@@ -319,8 +182,8 @@ export default function Dashboard() {
         <div className="">
           <form onSubmit={(e) => handleOnSubmit(e)}>
             <div className="flex flex-col">
-              <label className="sr-only" htmlFor="youtubeUrl">
-                Youtube URL (required)
+              <label className="text-white" htmlFor="youtubeUrl">
+                Youtube URL
               </label>
               <input
                 type="text"
@@ -333,15 +196,16 @@ export default function Dashboard() {
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="speech" className="sr-only">
+              <label htmlFor="speech" className="text-white">
                 Speech
               </label>
-              <input
+              <textarea
+                rows={7}
                 value={speech}
                 onChange={(e) => setSpeech(e.target.value)}
                 required
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                placeholder="Speech to Change (Required)"
+                placeholder="Speech (Required)"
                 type="text"
                 name="speech"
                 id="speech"
@@ -350,53 +214,33 @@ export default function Dashboard() {
 
 
             <div className="flex flex-col">
-              <label className="text-white" htmlFor="voice">
-                Option 1: Select voice
+              <label className="text-white" htmlFor="startTime">
+                Video Start Time
               </label>
 
-              <select
-                value={voice}
-                onChange={(e) => setVoice(e.target.value)}
+              <input
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                name="voice"
-                id="voice"
+                name="startTime"
+                id="startTime"
                 type="text"
-                placeholder="Select Voice"
-              >
-                <option value="">Select Voice</option>
-                <option value="en-US-Male-A">en-US-Male-A</option>
-                <option value="en-US-Female-B">en-US-Female-B</option>
-                <option value="en-US-Male-C">en-US-Male-C</option>
-                <option value="en-US-Female-D">en-US-Female-D</option>
-                <option value="en-GB-Male-E">en-GB-Male-E</option>
-                <option value="en-GB-Female-F">en-GB-Female-F</option>
-                <option value="en-AU-Male-G">en-AU-Male-G</option>
-                <option value="en-AU-Female-H">en-AU-Female-H</option>
-                <option value="Cage">Cage</option>
-                <option value="Fifth_Element">Fifth_Element</option>
-                <option value="Musk">Musk</option>
-                <option value="Obama">Obama</option>
-                <option value="Queen">Queen</option>
-                <option value="Shrek">Shrek</option>
-                <option value="Samuel_Jackson">Samuel_Jackson</option>
-                <option value="Tom">Tom</option>
-                <option value="Trump">Trump</option>
-                <option value="Young_Kid">Young Kid</option>
-              </select>
+                placeholder="Time format as 00:00:00 (Required)"
+              />
             </div>
 
             <div className="flex flex-col">
-              <label className="text-white" htmlFor="audio">
-                Option 2: Upload custom voice {"   "}{"    "}
-                <span className="text-red-500">(wav/mp3, Max 2MB)</span>
-                <span className="text-red-400">*</span>
+              <label className="text-white" htmlFor="endTime">
+                Video End Time
               </label>
               <input
-                type="file"
-                className="hero-button w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-white-500 my-2 text-white-900"
-                name="audio"
-                placeholder="Upload custom voice file"
-                onChange={handleAudioChange}
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+                name="endTime"
+                id="endTime"
+                type="text"
+                placeholder="Time format as 00:00:00 (Required)"
               />
             </div>
 
@@ -410,12 +254,12 @@ export default function Dashboard() {
               ) :
               (<button
                 className={`hero-button w-full hover:bg-green-700 text-white font-bold mt-6 py-2 px-4 rounded
-                  ${isGenerating || audioPrediction === ""
+                  ${isGenerating || youtubeUrl === ""
                     ? "cursor-not-allowed opacity-50"
                     : ""
                   }`}
                 type="submit"
-                disabled={isGenerating || audioPrediction === ""}
+                disabled={isGenerating || youtubeUrl === ""}
               >
                 {isGenerating ? "Generating..." : "Generate Youtube Video"}
               </button>)
@@ -431,7 +275,6 @@ export default function Dashboard() {
               />
             </div>
           )}
-          <p className="py-3 text-sm opacity-50 text-white">audio status: {audioPrediction?.status}</p>
           <p className="py-3 text-sm opacity-50 text-white">video status: {videoPrediction?.status}</p>
           <p className="py-3 text-sm opacity-50 text-white">video url: {videoUrl}</p>
 
