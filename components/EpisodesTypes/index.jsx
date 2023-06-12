@@ -17,7 +17,7 @@ const EpisodesTypes = () => {
                                 <p className="text-sm font-normal text-gray leading-6">{episode.description}</p>
                             </div>
                             <div className="w-100 md:w-1/2">
-                                <video controls muted autoPlay src={episode.video_url} className="w-100" alt="Episode-Type-Image" />
+                                <video controls muted autoPlay src={episode.video_url} controlsList="nodownload" className="w-100" alt="Episode-Type-Image" />
                             </div>
                         </div>
                     )

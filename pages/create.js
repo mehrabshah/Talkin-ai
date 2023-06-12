@@ -1,6 +1,7 @@
 import Head from "next/head";
 //import { Roboto } from "@next/font/google";
 import AvatarDashboard from "../components/AvatarDashboard";
+import { Video, CloudinaryContext } from "cloudinary-react";
 //import AvatarFAQ from '../components/AvatarFAQ';
 
 
@@ -32,6 +33,21 @@ export default function Home() {
             Create Your Unique Talking Avatar in Seconds
           </p>
         </div>
+        <div className="topnav">
+
+          <CloudinaryContext cloud_name="dbospsdwo">
+            <div>
+              <Video
+                publicId="talking_avatar/vh6rcnjxyo3yubfpk5js"
+                width="256"
+                height="256"
+                controls
+                disablePictureInPicture
+              />
+            </div>
+          </CloudinaryContext>
+        </div>
+
         <AvatarDashboard />
       </main>
     </>

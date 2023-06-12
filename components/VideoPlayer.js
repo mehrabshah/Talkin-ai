@@ -8,7 +8,7 @@ const VideoPlayer = () => {
     <CloudinaryContext cloud_name="dbospsdwo">
       <div>
         <Video
-          publicId="talking_avatar/vh6rcnjxyo3yubfpk5js"
+          publicId="tube_video/swwadhiy7gzfopqfyx2b"
           width="640"
           height="360"
           controls
