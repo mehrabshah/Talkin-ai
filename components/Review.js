@@ -51,7 +51,7 @@ export default function Review() {
 
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-      <div className="app__discord-logo">
+      <div className="app_contact-logo">
         <img src='/talkinai_contact.png' alt="app logo" />
         <div className="header1 text-1xl font-bold">Please be as specific as possible!</div>
       </div>

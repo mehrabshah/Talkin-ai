@@ -53,7 +53,7 @@ const SocialLinkBar = ({ video_url }) => {
             <p className="mb-20 text-xl text-center text-white">
                 <span>🔥 Share Your Creations With the World 🔥 </span>
             </p>
-            <ul className="app__social-links">
+            <ul className="app_social-links">
                 <li><TwitterShareButton url={video_url}>
                     <TwitterIcon size={40} round />
                 </TwitterShareButton> </li>
