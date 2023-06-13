@@ -1,7 +1,10 @@
 import prisma from "../../../lib/prisma";
-import { hash } from "bcrypt";
+//import { hash } from "bcrypt";
+
 
 import initStripe from 'stripe';
+
+import bcrypt from "bcryptjs";
 
 const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
 
@@ -29,7 +32,7 @@ const handler = async (req, res) => {
       const user = await prisma.user.create({
         data: {
           email,
-          password: await hash(password, 10),
+          password: await bcrypt.hash(password, 10),
           fullname,
           stripeCustomerId: customer.id,
         },
