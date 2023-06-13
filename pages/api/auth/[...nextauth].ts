@@ -2,19 +2,19 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "../../../lib/prisma";
 import { compare } from "bcrypt";
-import Stripe from 'stripe';
+
 
 
 export default NextAuth({
   providers: [
     CredentialsProvider({
-      credentials: {},
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
       // @ts-ignore
-      async authorize(credentials, _) {
-        const { email, password } = credentials as {
-          email: string;
-          password: string;
-        };
+      async authorize(credentials) {
+        const { email, password } = credentials ?? {}
         if (!email || !password) {
           throw new Error("Missing username or password");
         }
@@ -37,7 +37,7 @@ export default NextAuth({
 
   callbacks: {
     async jwt({
-      token, user, account,
+      token, user,
     }) {
       // if Local
       if (user) {
@@ -49,9 +49,9 @@ export default NextAuth({
     },
 
 
-    async session({ session, token }) {
+    async session({ session, user }) {
       //session.accessToken = token?.accessToken;
-      session.user = token.user;
+      session.user = user;
       return session;
     },
   },
