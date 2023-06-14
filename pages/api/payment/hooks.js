@@ -3,6 +3,7 @@
 import initStripe from "stripe";
 import { buffer } from "micro";
 import prisma from "../../../lib/prisma";
+import Cors from 'micro-cors';
 
 
 const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
@@ -10,102 +11,116 @@ const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
 
 export const config = { api: { bodyParser: false } };
 
-export default async (req, res) => {
-  const reqBuffer = await buffer(req);
-  const signature = req.headers["stripe-signature"];
-  const signingSecret = process.env.STRIPE_SIGNING_SECRET;
 
-  let event;
+const cors = Cors({
+  allowMethods: ['POST', 'HEAD'],
+})
 
-  try {
-    event = stripe.webhooks.constructEvent(reqBuffer, signature, signingSecret);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
+const webhookHandler = async (req, res) => {
 
-  //const { metadata } = event.data.object;
-  const stripeCustomerId = event.data.object.customer;
+  if (req.method === 'POST') {
+    const reqBuffer = await buffer(req);
+    const signature = req.headers["stripe-signature"];
+    const signingSecret = process.env.STRIPE_SIGNING_SECRET;
 
-  switch (event.type) {
-    case "charge.succeeded":
-      const { metadata } = event.data.object;
-      if (metadata?.userId && metadata?.productId) {
-        const user = await prisma.user.update({
-          where: {
-            id: parseInt(metadata.userId),
-          },
+    let event;
 
-          data: {
-            hadTrial: true,
-            onTrial: true,
-            trialStartAt: new Date(),
-            products: {
-              connect: {
-                priceId: metadata.productId,
+    try {
+      event = stripe.webhooks.constructEvent(reqBuffer, signature, signingSecret);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    //const { metadata } = event.data.object;
+    const stripeCustomerId = event.data.object.customer;
+
+    switch (event.type) {
+      case "charge.succeeded":
+        const { metadata } = event.data.object;
+        if (metadata?.userId && metadata?.productId) {
+          const user = await prisma.user.update({
+            where: {
+              id: parseInt(metadata.userId),
+            },
+
+            data: {
+              hadTrial: true,
+              onTrial: true,
+              trialStartAt: new Date(),
+              products: {
+                connect: {
+                  priceId: metadata.productId,
+                },
               },
             },
-          },
-        });
+          });
 
-        const result = await prisma.purchase.create({
-          data: {
-            priceId: metadata.productId,
-            userId: parseInt(metadata.userId),
-          },
-        });
+          const result = await prisma.purchase.create({
+            data: {
+              priceId: metadata.productId,
+              userId: parseInt(metadata.userId),
+            },
+          });
 
-      }
-      break;
+        }
+        break;
 
 
-    case "customer.subscription.updated":
-      const subscription = event.data.object;
-      const priceId = subscription.items.data[0].price.id;
-      if (stripeCustomerId) {
+      case "customer.subscription.updated":
+        const subscription = event.data.object;
+        const priceId = subscription.items.data[0].price.id;
+        if (stripeCustomerId) {
+          await prisma.user.update({
+            where: {
+              stripeCustomerId,
+            },
+            data: {
+              hadTrial: true,
+              isSubscribed: true,
+              productSubscribed: priceId,
+              currentPeriodStart: new Date(),
+              products: {
+                connect: {
+                  priceId: priceId,
+                },
+              },
+            },
+          });
+
+          await prisma.purchase.create({
+            data: {
+              priceId: priceId,
+              stripeCustomerId: stripeCustomerId,
+            },
+          });
+        }
+        break;
+
+
+      case 'customer.subscription.deleted':
         await prisma.user.update({
           where: {
             stripeCustomerId,
           },
           data: {
-            hadTrial: true,
-            isSubscribed: true,
-            productSubscribed: priceId,
-            currentPeriodStart: new Date(),
-            products: {
-              connect: {
-                priceId: priceId,
-              },
-            },
+            isSubscribed: false,
           },
         });
+        break;
+      default:
+        console.log(`Unhandled event type ${event.type}`);
+    }
 
-        await prisma.purchase.create({
-          data: {
-            priceId: priceId,
-            stripeCustomerId: stripeCustomerId,
-          },
-        });
-      }
-      break;
-
-
-    case 'customer.subscription.deleted':
-      await prisma.user.update({
-        where: {
-          stripeCustomerId,
-        },
-        data: {
-          isSubscribed: false,
-        },
-      });
-      break;
-    default:
-      console.log(`Unhandled event type ${event.type}`);
+    res.send({ received: true });
   }
-
-  res.send({ received: true });
+  else {
+    res.setHeader('Allow', 'POST')
+    res.status(405).end('Method Not Allowed')
+  }
 };
+
+export default cors(webhookHandler);
 
 
 
