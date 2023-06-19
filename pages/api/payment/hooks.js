@@ -6,7 +6,9 @@ import prisma from "../../../lib/prisma";
 import Cors from 'micro-cors';
 
 
-const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
+const stripe = initStripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2022-08-01',
+});
 
 
 export const config = { api: { bodyParser: false } };
@@ -26,7 +28,7 @@ const webhookHandler = async (req, res) => {
     let event;
 
     try {
-      event = stripe.webhooks.constructEvent(reqBuffer, signature, signingSecret);
+      event = stripe.webhooks.constructEvent(reqBuffer.toString(), signature, signingSecret);
     } catch (err) {
       console.log(err);
       return res.status(400).send(`Webhook Error: ${err.message}`);

@@ -3,7 +3,9 @@ import initStripe from "stripe";
 import { getToken } from 'next-auth/jwt';
 
 
-const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
+const stripe = initStripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2022-08-01',
+});
 
 export default async function handle(req, res) {
 
