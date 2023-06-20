@@ -29,7 +29,7 @@ export default async (req, res) => {
 
   switch (event.type) {
 
-    case "customer.subscription.updated":
+    case "customer.subscription.created":
       const subscription = event.data.object;
       const priceId = subscription.items.data[0].price.id;
       if (stripeCustomerId) {
