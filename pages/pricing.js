@@ -83,31 +83,6 @@ const PricingPage = ({ plans, trial }) => {
                 </button>
               </div>
             ))}
-            {data?.user?.hadTrial ? null : (<div
-              key={trial.priceId}
-              className="h-80 w-80 mx-2 bg-white text-black-700 flex flex-col"
-            >
-              <h2 className="text-gray-600 text-2xl py-8 font-medium text-center border-b border-gray-300">
-                {trial.name}
-              </h2>
-              <p className="flex-1 p-8 flex flex-col items-center">
-                <span className="text-gray-600  text-1xl">
-                  ${trial.price / 100}
-                  <span className="text-black-400 text-sm uppercase">
-                    {trial.currency}
-                  </span>
-                </span>
-
-              </p>
-
-              <button
-                className="hero-button py-4 text-white text-center"
-                onClick={() => processPayment(trial.priceId)}
-              >
-                Subscribe
-              </button>
-            </div>)}
-
           </div>
         </Container>
 

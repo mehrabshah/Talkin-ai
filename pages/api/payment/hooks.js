@@ -28,36 +28,6 @@ export default async (req, res) => {
   const stripeCustomerId = event.data.object.customer;
 
   switch (event.type) {
-    case "charge.succeeded":
-      const { metadata } = event.data.object;
-      if (metadata?.userId && metadata?.productId) {
-        const user = await prisma.user.update({
-          where: {
-            id: parseInt(metadata.userId),
-          },
-
-          data: {
-            hadTrial: true,
-            onTrial: true,
-            trialStartAt: new Date(),
-            products: {
-              connect: {
-                priceId: metadata.productId,
-              },
-            },
-          },
-        });
-
-        const result = await prisma.purchase.create({
-          data: {
-            priceId: metadata.productId,
-            userId: parseInt(metadata.userId),
-          },
-        });
-
-      }
-      break;
-
 
     case "customer.subscription.updated":
       const subscription = event.data.object;
