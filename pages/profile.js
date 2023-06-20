@@ -9,6 +9,7 @@ import Loading from '../components/Loading';
 import AppContext from '../utils/AppContext';
 import { BsFillCupHotFill } from 'react-icons/bs';
 import Head from "next/head";
+import { loadPortal } from 'utils/payment';
 
 export default function Profile({
   error, user, creations
@@ -132,6 +133,15 @@ export default function Profile({
                 <span>You are subscribed!</span> </div>) : null}
 
             </div>
+
+
+            <button
+              className="hero-button flex justify-center items-center gap-3 w-max m-auto mt-8 py-3 px-6 text-sm text-white font-semibold active:scale-95 md:text-md md:m-0"
+              onClick={() => loadPortal()}
+            >
+              Manage Your Plan
+            </button>
+
           </div>
 
           <div>
