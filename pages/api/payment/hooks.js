@@ -42,11 +42,6 @@ export default async (req, res) => {
             isSubscribed: true,
             productSubscribed: priceId,
             currentPeriodStart: new Date(),
-            products: {
-              connect: {
-                priceId: priceId,
-              },
-            },
           },
         });
 
