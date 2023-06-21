@@ -6,7 +6,7 @@ const AboutVideoPlayer = () => {
   const videoRef = useRef();
   return (
     <div className="feature-content bg-light-purple py-2 md:py-16">
-      <div className="max-w-5xl w-100 m-auto px-4">
+      <div className="max-w-5xl w-100 m-auto px-20">
         <CloudinaryContext cloud_name="dbospsdwo">
           <div>
             <Video
@@ -14,6 +14,8 @@ const AboutVideoPlayer = () => {
               width="1280"
               height="360"
               controls
+              autoplay
+              loop
               innerRef={videoRef}
             />
           </div>

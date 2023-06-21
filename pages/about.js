@@ -22,7 +22,7 @@ export default function Home() {
       </Head>
 
 
-      <div className="max-w-7xl w-100 m-auto px-4">
+      <div className="max-w-7xl w-100 m-auto px-1">
         <AboutHero />
 
       </div>
