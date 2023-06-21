@@ -8,6 +8,7 @@ import ErrorComponent from '../components/ErrorComponent';
 import Loading from '../components/Loading';
 import AppContext from '../utils/AppContext';
 import { BsFillCupHotFill } from 'react-icons/bs';
+import { BsFillPlayCircleFill } from 'react-icons/bs';
 import Head from "next/head";
 import { loadPortal } from 'utils/payment';
 
@@ -135,12 +136,15 @@ export default function Profile({
             </div>
 
 
-            <button
-              className="hero-button flex justify-center items-center gap-3 w-max m-auto mt-8 py-3 px-6 text-sm text-white font-semibold active:scale-95 md:text-md md:m-0"
-              onClick={() => loadPortal()}
-            >
-              Manage Your Plan
-            </button>
+            <div className="mx-auto mt-10 max-w-xs sm:flex sm:max-w-none sm:justify-center">
+              <button
+                className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-orange-600 shadow-sm hover:bg-gray-500 sm:px-8"
+                onClick={() => loadPortal()}
+              >
+                <span className="text-xl md:text-2xl"><BsFillPlayCircleFill /></span>
+                <span> Manage Your Plan</span>
+              </button>
+            </div>
 
           </div>
 
