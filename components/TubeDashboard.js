@@ -8,6 +8,7 @@ import { isAudio, validateAudioSize, } from '../utils/fileValidation';
 
 import TubeFAQ from './TubeFAQ';
 import DiscordButton from './DiscordButton';
+import { BsFillPlayCircleFill } from 'react-icons/bs';
 
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -180,8 +181,30 @@ export default function Dashboard() {
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-y-12 md:grid-cols-1 md:gap-x-12 ">
         <div className="">
+
+          {isOverUsageLimit ?
+            (
+              <Link href="/pricing">
+                <button
+                  className="hero-button hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                >Buy a Plan</button>
+              </Link>
+            ) :
+            (<div className="mx-auto mt-10 max-w-xs sm:flex sm:max-w-none sm:justify-center">
+              <a target="_blank" href="https://www.talkin-ai.asia">
+                <button
+                  className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-orange-600 shadow-sm hover:bg-gray-500 sm:px-8"
+                >
+                  <span className="text-xl md:text-2xl"><BsFillPlayCircleFill /></span>
+                  <span> Use ChatGPT to Create Speech</span>
+                </button>
+              </a>
+            </div>)
+          }
+
+
           <form onSubmit={(e) => handleOnSubmit(e)}>
-            <div className="flex flex-col">
+            <div className="flex flex-col py-10">
               <label className="text-white" htmlFor="youtubeUrl">
                 Youtube URL
               </label>
@@ -195,6 +218,8 @@ export default function Dashboard() {
                 onChange={(e) => setYoutubeUrl(e.target.value)}
               />
             </div>
+
+
             <div className="flex flex-col">
               <label htmlFor="speech" className="text-white">
                 Speech

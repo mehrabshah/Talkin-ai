@@ -60,9 +60,6 @@ const Navbar = () => {
                      <Link href="/tube2lip">Tube2Lip</Link>
                   </li>
                   <li className="p__opensans">
-                        <a href="https://chatgpt-en.vercel.app">GPT2Speech</a>
-                  </li>
-                  <li className="p__opensans">
                      <Link href="/pricing">Pricing</Link>
                   </li>
 
@@ -114,10 +111,10 @@ const Navbar = () => {
                         <Link href="/tube2lip">Tube2Lip</Link>
                      </li>
                      <li className="p__opensans">
-                        <a href="https://chatgpt-en.vercel.app">GPT2Speech</a>
-                     </li>
-                     <li className="p__opensans">
                         <Link href="/pricing">Pricing</Link>
+                     </li>
+                     <li onClick={handleSignout} className="p__opensans">
+                        Logout
                      </li>
 
                   </ul>

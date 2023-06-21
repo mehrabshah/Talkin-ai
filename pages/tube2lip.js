@@ -29,7 +29,7 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center px-4 py-2">
 
           <p className="mt-3 text-1xl text-white">
-            Create Funny Youtube Speec Video in Seconds
+            Create Funny Youtube Video in Seconds
           </p>
         </div>
         <TubeDashboard />
