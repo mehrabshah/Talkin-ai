@@ -6,7 +6,7 @@ import Head from 'next/head';
 
 import Container from '../components/Container';
 
-import prisma from '../lib/prisma';
+
 
 import { useState } from "react";
 
@@ -15,11 +15,11 @@ import { useSession, signOut } from 'next-auth/react';
 
 import { processSubscription } from 'utils/payment';
 
-import { processPayment } from 'utils/payment';
+
 
 import initStripe from "stripe";
 
-const PricingPage = ({ plans, trial }) => {
+const PricingPage = ({ plans }) => {
   // display plans
   const session = useSession();
 
@@ -171,33 +171,6 @@ const PricingPage = ({ plans, trial }) => {
 
               </p>
             </div>
-            {data?.user?.hadTrial ? null : (<div
-
-              className="h-80 w-80 mx-2 bg-white text-black-700 flex flex-col"
-            >
-              <h2 className="text-gray-600 text-2xl py-8 font-medium text-center border-b border-gray-300">
-                Feature List
-              </h2>
-              <p className="flex-1 p-8 flex flex-col items-center">
-                <span className="text-gray-600  font-bold text-center  text-1xl">
-                  3 mins/ 3 days
-
-                </span>
-                <span className="text-gray-600 text-center text-sm">
-                  Use your own images
-
-                </span>
-                <span className="text-gray-600 text-center text-sm">
-                  Ask ChatGPT to create scripts
-
-                </span>
-                <span className="text-gray-600 text-center text-sm">
-                  Voice cloning
-
-                </span>
-
-              </p>
-            </div>)}
 
           </div>
         </Container>
@@ -252,15 +225,15 @@ export const getStaticProps = async () => {
 
   const plans = await Promise.all(productPromises);
 
-  const trial = await prisma.product.findUnique({
-    where: {
-      name: 'New User Trial',
-    },
-  });
+  //const trial = await prisma.product.findUnique({
+  //  where: {
+  //    name: 'New User Trial',
+  //  },
+  //});
 
   return {
     props: {
-      plans, trial
+      plans
     },
   };
 };
