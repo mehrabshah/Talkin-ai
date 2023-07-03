@@ -1,7 +1,7 @@
 import Head from "next/head";
 //import { Roboto } from "@next/font/google";
 import { Video, CloudinaryContext } from "cloudinary-react";
-import TubeDashboard from "../components/TubeDashboard";
+import TubeDashboardV2 from "../components/TubeDashboardV2";
 
 //import TubeFAQ from "../components/TubeFAQ";
 //const roboto = Roboto({
@@ -23,14 +23,14 @@ export default function Home() {
 
         <div className="topnav">
           <div>
-            <h1 className="header1 text-2xl md:text-2xl font-bold">Text2Tube Video Generator</h1>
+            <h1 className="header1 text-2xl md:text-2xl font-bold">Tube2Tube Video Generator</h1>
           </div>
         </div>
 
         <div className="flex flex-col items-center justify-center px-4 py-2">
 
           <p className="mt-3 text-1xl text-white">
-            Create Professional or Funny Youtube Video in Seconds
+            Create Funny Youtube Video in Seconds
           </p>
         </div>
 
@@ -40,19 +40,17 @@ export default function Home() {
               Welcome! To make a youtube video, you need to:
               <p className="flex-1  my-2 flex flex-col items-left">
                 <li className="text-gray-600 font-bold text-left  text-sm">
-                  First to input the youtube video url,
-
-
+                First to input the youtube video url for video, and input the start time of the video and the end time of the video where you would like to match the audio, 
                 </li>
 
                 <li className="text-gray-600 text-left text-sm">
-                  Then to input your speech script, you can also use ChatGPT to create a script,
+                Next to input the youtube video url for audio, and input the start time of the video and the end time of the video where you would like to extract the audio, 
 
 
 
                 </li>
                 <li className="text-gray-600 text-left text-sm">
-                  Finally to choose the start time of video and the end time of the video where you would like to match the speech and click the generate button.
+                  Finally to click the generate button.
 
 
                 </li>
@@ -67,7 +65,7 @@ export default function Home() {
               <CloudinaryContext cloud_name="dbospsdwo">
                 <div>
                   <Video
-                    publicId="talking_avatar/rgupcw6itclxsh5cuzee"
+                    publicId="talking_avatar/evzfcehy7yey9vj6au2e"
                     width="512"
                     height="512"
                     controls
@@ -78,7 +76,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <TubeDashboard />
+        <TubeDashboardV2 />
       </main>
     </>
   );
