@@ -10,7 +10,7 @@ const data = [
     {
         id: 2,
         title: "Youtube Video",
-        description: "Make professional or funny youtube video by change the speech of  the video with proprietary AI technology.",
+        description: "Make AI-enabled professional or funny youtube videos. Imagine the endless possibilities of seamlessly matching any audio track to different faces, making it appear as if the person in the video is speaking those words. ",
         video_url: "https://res.cloudinary.com/dbospsdwo/video/upload/v1683742127/result_voice_iowf0r.mp4"
     },
     {

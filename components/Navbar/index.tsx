@@ -56,9 +56,19 @@ const Navbar = () => {
                   <li className="p__opensans">
                      <Link href="/create">TalkingAvatar</Link>
                   </li>
-                  <li className="p__opensans">
-                     <Link href="/tube2lip">Tube2Lip</Link>
-                  </li>
+                  
+                  <li className="dropdown">
+    <button className="dropbtn">AI2Tube 
+      <i className="fa fa-caret-down"></i>
+    </button>
+    <div className="dropdown-content">
+      <Link href="/tube2lip">Text2Tube</Link>
+      <Link href="/tube2lip_v2">Tube2Tube</Link>
+      
+    </div>
+  </li> 
+                  
+                  
                   <li className="p__opensans">
                      <Link href="/pricing">Pricing</Link>
                   </li>
@@ -108,7 +118,7 @@ const Navbar = () => {
                         <Link href="/create">TalkingAvatar</Link>
                      </li>
                      <li className="p__opensans">
-                        <Link href="/tube2lip">Tube2Lip</Link>
+                        <Link href="/tube2lip_v2">Tube2Tube</Link>
                      </li>
                      <li className="p__opensans">
                         <Link href="/pricing">Pricing</Link>
