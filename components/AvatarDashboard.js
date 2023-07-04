@@ -6,7 +6,7 @@ import { isImage, isAudio, validateImgSize, validateAudioSize, } from '../utils/
 import { useContext, useEffect } from 'react';
 //import FAQ from './FAQ';
 import { ToastContainer, toast } from 'react-toastify';
-
+import Disclaimer from './Disclaimer';
 import SocialLinkBar from './SocialLinkBar';
 import AvatarFAQ from './AvatarFAQ';
 import DiscordButton from './DiscordButton';
@@ -555,7 +555,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-
+      <Disclaimer />
       <DiscordButton />
       <SocialLinkBar url={videoUrl} />
 

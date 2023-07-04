@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import SocialLinkBar from './SocialLinkBar';
 import { isAudio, validateAudioSize, } from '../utils/fileValidation';
-
+import Disclaimer from './Disclaimer';
 import TubeFAQ from './TubeFAQ';
 import DiscordButton from './DiscordButton';
 import { BsFillPlayCircleFill } from 'react-icons/bs';
@@ -323,7 +323,7 @@ export default function Dashboard() {
       </div>
 
 
-
+      <Disclaimer />
       <DiscordButton />
       <SocialLinkBar url={videoUrl} />
 

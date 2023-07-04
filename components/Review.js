@@ -50,11 +50,6 @@ export default function Review() {
 
 
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-      <div className="app_contact-logo">
-        <img src='/talkinai_contact.png' alt="app logo" />
-        <div className="header1 text-1xl font-bold">Please be as specific as possible!</div>
-      </div>
       <form onSubmit={(event) => submitProduct(event)}>
         <div className="review-card shadow sm:rounded-md sm:overflow-hidden">
 
@@ -73,8 +68,9 @@ export default function Review() {
             >
               <option value="">Select Product</option>
               <option value="TalkingAvatar">Talking Avatar</option>
-              <option value="Tube2Lip">Tube2Lip</option>
-              <option value="GPT2Speech">GPT2Speech</option>
+              <option value="Text2Tube">Text2Tube</option>
+              <option value="Tube2Tube">Tube2Tube</option>
+              <option value="RequestNewProduct">Request New Product</option>
               <option value="Other">Other</option>
             </select>
           </div>
@@ -93,7 +89,6 @@ export default function Review() {
               id="planName"
             >
               <option value="">Select Plan</option>
-              <option value="New User Trial">New User Trial</option>
               <option value="Lite Plan">Lite Plan</option>
               <option value="Pro Plan">Pro Plan</option>
               <option value="Advanced Plan">Advanced Plan</option>

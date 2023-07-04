@@ -29,7 +29,7 @@ const Hero = () => {
             </div>
 
             <div>
-                <div classname="video-card flex justify-center items-center gap-3 m-auto mt-8 py-3 px-6">
+                <div className="video-card flex justify-center items-center gap-3 m-auto mt-8 py-3 px-6">
                     <VideoPlayer />
                 </div>
             </div>

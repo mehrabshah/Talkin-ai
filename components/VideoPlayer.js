@@ -10,8 +10,8 @@ const VideoPlayer = () => {
         <Video
           //publicId="swwadhiy7gzfopqfyx2b"
           publicId="trump_rap_qgtuxz"
-          width="640"
-          height="360"
+          width="900"
+          height="600"
           controls
           loop
           innerRef={videoRef}
