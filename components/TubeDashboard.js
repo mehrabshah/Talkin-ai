@@ -20,15 +20,7 @@ import {vignette} from "@cloudinary/url-gen/actions/effect";
 import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
 
 
-// Create your instance
-const cld = new Cloudinary({
-  cloud: {
-    cloudName: process.env.CLOUDINARY_NAME
-  },
-  url: {
-    secure: true // force https, set to false to force http
-  }
-});
+
 
 
 
@@ -44,7 +36,7 @@ export default function Dashboard() {
   const [endTime, setEndTime] = useState("");
 
   const [error, setError] = useState("");
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState("");
   const [videoPrediction, setVideoPrediction] = useState(null);
 
   const [videoSrc, setVideoSrc] = useState();
@@ -162,7 +154,7 @@ export default function Dashboard() {
 
     if (videoPrediction.status == "succeeded") {
       setVideoPrediction(videoPrediction);
-      
+      setVideoSrc(videoPrediction.output);
       const video_url = videoPrediction.output;
 
       try {
@@ -182,10 +174,21 @@ export default function Dashboard() {
         const cld_video_duration = Math.floor(video_data.duration * 60);
         
 
+        // Create your instance
+        const cld = new Cloudinary({
+          cloud: {
+          cloudName: process.env.CLOUDINARY_NAME
+         },
+        url: {
+        secure: true // force https, set to false to force http
+        }
+        });
+        
+        
         const myVideo = cld.video(cld_video_id);
         // Import the resize transformation and apply it to myImage
         // Resize the image to 100x100
-        myVideo
+        const cld_video_url = myVideo
         .resize(Resize.scale().width(640).height(360))
         .overlay(
         source(
@@ -195,13 +198,11 @@ export default function Dashboard() {
         .effect(vignette())
         )
         )
-        .position(new Position().gravity(compass('south_east')).offsetY(5)) 
-        );
+        .position(new Position().gravity(compass('south_east'))) 
+        ).toURL();
 
        // When we're done, we can apply all our changes and create a URL.
-        const cld_video_url = myVideo.toURL();
-
-        setVideoSrc(cld_video_url);
+       // setVideoSrc(cld_video_url);
         setVideoUrl(cld_video_url);
 
 
