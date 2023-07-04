@@ -17,8 +17,9 @@ export default function Home() {
     <>
 
       <Head>
-        <title>Talking Avatar Homepage</title>
-        <meta name="description" content="A simple Next.js application that utilizes Replicate to restore old photos." />
+        <title>TALKIN AI Homepage</title>
+        <meta name="description" content="Generate AI-enabled talking avatar and youtube videos!" />
+        <link rel="icon" href="/talkin_logo.png" />
       </Head>
 
 

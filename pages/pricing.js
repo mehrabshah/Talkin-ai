@@ -30,9 +30,9 @@ const PricingPage = ({ plans }) => {
   return (
     <>
       <Head>
-        <title>talking avarter creations</title>
+        <title>TALKIN AI Pricing</title>
         <meta name="description" content="Talkin AI Pricing" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/talkin_logo.png" />
       </Head>
 
       <main className="p-10 mx-auto max-w-4xl">
