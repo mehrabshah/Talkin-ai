@@ -9,19 +9,6 @@ import { isAudio, validateAudioSize, } from '../utils/fileValidation';
 import TubeFAQ from './TubeFAQ';
 import DiscordButton from './DiscordButton';
 import { BsFillPlayCircleFill } from 'react-icons/bs';
-import {Cloudinary} from '@cloudinary/url-gen';
-import {Resize} from '@cloudinary/url-gen/actions/resize';
-import {Transformation} from "@cloudinary/url-gen";
-import {scale, fill, crop} from "@cloudinary/url-gen/actions/resize";
-import {source} from "@cloudinary/url-gen/actions/overlay";
-import {image, text} from "@cloudinary/url-gen/qualifiers/source";
-import {Position} from "@cloudinary/url-gen/qualifiers/position";
-import {vignette} from "@cloudinary/url-gen/actions/effect";
-import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
-
-
-
-
 
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -170,40 +157,13 @@ export default function Dashboard() {
         }).then(r => r.json());
 
         //const cld_video_url = video_data.secure_url;
+        const cld_video_url = video_data.secure_url;
         const cld_video_id = video_data.public_id;
         const cld_video_duration = Math.floor(video_data.duration * 60);
         
 
-        // Create your instance
-        const cld = new Cloudinary({
-          cloud: {
-          cloudName: process.env.CLOUDINARY_NAME
-         },
-        url: {
-        secure: true // force https, set to false to force http
-        }
-        });
+        setVideoUrl(video_data.secure_url);
         
-        
-        const myVideo = cld.video(cld_video_id);
-        // Import the resize transformation and apply it to myImage
-        // Resize the image to 100x100
-        const cld_video_url = myVideo
-        .resize(Resize.scale().width(640).height(360))
-        .overlay(
-        source(
-        image('ai_mark_ekzt6i')
-        .transformation(new Transformation()
-        .resize(scale().width(100))
-        .effect(vignette())
-        )
-        )
-        .position(new Position().gravity(compass('south_east'))) 
-        ).toURL();
-
-       // When we're done, we can apply all our changes and create a URL.
-       // setVideoSrc(cld_video_url);
-        setVideoUrl(cld_video_url);
 
 
         const prisma_body = { cld_video_url, cld_video_id, cld_video_duration };
