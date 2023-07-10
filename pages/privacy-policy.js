@@ -27,7 +27,7 @@ export default function Home() {
           <h1 className="mx-auto max-w-4xl font-display text-4xl font-bold tracking-normal text-white sm:text-6xl">
             Privacy Policy
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-slate-700 leading-7">
+          <p className="header1 mx-auto mt-6 max-w-xl text-lg leading-7">
           Talkin.AI is a premier generative AI platform that prioritizes the protection of data and user experience for all of our users.
           </p>
         </div>

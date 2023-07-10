@@ -103,7 +103,7 @@ export default function Testimonials() {
                       </blockquote>
                       <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                         <div>
-                          <div className="font-display text-4xl text-white">
+                          <div className="font-display text-3xl text-white">
                             {testimonial.author.name}
                           </div>
                         </div>
