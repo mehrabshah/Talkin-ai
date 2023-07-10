@@ -72,10 +72,10 @@ export default function Testimonials() {
     >
       <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mx-auto md:text-center">
-          <h1 className="mx-auto max-w-4xl font-display text-4xl font-bold tracking-normal text-slate-900 sm:text-6xl">
+          <h1 className="testimonial-header mx-auto max-w-4xl font-display text-4xl font-bold tracking-normal  sm:text-6xl">
             Loved by many worldwide.
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-slate-700 leading-7">
+          <p className="testimonial-sub mx-auto mt-6 max-w-xl text-lg leading-7">
             See what our 100,000+ users are saying about the product.
           </p>
         </div>
@@ -103,7 +103,7 @@ export default function Testimonials() {
                           <div className="font-display text-base text-slate-900">
                             {testimonial.author.name}
                           </div>
-                          <div className="mt-1 text-sm text-slate-500">
+                          <div className="mt-1 text-sm text-white">
                             {testimonial.author.role}
                           </div>
                         </div>

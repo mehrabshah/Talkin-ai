@@ -65,9 +65,9 @@ export default function SignIn({ csrfToken, providers }) {
   };
 
   // signin using Github provider
-  const handleGithubSubmit = async () => {
-    await signIn('github', { callbackUrl: '/' });
-  };
+  //const handleGithubSubmit = async () => {
+  //  await signIn('github', { callbackUrl: '/' });
+  //};
 
   return (
     <div className="bg-black text-white">
@@ -89,19 +89,7 @@ export default function SignIn({ csrfToken, providers }) {
           {loading ? <Loading /> : <button type="submit" className="hero-button text-white p-2 rounded-md mt-5 w-20 border">Sign in</button>}
         </form>
         <div className="w-4/5 sm:w-96 md:lg-1/3 lg:w-1/4 mt-5">
-          {providers
-            && (
-              <div className="w-full" key="github">
-                <h2 className="text-center my-4">
-                  Sign in with
-                </h2>
-                <div className="">
-                  <div className="flex justify-around">
-                    <span onClick={handleGithubSubmit} className="cursor-pointer p-2 bg-[#171515] text-white text-2xl rounded-3xl border basis-1/2 flex items-center justify-center"><RiGithubLine /></span>
-                  </div>
-                </div>
-              </div>
-            )}
+          
         </div>
         <div className="my-4">
           <p>

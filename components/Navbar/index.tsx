@@ -41,7 +41,7 @@ const Navbar = () => {
       <div className="app_navbar">
          <div className="app_navbar-logo">
             <img src='/talkinai_logo_white.png' alt="app logo" />
-            <div className="header1 text-3xl font-bold">{' '}TALKIN.AI</div>
+            <div className="header1 text-3xl font-bold">{' '}<Link href="/">TALKIN AI</Link></div>
          </div>
 
          <div className="basis-2/4 flex items-center justify-end">

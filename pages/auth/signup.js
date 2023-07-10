@@ -37,8 +37,8 @@ export default function SignIn({ providers }) {
   const handleCredentialsSubmit = async (e) => {
     e.preventDefault();
 
-    if (userInfo.fullname === '') {
-      setErrors((prev) => ({ ...prev, fullname: 'Please enter full name' }));
+    if (userInfo.fullName === '') {
+      setErrors((prev) => ({ ...prev, fullName: 'Please enter full name' }));
       return;
     }
 
@@ -82,9 +82,9 @@ export default function SignIn({ providers }) {
   };
 
   // signup using github
-  const handleGithubSubmit = async () => {
-    await signIn('github', { callbackUrl: '/' });
-  };
+  //const handleGithubSubmit = async () => {
+  //  await signIn('github', { callbackUrl: '/' });
+  //};
 
   return (
     <div className="text-white">
@@ -94,8 +94,8 @@ export default function SignIn({ providers }) {
           {signupError && <p className="text-center text-red-500">{signupError}</p>}
           <div className="mt-5">
             <label htmlFor="fullName">Full Name</label>
-            <input onChange={handleFormInput} placeholder="John Doe" name="fullname" className="mt-2 text-black block border w-full p-2 rounded-md" />
-            {errors.fullname && <p className="text-red-400">{errors.fullname}</p>}
+            <input onChange={handleFormInput} placeholder="John Doe" name="fullName" className="mt-2 text-black block border w-full p-2 rounded-md" />
+            {errors.fullName && <p className="text-red-400">{errors.fullName}</p>}
           </div>
           <div className="mt-5">
             <label htmlFor="email">Email</label>
@@ -110,21 +110,10 @@ export default function SignIn({ providers }) {
           {loading ? <Loading className="border" /> : <button type="submit" className="hero-button bg-black w-20 border text-white p-2 rounded-md mt-5">Sign up</button>}
         </form>
         <div className="w-4/5 sm:w-96 md:lg-1/3 lg:w-1/4 mt-5">
-
-          {/* Ensure we have providers already */}
-          {providers
-            && (
-              <div className="w-full" key="github">
-                <h2 className="text-center my-4">
-                  Signup using Github
-                </h2>
-                <div className="">
-                  <div className="flex justify-around">
-                    <span onClick={handleGithubSubmit} className="cursor-pointer p-2 bg-[#171515] text-white text-2xl rounded-3xl border basis-1/2 flex items-center justify-center"><RiGithubLine /></span>
-                  </div>
-                </div>
-              </div>
-            )}
+        <p className="text-gray-600 font-bold text-left  text-sm">
+                  By clicking Sign up, you agree to our <Link href='/terms' className='myLink'>Terms and Conditions </Link> and <Link href='/privacy-policy' className='myLink'>Privacy Policy</Link>.
+                  </p>
+          
         </div>
         <div className="my-4">
           <p>
