@@ -7,7 +7,7 @@ const AboutVideoPlayer = () => {
   return (
     <div className="feature-content bg-light-purple py-2  md: py-16">
       <div className="max-w-5xl w-100 m-auto px-20">
-        <CloudinaryContext cloud_name="dbospsdwo">
+        <CloudinaryContext cloud_name="dbospsdwo" secure>
           <div className="aboutvideo-card">
             <Video
               publicId="hero_video_ev2flp"

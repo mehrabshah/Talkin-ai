@@ -5,7 +5,7 @@ import { Video, CloudinaryContext } from "cloudinary-react";
 const VideoPlayer = () => {
   const videoRef = useRef();
   return (
-    <CloudinaryContext cloud_name="dbospsdwo">
+    <CloudinaryContext cloud_name="dbospsdwo" secure>
       <div className="herovideo-card">
         <Video
           //publicId="swwadhiy7gzfopqfyx2b"

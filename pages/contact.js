@@ -59,7 +59,7 @@ const Contact = () => {
 
   <div>
     <div className="video-card flex justify-center items-center gap-3 m-auto mt-2 py-2 px-6">
-      <CloudinaryContext cloud_name="dbospsdwo">
+      <CloudinaryContext cloud_name="dbospsdwo" secure>
         <div>
           <Video
             publicId="la_beach_caattj"

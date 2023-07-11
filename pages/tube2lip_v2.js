@@ -57,7 +57,7 @@ export default function Home() {
 
           <div>
             <div className="video-card flex justify-center items-center gap-3 m-auto mt-2 py-2 px-6">
-              <CloudinaryContext cloud_name="dbospsdwo">
+              <CloudinaryContext cloud_name="dbospsdwo" secure>
                 <div>
                   <Video
                     publicId="talking_avatar/evzfcehy7yey9vj6au2e"
