@@ -94,13 +94,13 @@ export default function Testimonials() {
 
                     <figure className="testimonial-card relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
                       <blockquote className="relative">
-                        <p className="text-lg tracking-tight text-slate-900">
+                        <p className="text-lg tracking-tight text-white">
                           {testimonial.content}
                         </p>
                       </blockquote>
                       <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                         <div>
-                          <div className="font-display text-base text-slate-900">
+                          <div className="font-display text-base text-white">
                             {testimonial.author.name}
                           </div>
                           <div className="mt-1 text-sm text-white">

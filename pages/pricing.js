@@ -34,25 +34,23 @@ const PricingPage = ({ plans }) => {
         <meta name="description" content="Talkin AI Pricing" />
         <link rel="icon" href="/talkin_logo.png" />
       </Head>
-      <div aria-hidden="true" class="absolute inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
-        <div class="blur-[106px] h-56 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
-        <div class="blur-[106px] h-32 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
+     
+
+      <main className="p-5 mx-auto max-w-4xl">
+      <div class="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
+        <div class="blur-[106px] h-30 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
+        <div class="blur-[106px] h-20 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
     </div>
-
-      <main className="p-10 mx-auto max-w-4xl">
-
-        <div className="topnav">
-          <div>
-            <h1 className="header1 text-2xl md:text-2xl font-bold">Pricing</h1>
-          </div>
-        </div>
-
-        <div className="flex flex-col items-center justify-center px-4 py-2">
-
-          <p className="mt-3 text-1xl text-white">
-            Choose Your Plan
-          </p>
-
+       
+       
+    <div class="relative pt-20 ml-auto">
+            <div class="lg:w-2/3 text-center mx-auto">
+                <h1 class="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Pricing.</h1>
+                <p class="mt-8 text-gray-700 dark:text-gray-300">Choose Your Plan </p>
+               
+                
+            </div>
+       
 
         </div>
 

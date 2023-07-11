@@ -79,16 +79,17 @@ export default function Profile({
         <link rel="icon" href="/talkin_logo.png" />
       </Head>
 
-      <div aria-hidden="true" class="absolute inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
-        <div class="blur-[106px] h-56 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
-        <div class="blur-[106px] h-32 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
+      <div class="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
+        <div class="blur-[106px] h-30 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
+        <div class="blur-[106px] h-20 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
     </div>
 
       <main className="p-10 mx-auto max-w-4xl">
 
         <div className="topnav">
           <div>
-            <h1 className="header1 text-2xl md:text-2xl font-bold">Your Profile</h1>
+          <h1 class="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Your Profile.</h1>
+            
           </div>
         </div>
 

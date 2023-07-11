@@ -88,6 +88,10 @@ export default function SignIn({ providers }) {
 
   return (
     <div className="text-white">
+      <div class="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
+        <div class="blur-[106px] h-30 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
+        <div class="blur-[106px] h-20 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
+    </div>
       <div className="h-screen flex flex-col justify-center items-center">
         <form onSubmit={handleCredentialsSubmit} method="post" className="w-4/5 sm:w-96 md:lg-1/3 lg:w-1/4">
           <h1 className="header1 text-center my-5 text-3xl">Please Signup </h1>

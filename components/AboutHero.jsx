@@ -10,7 +10,7 @@ const AboutHero = () => {
     return (
         <div className="grid grid-cols-1 gap-1 py-10 place-items-center md:py-16 md:grid-cols-2">
             <div>
-                <h1 className="header1 text-center text-3xl font-bold md:text-left md:text-3xl">
+                <h1 className="header1 text-center text-5xl font-bold md:text-left md:text-6xl">
                     About
                 </h1>
 
