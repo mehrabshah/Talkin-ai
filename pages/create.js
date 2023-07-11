@@ -22,17 +22,18 @@ export default function Home() {
 
       <main className="p-10 mx-auto max-w-4xl">
 
-        <div className="topnav">
-          <div>
-            <h1 className="header1 text-2xl md:text-2xl font-bold">Make Your Talking Avatar</h1>
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-center px-4 py-2">
+       
 
-          <p className="mt-3 text-1xl text-white">
-            Create Your Unique Talking Avatar in Seconds
-          </p>
+        <div class="relative pt-20 ml-auto">
+            <div class="lg:w-2/3 text-center mx-auto">
+                <h1 class="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Talking Avatar<span class="text-primary dark:text-white"> Generator.</span></h1>
+                <p class="mt-8 text-gray-700 dark:text-gray-300">Create Your Unique Talking Avatar in Seconds </p>
+               
+                
+            </div>
         </div>
+
+
 
         <div className="state-card grid grid-cols-1 gap-6 py-2 place-items-center md:py-2 md:grid-cols-2">
           <div>

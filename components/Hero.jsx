@@ -10,7 +10,8 @@ const Hero = () => {
     return (
         <div className="grid grid-cols-1 gap-6 py-10 place-items-center md:py-16 md:grid-cols-2">
             <div>
-                <h1 className="header1 text-center text-4xl font-bold md:text-left md:text-5xl">
+                <h1 className="header1 text-center text-5xl font-bold md:text-left md:text-6xl">
+               
                     TALKIN AI
                 </h1>
                 <h2 className="text-center my-4 text-3xl text-white font-semibold md:text-left md:text-4xl md:my-4">

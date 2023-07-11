@@ -428,7 +428,7 @@ a {
 }
 
 .app_navbar-logo img {
-  width: 110px;
+  width: 100px;
 }
 
 
@@ -536,7 +536,7 @@ a {
 /* Media Queries */
 @media screen and (max-width: 2000px) {
   .app_navbar-logo img {
-    width: 110px;
+    width: 100px;
   }
 }
 
@@ -560,6 +560,6 @@ a {
   }
 
   .app_navbar-logo img {
-    width: 110px;
+    width: 100px;
   }
 }
