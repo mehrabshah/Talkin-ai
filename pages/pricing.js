@@ -6,26 +6,19 @@ import Head from 'next/head';
 
 import Container from '../components/Container';
 
-
+import { useUser } from "@clerk/nextjs";
 
 import { useState } from "react";
 
-import { useSession, signOut } from 'next-auth/react';
-
-
 import { processSubscription } from 'utils/payment';
-
-
 
 import initStripe from "stripe";
 
 const PricingPage = ({ plans }) => {
   // display plans
-  const session = useSession();
-
-
-  const { status, data } = session;
-
+  
+  const { isLoaded, isSignedIn, user } = useUser();
+  
   const [priceId, setPriceId] = useState();
   return (
     <>
@@ -37,16 +30,16 @@ const PricingPage = ({ plans }) => {
      
 
       <main className="p-5 mx-auto max-w-4xl">
-      <div class="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
-        <div class="blur-[106px] h-30 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
-        <div class="blur-[106px] h-20 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
+      <div className="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
+        <div className="blur-[106px] h-30 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
+        <div className="blur-[106px] h-20 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
     </div>
        
        
-    <div class="relative pt-20 ml-auto">
-            <div class="lg:w-2/3 text-center mx-auto">
-                <h1 class="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Pricing.</h1>
-                <p class="mt-8 text-gray-700 dark:text-gray-300">Choose Your Plan </p>
+    <div className="relative pt-20 ml-auto">
+            <div className="lg:w-2/3 text-center mx-auto">
+                <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Pricing.</h1>
+                <p className="mt-8 text-gray-700 dark:text-gray-300">Choose Your Plan </p>
                
                 
             </div>

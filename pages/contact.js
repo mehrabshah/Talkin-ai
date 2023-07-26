@@ -27,16 +27,16 @@ const Contact = () => {
         <link rel="icon" href="/talkin_logo.png" />
       </Head>
 
-      <div class="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
-        <div class="blur-[106px] h-30 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
-        <div class="blur-[106px] h-20 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
+      <div className="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
+        <div className="blur-[106px] h-30 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
+        <div className="blur-[106px] h-20 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
     </div>
       <main className="p-10 mx-auto max-w-4xl">
 
-      <div class="relative pt-20 ml-auto">
-            <div class="lg:w-2/3 text-center mx-auto">
-                <h1 class="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Contact Us</h1>
-                <p class="mt-8 text-gray-700 dark:text-gray-300">Please be as specific as possible </p>
+      <div className="relative pt-20 ml-auto">
+            <div className="lg:w-2/3 text-center mx-auto">
+                <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Contact Us</h1>
+                <p className="mt-8 text-gray-700 dark:text-gray-300">Please be as specific as possible </p>
                
                 
             </div>
@@ -50,8 +50,10 @@ const Contact = () => {
 
 <div className="state-card grid grid-cols-1 gap-4 py-2 place-items-center md:py-2 md:grid-cols-2">
   <div>
-    <h2 className="text-center mx-4 my-4 text-xl text-white font-semibold md:text-left md:text-xl md:mx-2 my-4">
-      More New Products Coming! Leave us a review or a request for new products and services!
+    <h2 className="text-center px-4 py-4 text-xl text-white font-semibold md:text-left md:text-xl md:px-4 py-4">
+      Contact us via Chat or the contact form below.
+      
+      More New Products Coming! Leave us  a request for new products and services!
       
     </h2>
 
@@ -66,7 +68,7 @@ const Contact = () => {
             width="512"
             height="512"
             controls
-            autoplay
+            autoPlay
             loop
             disablePictureInPicture
           />
@@ -75,6 +77,10 @@ const Contact = () => {
     </div>
   </div>
 </div>
+
+<div className="profilenav">
+              <h1 className="my-5">Contact Form</h1>
+            </div>
 <Review />
 </main>
     </>

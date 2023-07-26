@@ -20,10 +20,10 @@ export default function Home() {
       </Head>
 
       <main className="p-10 mx-auto max-w-4xl">
-        <div class="relative pt-20 ml-auto">
-            <div class="lg:w-2/3 text-center mx-auto">
-                <h1 class="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Tube2Tube<span class="text-primary dark:text-white"> Video Generator.</span></h1>
-                <p class="mt-8 text-gray-700 dark:text-gray-300">Create Funny Youtube Video in Seconds</p>
+        <div className="relative pt-20 ml-auto">
+            <div className="lg:w-2/3 text-center mx-auto">
+                <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Tube2Tube<span className="text-primary dark:text-white"> Video Generator.</span></h1>
+                <p className="mt-8 text-gray-700 dark:text-gray-300">Create Funny Youtube Video in Seconds</p>
                
                 
             </div>
@@ -31,9 +31,9 @@ export default function Home() {
 
         <div className="state-card grid grid-cols-1 gap-6 py-2 place-items-center md:py-2 md:grid-cols-2">
           <div>
-            <h2 className="text-center mx-4 my-4 text-xl text-white font-semibold md:text-left md:text-xl md:mx-2 my-4">
+            <h2 className="text-center px-2 py-4 text-xl text-white font-semibold md:text-left md:text-xl md:mx-2 my-4">
               Welcome! To make a youtube video, you need to:
-              <p className="flex-1 flex flex-col items-left my-2">
+              <p className="flex-1 flex flex-col items-left px-2 py-4">
                 <li className="text-gray-600 font-bold text-left  text-sm">
                 First to input the youtube video url for video, and input the start time of the video and the end time of the video where you would like to match the audio, 
                 </li>

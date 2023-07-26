@@ -24,10 +24,10 @@ export default function Home() {
 
        
 
-        <div class="relative pt-20 ml-auto">
-            <div class="lg:w-2/3 text-center mx-auto">
-                <h1 class="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Talking Avatar<span class="text-primary dark:text-white"> Generator.</span></h1>
-                <p class="mt-8 text-gray-700 dark:text-gray-300">Create Your Unique Talking Avatar in Seconds </p>
+        <div className="relative pt-20 ml-auto">
+            <div className="lg:w-2/3 text-center mx-auto">
+                <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Talking Avatar<span className="text-primary dark:text-white"> Generator.</span></h1>
+                <p className="mt-8 text-gray-700 dark:text-gray-300">Create Your Unique Talking Avatar in Seconds </p>
                
                 
             </div>
