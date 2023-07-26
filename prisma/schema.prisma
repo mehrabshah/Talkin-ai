@@ -13,8 +13,8 @@ datasource db {
 
 model User {
   id        Int     @id @default(autoincrement())
+  userId    String?
   email     String  @unique
-  password  String
   fullname  String?
   profilePicture   String?
   profilePictureId     String?
