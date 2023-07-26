@@ -1,7 +1,7 @@
-import { Old_Standard_TT } from "@next/font/google";
 import Link from 'next/link';
 import React, { useState } from "react";
-import { useSession, signOut } from 'next-auth/react';
+import { useUser } from "@clerk/nextjs";
+//import { useSession, signOut } from 'next-auth/react';
 import { isImage, isAudio, validateImgSize, validateAudioSize, } from '../utils/fileValidation';
 import { useContext, useEffect } from 'react';
 //import FAQ from './FAQ';
@@ -49,13 +49,11 @@ export default function Dashboard() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isConverted, setIsConverted] = useState(false);
 
-  const session = useSession();
-
-  const { status, data } = session;
-
+  const { isLoaded, isSignedIn, user } = useUser();
+  
   const fetchUserUsage = async () => {
-    const user = await fetch(`/api/fetch-user-profile?email=${data?.user?.email}`);
-    const res_user = await user.json();
+    const currentUser = await fetch(`/api/fetch-user-profile?email=${user?.email}`);
+    const res_user = await currentUser.json();
     var date = new Date();
 
     date.setDate(date.getDate() - 3);
@@ -397,7 +395,7 @@ export default function Dashboard() {
             (
               <Link href="/pricing">
                 <button
-                  className="hero-button hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                  className="hero-button text-white font-bold py-2 px-4 rounded"
                 >Buy a Plan</button>
               </Link>
             ) :
@@ -501,12 +499,12 @@ export default function Dashboard() {
               (
                 <Link href="/pricing">
                   <button
-                    className="hero-button hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    className="hero-button text-white font-bold py-2 px-4 rounded"
                   >Buy a Plan</button>
                 </Link>
               ) :
               (<button
-                className={`hero-button w-full hover:bg-green-700 text-white font-bold mt-6 py-2 px-4 rounded
+                className={`hero-button w-full text-white font-bold mt-6 py-2 px-4 rounded
                   ${isGenerating || audioPrediction === ""
                     ? "cursor-not-allowed opacity-50"
                     : ""

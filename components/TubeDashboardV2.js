@@ -1,6 +1,7 @@
-import { Old_Standard_TT } from "@next/font/google";
+
 import React, { useState } from "react";
-import { useSession } from 'next-auth/react';
+import { useUser } from "@clerk/nextjs";
+
 import { useEffect } from 'react';
 import Link from 'next/link';
 import SocialLinkBar from './SocialLinkBar';
@@ -38,10 +39,8 @@ export default function Dashboard() {
   const [isGenerating, setIsGenerating] = useState(false);
 
 
-  const session = useSession();
-
-  const { status, data } = session;
-
+  const { isLoaded, isSignedIn, user } = useUser();
+  
   //get the  3 days lag date from current date 
 
   var date = new Date();
@@ -50,8 +49,8 @@ export default function Dashboard() {
 
 
   const fetchUserUsage = async () => {
-    const user = await fetch(`/api/fetch-user-profile?email=${data?.user?.email}`);
-    const res_user = await user.json();
+    const currentUser = await fetch(`/api/fetch-user-profile?email=${user?.email}`);
+    const res_user = await currentUser.json();
     // check whether subscribed and the usage is not over plan limit
     if (res_user?.isSubscribed) {
       const response = await fetch(`/api/fetch-user-usage?email=${res_user?.email}&currentPeriodStart=${res_user?.currentPeriodStart}`);
@@ -289,12 +288,12 @@ export default function Dashboard() {
               (
                 <Link href="/pricing">
                   <button
-                    className="hero-button hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    className="hero-button text-white font-bold py-2 px-4 rounded"
                   >Buy a Plan</button>
                 </Link>
               ) :
               (<button
-                className={`hero-button w-full hover:bg-green-700 text-white font-bold mt-6 py-2 px-4 rounded
+                className={`hero-button w-full text-white font-bold mt-6 py-2 px-4 rounded
                   ${isGenerating || videoYoutubeUrl === "" || audioYoutubeUrl === ""
                     ? "cursor-not-allowed opacity-50"
                     : ""
