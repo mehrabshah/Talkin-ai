@@ -1,25 +1,34 @@
 import '../styles/globals.css';
-import { SessionProvider } from 'next-auth/react';
+
 import { useEffect, useState } from 'react';
-import Layout from '../components/Layout';
-import AppContext from '../utils/AppContext';
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  const [profilePicture, setProfilePicture] = useState('');
 
+import { dark } from '@clerk/themes';
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
+import Script from "next/script";
+import Layout from "/components/Layout";
+import dynamic from 'next/dynamic'
+
+const CrispWithNoSSR = dynamic(
+  () => import('../components/crisp'),
+  { ssr: false }
+)
+
+const MyApp = ({ Component, pageProps }) => {
 
   return (
-    <SessionProvider session={session}>
-      <AppContext.Provider value={{
-        profilePicture, setProfilePicture,
-      }}
-      >
-        <Layout>
+    <ClerkProvider appearance={{
+      baseTheme: dark
+    }} {...pageProps}>
+      <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js" />
+      <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js" />
+      <Layout>
+      <CrispWithNoSSR />
           <Component {...pageProps} />
-        </Layout>
-      </AppContext.Provider>
-    </SessionProvider>
+      </Layout>
+    </ClerkProvider>
   );
-}
+};
 
 export default MyApp;
+

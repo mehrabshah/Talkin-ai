@@ -11,10 +11,12 @@ body {
   padding: 0;
   margin: 0;
   color: white;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
-  color: inherit;
+  color: inherent;
   text-decoration: none;
 }
 
@@ -62,6 +64,11 @@ a {
 }
 
 .hero-button.clicked {
+  background-color: #30373d;
+}
+
+
+.hero-button:hover {
   background-color: #30373d;
 }
 
