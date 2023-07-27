@@ -1,21 +1,28 @@
 import prisma from '../../../../lib/prisma';
 import initStripe from "stripe";
-import { getToken } from 'next-auth/jwt';
+import { auth } from "@clerk/nextjs";
+
 
 
 const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handle(req, res) {
 
+
   try {
 
-    const { priceId } = req.query;
+    const { userId, getToken } = auth();
+    
+    console.log(userId);
 
     const token = await getToken({ req });
 
-    const user = await prisma.user.findUnique({
+    const { priceId } = req.query;
+
+    
+    const subUser = await prisma.user.findUnique({
       where: {
-        id: token.user.id,
+        userId: userId,
       },
     });
 
@@ -28,7 +35,7 @@ export default async function handle(req, res) {
 
 
     const session = await stripe.checkout.sessions.create({
-      customer: user.stripeCustomerId,
+      customer: subUser.stripeCustomerId,
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "subscription",
