@@ -68,6 +68,7 @@
     "sass": "^1.60.0",
     "stripe": "^12.1.0",
     "tailwindcss": "^3.2.7",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "use-stripe-subscription": "^1.0.6"
   }
 }

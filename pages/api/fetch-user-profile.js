@@ -5,11 +5,11 @@ import prisma from "../../lib/prisma";
 export default async function handler(req, res) {
 
   const {
-    query: { email },
+    query: { userId },
   } = req;
   const result = await prisma.user.findUnique({
     where: {
-      email,
+      userId,
     },
   });
   res.json(result);

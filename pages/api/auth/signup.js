@@ -1,48 +1,61 @@
 import prisma from "../../../lib/prisma";
 //import { hash } from "bcrypt";
 
+import { getAuth, clerkClient } from "@clerk/nextjs/server";
 
 import initStripe from 'stripe';
 
-import bcrypt from "bcryptjs";
+import { getClerkUserPrimaryEmail } from "../../../lib/auth/Clerk";
 
 const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
 
 
 
 const handler = async (req, res) => {
-  try {
-    // check if user already exists
-    const { fullname, email, password } = req.body;
-    const user = await prisma.user.findUnique({
-      where: {
-        email: req.body.email,
-      },
-    });
-    if (user) {
-      return res.json({ data: null, error: 'User already exists' });
-    } else {
+  
 
-      // create new stripe customer
-      const customer = await stripe.customers.create({
-        email,
-      });
-      // create new user
+  const {
+    query: { userId },
+  } = req;
+  
+  console.log(userId);
+  
+  
+  
+ 
+  if (!userId) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+ 
+  const userEmail = await getClerkUserPrimaryEmail(userId);
+  
+  console.log(userEmail);
+  
+  const currentUser = await prisma.user.findUnique({
+    where: {
+      email: userEmail,
+    },
+  });
 
-      const user = await prisma.user.create({
+
+  
+  if (currentUser == null) {
+  
+  
+  // create new stripe customer
+  const customer = await stripe.customers.create({
+    email: userEmail,
+  });
+  const newUser = await prisma.user.create({
         data: {
-          email,
-          password: await bcrypt.hash(password, 10),
-          fullname,
+          userId: userId,
+          email: userEmail,
           stripeCustomerId: customer.id,
         },
       });
-      return res.json({ data: 'Registration', error: null });
+  
     }
-  } catch (error) {
-    res.status(500).json({ data: null, error: 'something went wrong' });
-  }
-};
+    }
 
 export default handler;
 

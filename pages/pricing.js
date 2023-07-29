@@ -6,20 +6,37 @@ import Head from 'next/head';
 
 import Container from '../components/Container';
 
-import { useUser } from "@clerk/nextjs";
+//import { useUser } from "@clerk/nextjs";
 
-import { useState } from "react";
+import { Gate, useSubscription } from "use-stripe-subscription";
 
-import { processSubscription } from 'utils/payment';
 
-import initStripe from "stripe";
 
-const PricingPage = ({ plans }) => {
+export default function PricingPage() {
   // display plans
   
-  const { isLoaded, isSignedIn, user } = useUser();
-  
-  const [priceId, setPriceId] = useState();
+  //const { isLoaded, isSignedIn, user } = useUser();
+
+  const {
+    isLoaded,
+    products,
+    subscription,
+    redirectToCheckout,
+    redirectToCustomerPortal,
+  } = useSubscription();
+
+  if (!isLoaded) {
+    return null;
+  }
+
+  const alertResponse = async (path) => {
+    const res = await fetch(path);
+    const body = await res.text();
+    alert(`Path requested: ${path}\nResponse: ${body}`);
+  };
+
+
+
   return (
     <>
       <Head>
@@ -39,7 +56,7 @@ const PricingPage = ({ plans }) => {
     <div className="relative pt-20 ml-auto">
             <div className="lg:w-2/3 text-center mx-auto">
                 <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Pricing.</h1>
-                <p className="mt-8 text-gray-700 dark:text-gray-300">Choose Your Plan </p>
+                <p className="mt-8 text-2xl text-gray-700 dark:text-gray-300">Choose Your Plan </p>
                
                 
             </div>
@@ -49,35 +66,31 @@ const PricingPage = ({ plans }) => {
 
         <Container>
           <div className="flex w-full items-center justify-center">
-            {plans.map((plan) => (
-              <div
-                key={plan.priceId}
-                className="h-80 w-80 mx-2 bg-white text-black-700 flex flex-col"
+            
+           
+          {products.map(({ product, prices }) => (
+        <div key={product.id} className="h-80 w-80 mx-2 bg-white text-black-700 flex flex-col">
+          <h4 className="text-gray-600 text-2xl py-8 font-medium text-center border-b border-gray-300">{product.name}</h4>
+          
+            {prices.map((price) => (
+              <p key={price.id} className="flex-1 p-8 flex flex-col items-center">
+              <h5 className="text-gray-600 text-2xl py-2 font-medium text-center ">${price.unit_amount/100} </h5>
+              <h5 className="text-gray-600 text-1xl font-medium text-center">Monthly</h5>
+              <h5 className="text-black text-1xl py-5 font-medium text-center border-b border-gray-300">3-Day Free Trial</h5>
+              
+              <button
+                 className="hero-button  px-10 py-4  flex flex-col text-white text-center"
+                onClick={() => redirectToCheckout({ price: price.id, successUrl: `http://localhost:3000/payment/success`, cancelUrl: `http://localhost:3000/payment/cancelled`})}
               >
-                <h2 className="text-gray-600 text-2xl py-8 font-medium text-center border-b border-gray-300">
-                  {plan.name}
-                </h2>
-                <p className="flex-1 p-8 flex flex-col items-center">
-                  <span className="text-gray-600 text-1xl">
-                    ${plan.price / 100}
-                    <span className="text-black-400 text-sm uppercase">
-                      {plan.currency}
-                    </span>
-                  </span>
-                  <span className="text-xl text-gray-400 ">{plan.interval}ly</span>
-
-
-                </p>
-
-
-                <button
-                  className="hero-button py-4 text-white text-center"
-                  onClick={() => processSubscription(plan.priceId)}
-                >
-                  Subscribe
-                </button>
-              </div>
+                Start Trial 
+              </button>
+            
+              </p>
             ))}
+      
+         
+        </div>
+      ))}
           </div>
         </Container>
 
@@ -93,7 +106,7 @@ const PricingPage = ({ plans }) => {
               </h2>
               <p className="flex-1 p-8 flex flex-col items-left">
                 <span className="text-gray-600 font-bold text-center  text-1xl">
-                  45 mins /month
+                  5 mins /month
 
                 </span>
 
@@ -148,7 +161,7 @@ const PricingPage = ({ plans }) => {
               </h2>
               <p className="flex-1 p-8 flex flex-col items-center">
                 <span className="text-gray-600 font-bold text-center  text-1xl">
-                  5 mins /month
+                  45 mins /month
 
                 </span>
                 <span className="text-gray-600 text-center text-sm">
@@ -180,60 +193,7 @@ const PricingPage = ({ plans }) => {
 
 
 
-export const getStaticProps = async () => {
-  const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
 
-  const { data: prices } = await stripe.prices.list({
-    active: true,
-    recurring: {
-      'interval': `month`
-    },
-    type: 'recurring',
-    limit: 3,
-  });
-
-  const productPromises = prices.map(async (price) => {
-    const product = await stripe.products.retrieve(price.product);
-    //const updatedProduct = await prisma.product.update({
-    //  where: {
-    //    name: product.name,
-    //  },
-    //  data: {
-    //    priceId: price.id,
-    //    price: price.unit_amount,
-    //    interval: price.recurring.interval,
-    //    currency: price.currency,
-    //    type: 'recurring',
-    //  },
-    //});
-
-    return {
-      priceId: price.id,
-      name: product.name,
-      price: price.unit_amount,
-      interval: price.recurring.interval,
-      currency: price.currency,
-
-
-    };
-  });
-
-  const plans = await Promise.all(productPromises);
-
-  //const trial = await prisma.product.findUnique({
-  //  where: {
-  //    name: 'New User Trial',
-  //  },
-  //});
-
-  return {
-    props: {
-      plans
-    },
-  };
-};
-
-export default PricingPage;
 
 
 
