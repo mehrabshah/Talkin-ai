@@ -2,7 +2,7 @@ import '../styles/globals.css';
 
 import { useEffect, useState } from 'react';
 
-
+import { SubscriptionProvider } from "use-stripe-subscription";
 import { dark } from '@clerk/themes';
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
 import Script from "next/script";
@@ -17,16 +17,18 @@ const CrispWithNoSSR = dynamic(
 const MyApp = ({ Component, pageProps }) => {
 
   return (
+    <SubscriptionProvider
+      stripePublishableKey={process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY}
+    >
     <ClerkProvider appearance={{
       baseTheme: dark
     }} {...pageProps}>
-      <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js" />
-      <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js" />
       <Layout>
       <CrispWithNoSSR />
           <Component {...pageProps} />
       </Layout>
     </ClerkProvider>
+    </SubscriptionProvider>
   );
 };
 
