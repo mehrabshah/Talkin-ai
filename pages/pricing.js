@@ -85,7 +85,7 @@ export default function PricingPage() {
               </p>
               <button
               className="hero-button  w-full px-10 py-8 flex flex-col text-white text-center"
-             onClick={() => redirectToCheckout({ price: price.id, successUrl: `http://localhost:3000/payment/success`, cancelUrl: `http://localhost:3000/payment/cancelled`})}
+             onClick={() => redirectToCheckout({ price: price.id, successUrl: `https://talkin-ai.com/payment/success`, cancelUrl: `https://talkin-ai.com/payment/cancelled`})}
            >
              Start Plan
            </button>

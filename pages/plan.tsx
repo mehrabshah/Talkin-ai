@@ -92,7 +92,7 @@ export default function PlanPage() {
           
             
           
-            <button  className="hero-button  z-10 px-10 py-4  flex flex-col text-white text-center " onClick={() => redirectToCustomerPortal()}>
+            <button  className="hero-button  z-10 px-10 py-4  flex flex-col text-white text-center " onClick={() => redirectToCustomerPortal({ returnUrl: `https://talkin-ai.com/plan`})}>
               Change plan
             </button>
          
