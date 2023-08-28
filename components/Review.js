@@ -1,10 +1,10 @@
 // pages/pricing.js
 
 import React from 'react';
-
-//import { useSession, signOut } from 'next-auth/react';
-//import Head from 'next/head';
 import { useState } from 'react';
+import { useUser } from "@clerk/nextjs";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 export default function Review() {
@@ -20,159 +20,211 @@ export default function Review() {
   //const session = useSession();
 
   //const { status, data } = session;
-
+  const { isSignedIn, user } = useUser();
   
-  const submitProduct = (event) => {
+  if (!isSignedIn) {return null};
+  
+  const submitProduct = async(event) => {
 
-    event.preventDefault();
-    fetch('/api/notification', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        userName,
+      event.preventDefault();
+    
+          
+      const dateSubmitted = new Date();
+
+      //update the database
+      const req_body = {
         userEmail,
+        userName,
         productName,
         planName,
         productMessage,
-      })
-    }).then(() => {
-      setIsError(false);
-      setMessage("Your messsage has been submitted!");
-    }).catch((error) => {
-      setIsError(true);
-      setMessage("Something is wrong!");
-      //console.log(error)
-    });
-    event.target.reset();
+        dateSubmitted };
+      await fetch('/api/add_review', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(req_body),
+      }).then(() => {
+        setIsError(false);
+        toast("Your messsage has been submitted!", { type: 'success' });
+        
+      }).catch((error) => {
+        setIsError(true);
+        toast("Something is wrong!", { type: 'error' });
+        //console.log(error)
+      });
+
+    
+      setUserEmail("");
+      setUserName("");
+      setPlanName("");
+      setProductName("");
+      setProductMessage("");
+    
+    
   }
 
 
   return (
 
-
-    <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <form onSubmit={(event) => submitProduct(event)}>
-        <div className="review-card shadow sm:rounded-md sm:overflow-hidden">
-
-        <div className="flex flex-col">
-              <label className="sr-only" htmlFor="userName">
-                Name (Required)
-              </label>
-              <input
-                type="text"
-                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                name="userName"
-                placeholder="Your Name"
-                id="userName"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label className="sr-only" htmlFor="userEmail">
-                Email (Required)
-              </label>
-              <input
-                type="text"
-                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                name="userEmail"
-                placeholder="Your Email"
-                id="userEmail"
-                value={userEmail}
-                onChange={(e) => setUserEmail(e.target.value)}
-              />
-            </div>  
+    <section id="contact" className="overflow-hidden py-10 md:py-10 lg:py-10">
+    <div className="container">
+      <div className="-mx-4 flex flex-wrap">
        
-         
-          <div className="flex flex-col">
-            <label className="text-white" htmlFor="productName">
-              Product Name
-            </label>
+          <div
+            className="wow fadeInUp mb-12 rounded-md bg-primary/[3%] py-11 px-8 dark:bg-dark sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]"
+            data-wow-delay=".15s
+            "
+          >
+            <h2 className="mb-3 text-2xl font-bold text-white dark:text-white sm:text-3xl lg:text-2xl xl:text-3xl">
+              Need Help? Contact us via live chat (recommended) or  send us a message.
+            </h2>
+            <p className="mb-12 text-base font-medium text-body-color">
+              Our support team will get back to you ASAP.
+            </p>
+            <form onSubmit={(event) => submitProduct(event)}>
+              <div className="-mx-4 flex flex-wrap">
+                <div className="w-full px-4 md:w-1/2">
+                  <div className="mb-8">
+                    <label
+                      htmlFor="userName"
+                      className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                    >
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Enter your name"
+                      name="userName"
+                      id="userName"
+                      value={userName}
+                      onChange={(e) => setUserName(e.target.value)}
+                      className="w-full rounded-md border border-transparent py-3 px-6 text-base text-black placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                    />
+                  </div>
+                </div>
+                <div className="w-full px-4 md:w-1/2">
+                  <div className="mb-8">
+                    <label
+                      htmlFor="uerEmail"
+                      className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                    >
+                      Your Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      name="userEmail"
+                      id="userEmail"
+                      value={userEmail}
+                      onChange={(e) => setUserEmail(e.target.value)}
+                      className="w-full rounded-md border border-transparent py-3 px-6 text-base text-black placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                    />
+                  </div>
+                </div>
 
-            <select
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
-              className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-              name="productName"
-              id="productName"
-            >
-              <option value="">Select Product</option>
-              <option value="TalkingAvatar">Talking Avatar</option>
-              <option value="Text2Tube">Text2Tube</option>
-              <option value="Tube2Tube">Tube2Tube</option>
-              <option value="RequestNewProduct">Request New Product</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
+              
+                <div className="w-full px-4 md:w-1/2">
+                  <div className="mb-8">
+                    <label
+                      htmlFor="productName"
+                      className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                    >
+                      Product Name
+                    </label>
+                    
+                    <select
+            value={productName}
+            onChange={(e) => setProductName(e.target.value)}
+            className="w-full rounded-md border border-transparent py-3 px-6 text-base text-black placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+            name="productName"
+            id="productName"
+          > 
+            <option value="">Select Product</option>
+            <option value="TalkingAvatar">Talking Avatar</option>
+            <option value="Text2Tube">Text2Tube</option>
+            <option value="Tube2Tube">Tube2Tube</option>
+            <option value="RequestNewProduct">Request New Product</option>
+            <option value="Other">Other</option>
+          </select>
+                </div>
+                </div>
+                <div className="w-full px-4 md:w-1/2">
+                  <div className="mb-8">
+                    <label
+                      htmlFor="planName"
+                      className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                    >
+                      Plan Name
+                    </label>
+                    
+                    <select
+            value={planName}
+            onChange={(e) => setPlanName(e.target.value)}
+            className="w-full rounded-md border border-transparent py-3 px-6 text-base text-black placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+            name="planName"
+            id="planName"
+          >
+            <option value="">Select Plan</option>
+            <option value="Lite Plan">Lite Plan</option>
+            <option value="Pro Plan">Pro Plan</option>
+            <option value="Advanced Plan">Advanced Plan</option>
+          </select>
+                  </div>
+                </div>
+                
+
+                <div className="w-full px-4">
+                  <div className="mb-8">
+                    <label
+                      htmlFor="productMessage"
+                      className="mb-3 block text-sm font-medium text-dark dark:text-white"
+                    >
+                      Your Message
+                    </label>
+                    <textarea
+                      
+                      id="productMessage"
+              name="productMessage"
+              rows={10}
+              value={productMessage}
+              onChange={(e) => setProductMessage(e.target.value)}
+                      
+                      
+                      
+                      placeholder="Enter your Message"
+                      className="w-full resize-none rounded-md border border-transparent py-3 px-6 text-base text-black placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
+                    ></textarea>
+                  </div>
+                </div>
+                <div className="w-full px-4">
+                <button
+            type="submit"
 
 
-          <div className="flex flex-col">
-            <label className="text-white" htmlFor="planName">
-              Plan Name
-            </label>
+            className={`hero-button rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp
+                ${isGenerating || userEmail === ""
+                ? "cursor-not-allowed opacity-50"
+                : ""
+              }`}
 
-            <select
-              value={planName}
-              onChange={(e) => setPlanName(e.target.value)}
-              className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-              name="planName"
-              id="planName"
-            >
-              <option value="">Select Plan</option>
-              <option value="Lite Plan">Lite Plan</option>
-              <option value="Pro Plan">Pro Plan</option>
-              <option value="Advanced Plan">Advanced Plan</option>
-            </select>
-          </div>
+            disabled={isGenerating || userEmail === ""}
+          >
+            {isGenerating ? "Generating..." : "Submit Your Message"}
 
-
-          <div>
-            <label htmlFor="productMessage" className="text-white">
-              Your Message
-            </label>
-            <div className="text-black mt-1">
-              <textarea
-                id="productMessage"
-                name="productMessage"
-                rows={16}
-                value={productMessage}
-                onChange={(e) => setProductMessage(e.target.value)}
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm px-4 py-2 border border-gray-300 rounded-md"
-              />
-            </div>
-
-          </div>
-
-          <div>
-            <button
-              type="submit"
-
-
-              className={`hero-button w-full text-white font-bold mt-6 py-2 px-4 rounded
-                  ${isGenerating || userEmail === ""
-                  ? "cursor-not-allowed opacity-50"
-                  : ""
-                }`}
-
-              disabled={isGenerating || userEmail === ""}
-            >
-              {isGenerating ? "Generating..." : "Submit Your Message"}
-
-            </button>
-
+          </button>
+                
+               
+                 
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-      </form>
-      <p className="header1 py-3">{message}</p>
-     
-
-     
-
-    </div>
-
+        
+      </div>
+   
+  </section>
+    
   )
 }
 

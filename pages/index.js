@@ -2,9 +2,13 @@
 import Link from "next/link";
 import Head from 'next/head';
 import Hero from "../components/Hero";
-import EpisodesTypes from "../components/EpisodesTypes";
+import Text2VideoHero from "../components/Text2VideoHero";
+import Features from "../components/Features";
+import NewUserTrialHero from "../components/NewUserTrialHero";
 
 import Testimonials from "../components/Testimonials";
+
+
 
 export default function Home() {
   
@@ -23,8 +27,12 @@ export default function Home() {
     </div>
       <div className="max-w-7xl w-100 m-auto px-4">
         <Hero />
+        <Text2VideoHero />
       </div>
-      <EpisodesTypes />
+      <NewUserTrialHero />
+      <Features />
+
+      
       <Testimonials />
     </>
 

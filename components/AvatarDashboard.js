@@ -1,17 +1,18 @@
 import Link from 'next/link';
 import React, { useState } from "react";
 import { useUser } from "@clerk/nextjs";
-//import { useSession, signOut } from 'next-auth/react';
 import { isImage, isAudio, validateImgSize, validateAudioSize, } from '../utils/fileValidation';
 import { useContext, useEffect } from 'react';
 //import FAQ from './FAQ';
-import { ToastContainer, toast } from 'react-toastify';
 import Disclaimer from './Disclaimer';
 import SocialLinkBar from './SocialLinkBar';
 import AvatarFAQ from './AvatarFAQ';
 import DiscordButton from './DiscordButton';
 import { BsFillPlayCircleFill } from 'react-icons/bs';
-
+import { Gate, useSubscription } from "use-stripe-subscription";
+import { findCreation, checkNewUserTrial, errorMessage, successMessage } from "../utils/functions";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -24,7 +25,7 @@ export default function Dashboard() {
   const [imageSrc, setImageSrc] = useState();
   const [audioSrc, setAudioSrc] = useState();
   const [customAudioUrl, setCustomAudioUrl] = useState(null);
-  const [uploadData, setUploadData] = useState();
+  
   const [image, setImage] = useState();
   const [audio, setAudio] = useState();
   const [imageError, setImageError] = useState();
@@ -32,84 +33,87 @@ export default function Dashboard() {
   const [videoUrl, setVideoUrl] = useState('');
   const [usage, setUsage] = useState('');
 
-
-
-  const [videoScription, setVideoScription] = useState("");
-
   const [audioFile, setAudioFile] = useState();
-  const [role, setRole] = useState("");
-  const [topic, setTopic] = useState("");
+  
   const [speech, setSpeech] = useState("");
-  const [tone, setTone] = useState("");
-  const [numWords, setNumWords] = useState("");
+  
   const [voice, setVoice] = useState("");
   const [isOverUsageLimit, setIsOverUsageLimit] = useState(true);
+  
 
   const [isCustomAudio, setIsCustomAudio] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [isConverted, setIsConverted] = useState(false);
+  const [newUser, setNewUser] = useState(false);
+  const [effect, setEffect] = useState(false);
 
-  const { isLoaded, isSignedIn, user } = useUser();
   
+
+  const {
+    subscription,
+  } = useSubscription();
+
+  const { isSignedIn, user } = useUser();
+
+
   const fetchUserUsage = async () => {
-    const currentUser = await fetch(`/api/fetch-user-profile?email=${user?.email}`);
-    const res_user = await currentUser.json();
-    var date = new Date();
-
-    date.setDate(date.getDate() - 3);
-
+    
+    const userId = user?.id;
     // check whether subscribed and the usage is not over plan limit
-    if (res_user?.isSubscribed) {
-      const response = await fetch(`/api/fetch-user-usage?email=${res_user?.email}&currentPeriodStart=${res_user?.currentPeriodStart}`);
-      const result = await response.json();
-      //setUsage(response.usage);
-      console.log(result?._sum.video_duration);
-      setUsage(result?._sum.video_duration);
-      if (result?._sum.video_duration == null) {
-        setIsOverUsageLimit(false);
-      }
-      else {
-        switch (res_user?.productSubscribed) {
-          case "price_1Mw6i7Dfv2951nlDALJ1T3TO":
-            if (result?._sum.video_duration < 5 * 60 * 60) {
-              setIsOverUsageLimit(false);
-            }
-            break;
-          case "price_1Mw6lvDfv2951nlDJdONFBJ1":
-            if (result?._sum.video_duration < 15 * 60 * 60) {
-              setIsOverUsageLimit(false);
-            }
-            break;
-          case "price_1N8R7vDfv2951nlD2mhgqAuo":
-            if (result?._sum.video_duration < 45 * 60 * 60) {
-              setIsOverUsageLimit(false);
-            }
-            break;
-        }
-      }
-    }
-    // check whether user is on trial and is not expired
-    else if (res_user?.onTrial && new Date(res_user?.trialStartAt) > date) {
-      if (res_user?.creations?.length == 0) {
-        setIsOverUsageLimit(false);
-      }
-      else {
-        const response = await fetch(`/api/fetch-trial-usage?email=${res_user?.email}&trialStartAt=${res_user?.trialStartAt}`);
-        const result = await response.json();
-        if (result?._sum.video_duration < 3 * 60 * 60) {
-          setIsOverUsageLimit(false);
-        }
-      }
-    }
-  };
+    if (subscription !=null) {
+      
+      
+      const subscriptionStart= subscription.start_date;
 
+      const subscriptionUsage = await findCreation(userId, subscriptionStart);
+      //const response = await fetch(`/api/fetch_usage?subscriptionStart=${subscription?.start_date}`);
+      //const result = await response.json();
+      setUsage(subscriptionUsage);
+      //console.log(result.userUsage);
+      
+      switch (subscription.plan.id) {
+        case "price_1NKLt1Dfv2951nlDZgy3rBUp":
+          if (subscriptionUsage < 3 * 60 * 60) {
+            setIsOverUsageLimit(false);
+          }
+          break;
+        case "price_1NLlSvDfv2951nlD1Nz9MrRo":
+          if (subscriptionUsage < 10 * 60 * 60) {
+            setIsOverUsageLimit(false);
+          }
+          break;
+        case "price_1NLlT8Dfv2951nlDtxCDnigJ":
+          if (subscriptionUsage < 25 * 60 * 60) {
+            setIsOverUsageLimit(false);
+          }
+          break;
+      }
+    }
+    else {
+
+      const trialUsage = await checkNewUserTrial(userId);
+
+      if (trialUsage.length > 0) {
+			   
+        //toast.error("You have used new user trial!");
+        setIsOverUsageLimit(true);
+        setNewUser(false);
+        //errorMessage("You have used new user trial.");
+			
+		  } else {
+         setIsOverUsageLimit(false);
+			   setNewUser(true);
+         //successMessage("Start your trial today🎉");
+			   //toast.success("Start your trial today!");
+		  }
+    }
+
+  }
   useEffect(() => {
 
     fetchUserUsage();
-
-  });
-
-
+    
+    });
+  
   const handleImageChange = (e) => {
     setImageError('');
     const img = e.target.files[0];
@@ -356,19 +360,22 @@ export default function Dashboard() {
           body: video_formData
         }).then(r => r.json());
 
-        const cld_video_url = video_data.secure_url;
-        const cld_video_id = video_data.public_id;
-        const cld_video_duration = Math.floor(video_data.duration * 60);
+        //const cld_video_url = video_data.secure_url;
+        //const cld_video_id = video_data.public_id;
+        const videoDuration = Math.floor(video_data.duration * 60);
         setVideoUrl(video_data.secure_url);
 
         try {
 
+          
+          const dateCreated = new Date();
+
           //update the database
-          const prisma_body = { cld_video_url, cld_video_id, cld_video_duration };
-          await fetch('/api/creation', {
+          const req_body = {videoDuration, dateCreated };
+          await fetch('/api/add_usage', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(prisma_body),
+            body: JSON.stringify(req_body),
           });
           //await Router.push('/drafts');
         } catch (error) {
@@ -390,25 +397,38 @@ export default function Dashboard() {
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-y-12 md:grid-cols-1 md:gap-x-12 ">
         <div className="">
-
-          {isOverUsageLimit ?
-            (
+        
+          {newUser? (
+              
+                <button
+                  className={`${
+                    effect && "animate-wiggle"
+                  } hero-button text-white font-bold py-2 px-4 rounded`} onClick={() => {
+                    setEffect(true);
+                  }}
+                  onAnimationEnd={() => setEffect(false)}
+                >Start Your New User Trial Today</button>
+      
+            ) : null}
+          
+          
+          {isOverUsageLimit?
+             (
               <Link href="/pricing">
                 <button
                   className="hero-button text-white font-bold py-2 px-4 rounded"
                 >Buy a Plan</button>
               </Link>
-            ) :
-            (<div className="mx-auto mt-10 max-w-xs sm:flex sm:max-w-none sm:justify-center">
-              <a target="_blank" href="https://www.talkin-ai.asia">
-                <button
-                  className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-orange-600 shadow-sm hover:bg-gray-500 sm:px-8"
-                >
-                  <span className="text-xl md:text-2xl"><BsFillPlayCircleFill /></span>
-                  <span> Use ChatGPT to Create Speech</span>
-                </button>
-              </a>
-            </div>)
+            ) : (<div className="mx-auto mt-10 max-w-xs sm:flex sm:max-w-none sm:justify-center">
+            <a target="_blank" href="https://www.talkin-ai.asia">
+              <button
+                className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-orange-600 shadow-sm hover:bg-gray-500 sm:px-8"
+              >
+                <span className="text-xl md:text-2xl"><BsFillPlayCircleFill /></span>
+                <span> Use ChatGPT to Create Speech</span>
+              </button>
+            </a>
+          </div>) 
           }
 
           <form onSubmit={(e) => handleOnSubmit(e)}>
@@ -495,15 +515,15 @@ export default function Dashboard() {
             </div>
 
 
-            {isOverUsageLimit ?
-              (
+            {isOverUsageLimit?
+              
+               (
                 <Link href="/pricing">
                   <button
                     className="hero-button text-white font-bold py-2 px-4 rounded"
                   >Buy a Plan</button>
                 </Link>
-              ) :
-              (<button
+              ) : (<button
                 className={`hero-button w-full text-white font-bold mt-6 py-2 px-4 rounded
                   ${isGenerating || audioPrediction === ""
                     ? "cursor-not-allowed opacity-50"
@@ -513,7 +533,7 @@ export default function Dashboard() {
                 disabled={isGenerating || audioPrediction === ""}
               >
                 {isGenerating ? "Generating..." : "Generate Talking Avatar"}
-              </button>)
+              </button>) 
             }
           </form>
         </div>

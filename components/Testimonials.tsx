@@ -4,7 +4,7 @@ const testimonials = [
   [
     {
       content:
-        "Just had early access to this and it's amazing. The youtube video created is hilarious.",
+        "Just had early access to this and it's amazing. The TikTok videos created are hilarious.",
       //link: "https://twitter.com/rauchg/status/1612233034622984192",
       author: {
         name: "Stephanie Reich",
@@ -53,7 +53,7 @@ const testimonials = [
     },
     {
       content:
-        "Wow, thank you! Tried a few and love it! Got lots of likes on my instagram posts!",
+        "Wow, thank you! Tried a few and love it! Got lots of likes on my Instagram posts!",
       //link: "https://twitter.com/rod_ellison/status/1612513333302775809",
       author: {
         name: "Anne Ellison",
@@ -73,7 +73,7 @@ export default function Testimonials() {
       <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mx-auto md:text-center">
           <h1 className="testimonial-header mx-auto max-w-4xl font-display text-4xl font-bold tracking-normal  sm:text-6xl">
-            Loved by many worldwide.
+            Loved By Many Worldwide.
           </h1>
           <p className="testimonial-sub mx-auto mt-6 max-w-xl text-lg leading-7">
             See what our 100,000+ users are saying about the product.

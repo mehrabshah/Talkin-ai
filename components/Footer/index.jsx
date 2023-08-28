@@ -1,8 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 
-// React Icons
-import { SiNextdotjs, SiTailwindcss } from 'react-icons/si';
 
 const Footer = () => {
     return (
@@ -14,7 +12,18 @@ const Footer = () => {
                         <Link href="/"><img src="/talkinai_logo_white.png" alt="talkin-ai-Logo" className="max-w-2xl w-28 m-0" /></Link>
                     </div>
 
-                    <h5 className="text-gray mt-4">
+                   
+
+                    <p className="uppercase tracking-[5px] text-sectiontitle mb-1.5 ">
+                  contact
+                </p>
+                <a
+                  href="#"
+                  className="text-white dark:text-white font-medium text-itemtitle"
+                >
+                  support@talkin-ai.com
+                </a>
+                <h5 className="text-gray mt-4">
                         &copy; TALKIN AI 2023
                     </h5>
                 </div>
@@ -38,13 +47,38 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div className="text-center md:text-left">
+                <h2 className="text-xl font-semibold text-white">Support & Help</h2>
+                <ul className="mt-2 text-center md:text-left">
+                        <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Youtube">
+                            <Link target="_blank" href="/contact" rel="noopener noreferrer">
 
-                    <h5 className="mt-2 text-gray">
-                        This website is made with ❤️ By {" "}
-                        <Link href="/">
-                            <h5 className="text-pink">TALKIN.AI</h5>
-                        </Link>
-                    </h5>
+                                Contact
+                            </Link>
+                        </li>
+                        <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Twitter">
+                            <Link target="_blank" href="/about">
+
+                                About
+
+                            </Link>
+                        </li>
+
+                        <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Twitter">
+                            <Link target="_blank" href="/terms">
+
+                                Terms
+
+                            </Link>
+                        </li>
+                        <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Twitter">
+                            <Link target="_blank" href="/privacy-policy">
+
+                                Privacy Policy
+
+                            </Link>
+                        </li>
+
+                    </ul>
                 </div>
             </div>
         </div>

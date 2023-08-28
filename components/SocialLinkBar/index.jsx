@@ -63,11 +63,6 @@ const SocialLinkBar = ({ video_url }) => {
                 <li><FacebookShareButton url={video_url}>
                     <FacebookIcon size={40} round />
                 </FacebookShareButton></li>
-
-                <li><WhatsappShareButton url={video_url}>
-                    <WhatsappIcon size={40} round />
-                </WhatsappShareButton></li>
-
                 <li> <WeiboShareButton url={video_url}>
                     <WeiboIcon size={40} round />
                 </WeiboShareButton></li>
@@ -75,11 +70,6 @@ const SocialLinkBar = ({ video_url }) => {
                 <li> <RedditShareButton url={video_url}>
                     <RedditIcon size={40} round />
                 </RedditShareButton></li>
-
-                <li><PinterestShareButton url={video_url}>
-                    <PinterestIcon size={40} round />
-                </PinterestShareButton></li>
-
 
             </ul>
         </div>

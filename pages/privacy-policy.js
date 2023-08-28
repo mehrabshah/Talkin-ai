@@ -1,16 +1,12 @@
 import Link from "next/link";
 import Head from 'next/head';
-import AppContext from '../utils/AppContext';
 import { useContext } from 'react';
 import PrivacyPolicy from "../components/PrivacyPolicy";
 
 
 
 export default function Home() {
-  const {
-    theme, setTheme, searchValue, setSearchValue,
-  } = useContext(AppContext);
-
+  
   return (
     <>
 

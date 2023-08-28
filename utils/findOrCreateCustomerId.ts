@@ -13,7 +13,7 @@ export const findOrCreateCustomerId = async ({
 
   const customerCreate = await stripeApiClient.customers.create(
     {
-      name: user.firstName + " " + user.lastName,
+      //name: user.firstName + " " + user.lastName,
       email: user.emailAddresses.find(
         (x) => x.id === user.primaryEmailAddressId
       ).emailAddress,
