@@ -10,7 +10,7 @@ import AvatarFAQ from './AvatarFAQ';
 import DiscordButton from './DiscordButton';
 import { BsFillPlayCircleFill } from 'react-icons/bs';
 import { Gate, useSubscription } from "use-stripe-subscription";
-import { findCreation, checkNewUserTrial, errorMessage, successMessage } from "../utils/functions";
+import { checkNewUserTrial} from "../utils/functions";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -45,7 +45,7 @@ export default function Dashboard() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [newUser, setNewUser] = useState(false);
   const [effect, setEffect] = useState(false);
-
+  const [startDate, setStartDate] =  useState("");
   
 
   const {
@@ -64,9 +64,14 @@ export default function Dashboard() {
       
       const subscriptionStart= subscription.start_date;
 
-      const subscriptionUsage = await findCreation(userId, subscriptionStart);
+      setStartDate(subscriptionStart);
+
+      const response = await fetch(`/api/fetch_usage?startDate=${subscriptionStart}`);
+      const result = await response.json();
+      const subscriptionUsage = result.usage;
       //const response = await fetch(`/api/fetch_usage?subscriptionStart=${subscription?.start_date}`);
       //const result = await response.json();
+      //console.log(response);
       setUsage(subscriptionUsage);
       //console.log(result.userUsage);
       
@@ -566,6 +571,8 @@ export default function Dashboard() {
                 />
               </div>
             )}
+             <p className="py-3 text-sm opacity-50">start date: {startDate}</p>
+             <p className="py-3 text-sm opacity-50">usage: {usage}</p>
             <p className="py-3 text-sm opacity-50">audio status: {audioPrediction?.status}</p>
             <p className="py-3 text-sm opacity-50">video status: {prediction?.status}</p>
             <p className="py-3 text-sm opacity-50">video url: {videoUrl}</p>
