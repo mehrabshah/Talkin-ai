@@ -12,13 +12,13 @@ export default async function handler(req, res) {
   return;
   }
   
-  console.log(userId);
+  //console.log(userId);
 
   //const subscriptionStart = req.query.startDate;
 
   const result = await checkNewUserTrial(userId);
   
-  console.log(result);
+  //console.log(result);
   
 
   res.json({ "trialUsage" : result });
