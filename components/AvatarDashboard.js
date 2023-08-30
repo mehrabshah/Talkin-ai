@@ -64,14 +64,12 @@ export default function Dashboard() {
       
       const subscriptionStart= subscription.start_date;
 
-      setStartDate(subscriptionStart);
+      //setStartDate(subscriptionStart);
 
       const response = await fetch(`/api/fetch_usage?startDate=${subscriptionStart}`);
       const result = await response.json();
-      const subscriptionUsage = result.usage;
-      //const response = await fetch(`/api/fetch_usage?subscriptionStart=${subscription?.start_date}`);
-      //const result = await response.json();
-      //console.log(response);
+      const subscriptionUsage = result?.usage;
+      
       setUsage(subscriptionUsage);
       //console.log(result.userUsage);
       
@@ -95,9 +93,11 @@ export default function Dashboard() {
     }
     else {
 
-      const trialUsage = await checkNewUserTrial(userId);
+      const response = await fetch(`/api/check_new_user`);
+      const result = await response.json();
+      const trialUsage = result?.trialUsage;
 
-      if (trialUsage.length > 0) {
+      if (trialUsage?.length > 0) {
 			   
         //toast.error("You have used new user trial!");
         setIsOverUsageLimit(true);
@@ -571,8 +571,6 @@ export default function Dashboard() {
                 />
               </div>
             )}
-             <p className="py-3 text-sm opacity-50">start date: {startDate}</p>
-             <p className="py-3 text-sm opacity-50">usage: {usage}</p>
             <p className="py-3 text-sm opacity-50">audio status: {audioPrediction?.status}</p>
             <p className="py-3 text-sm opacity-50">video status: {prediction?.status}</p>
             <p className="py-3 text-sm opacity-50">video url: {videoUrl}</p>

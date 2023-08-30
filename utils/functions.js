@@ -78,9 +78,10 @@ export const findCreation = async (userId, subscriptionStart) => {
 	try {
 		
 		var date = new Date(subscriptionStart * 1000); // convert timestamp to date
-        date.setDate(date.getDate() + 30); // add 30 days to subscription start date
+        
 		
-		console.log(date);
+		//console.log(startDate);
+		//console.log(date);
 		const response = await db.listDocuments(
 			process.env.NEXT_PUBLIC_DB_ID,
 			process.env.NEXT_PUBLIC_CREATIONS_COLLECTION_ID,
@@ -88,11 +89,16 @@ export const findCreation = async (userId, subscriptionStart) => {
 		
         const creations = response.documents;
 		const results = creations.filter((creation) => ( creation.userId === userId ));
-		const lists = results.filter((result) => ( new Date (result.dateCreated) <= date ));
-       
+		const lists = results.filter((result) => ( new Date (result.dateCreated) >= date  ) );
+		
+		date.setDate(date.getDate() + 30); // add 30 days to subscription start date
+
+		//console.log(date);
+
+       const usageLists = lists.filter((list) => ( new Date (list.dateCreated) <= date  ) );
 		//console.log(lists);
 		
-		var userUsage = lists.map(list => list.videoDuration).reduce((usage, duration) => usage + duration);
+		var userUsage = usageLists.map(usageList => usageList.videoDuration).reduce((usage, duration) => usage + duration);
 		
 		//console.log(userUsage);
         //console.log(result[0].videoDuration);
@@ -102,6 +108,8 @@ export const findCreation = async (userId, subscriptionStart) => {
 	}
 
 };
+
+
 
 
 
@@ -118,7 +126,7 @@ export const checkNewUserTrial = async (userId) => {
 		
 		
 	} catch (error) {
-		errorMessage("An error occurred 😪");
+		//errorMessage("An error occurred 😪");
 		console.error(error);
 	}
 };

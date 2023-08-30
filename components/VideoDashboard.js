@@ -11,7 +11,7 @@ import Text2VideoFAQ from './Text2VideoFAQ';
 import DiscordButton from './DiscordButton';
 import { BsFillPlayCircleFill } from 'react-icons/bs';
 import { Gate, useSubscription } from "use-stripe-subscription";
-import { findCreation, checkNewUserTrial, errorMessage, successMessage } from "../utils/functions";
+import { findCreation, checkNewUserTrial} from "../utils/functions";
 
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -59,7 +59,13 @@ export default function Dashboard() {
       
       const subscriptionStart= subscription.start_date;
 
-      const subscriptionUsage = await findCreation(userId, subscriptionStart);
+      //setStartDate(subscriptionStart);
+
+      const response = await fetch(`/api/fetch_usage?startDate=${subscriptionStart}`);
+      const result = await response.json();
+      const subscriptionUsage = result?.usage;
+
+      
       //const response = await fetch(`/api/fetch_usage?subscriptionStart=${subscription?.start_date}`);
       //const result = await response.json();
       setUsage(subscriptionUsage);
@@ -85,7 +91,10 @@ export default function Dashboard() {
     }
     else {
 
-      const trialUsage = await checkNewUserTrial(userId);
+      const response = await fetch(`/api/check_new_user`);
+      const result = await response.json();
+      const trialUsage = result?.trialUsage;
+      
 
       if (trialUsage.length > 0) {
 			  setIsOverUsageLimit(true);
