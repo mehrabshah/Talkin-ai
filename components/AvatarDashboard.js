@@ -10,7 +10,6 @@ import AvatarFAQ from './AvatarFAQ';
 import DiscordButton from './DiscordButton';
 import { BsFillPlayCircleFill } from 'react-icons/bs';
 import { Gate, useSubscription } from "use-stripe-subscription";
-import { checkNewUserTrial} from "../utils/functions";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -183,7 +182,6 @@ export default function Dashboard() {
       setAudio(audio);
       console.log(isCustomAudio);
     });
-
 
   };
 
@@ -394,6 +392,11 @@ export default function Dashboard() {
 
 
     }
+    setImage();
+    setSpeech("");
+    setVoice("");
+    setAudio();
+
   };
 
 

@@ -22,9 +22,8 @@ export default function Dashboard() {
 
   const [negativePrompt, setNegativePrompt] = useState("");
 
-  const [videoLength, setVideoLength] = useState(16);
-  const [seed, setSeed] = useState(0);
-
+  const [videoLength, setVideoLength] = useState("16");
+  
   const [error, setError] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [videoPrediction, setVideoPrediction] = useState(null);
@@ -37,7 +36,7 @@ export default function Dashboard() {
 
   const [newUser, setNewUser] = useState(false);
   const [effect, setEffect] = useState(false);
-  
+  const [seed, setSeed] = useState();
 
   //get the  3 days lag date from current date 
 
@@ -139,9 +138,9 @@ export default function Dashboard() {
       timestep_t1: 47,
       motion_field_strength_x: 12,
       motion_field_strength_y: 12,
-      video_length: videoLength,
+      video_length: parseInt(videoLength),
       fps: 4,
-      seed: seed,
+      seed: seed
     };
 
     const video_response = await fetch("/api/video_predictions", {
@@ -174,6 +173,7 @@ export default function Dashboard() {
         return;
       }
       console.log({ videoPrediction });
+      setVideoPrediction(videoPrediction);
     }
 
     if (videoPrediction.status == "succeeded") {
@@ -216,6 +216,11 @@ export default function Dashboard() {
         console.error(error);
       }
     }
+    setPromptInput("");
+    setNegativePrompt("");
+      
+    setVideoLength("16");
+
 
   }
 
@@ -297,25 +302,14 @@ export default function Dashboard() {
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
                 name="videoLength"
                 id="videoLength"
-                type="number"
+                type="text" 
+                inputmode="numeric" 
+                pattern="[0-9]*"
                 placeholder="Default: 16"
               />
             </div>
            
-            <div className="flex flex-col py-5">
-              <label className="text-white" htmlFor="seed">
-                Seed
-              </label>
-              <input
-                value={seed}
-                onChange={(e) => setSeed(e.target.value)}
-                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                name="seed"
-                id="seed"
-                type="number"
-                placeholder="Default: 0"
-              />
-            </div>
+            
 
             {isOverUsageLimit ?
               (
