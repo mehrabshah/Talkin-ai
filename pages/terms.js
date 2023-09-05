@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 
 // React Icons
 
@@ -7,6 +8,14 @@ import React from 'react';
 
 export default function Home() {
     return (
+
+		<>
+
+      <Head>
+        <title>TALKIN AI Terms</title>
+        <meta name="description" content="TALKIN AI Terms" />
+        <link rel="icon" href="/talkin_logo.png" />
+      </Head>
 
         <div className='terms-card'>
             <p className="mb-5 mx-6 py-4 text-sm text-left text-white">
@@ -175,6 +184,7 @@ You and TALKIN AI are independent contractors. Nothing in this Agreement creates
 			</p>
 
         </div>
+		</>
     )
 }
 

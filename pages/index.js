@@ -17,7 +17,8 @@ export default function Home() {
 
       <Head>
         <title>TALKIN AI Homepage</title>
-        <meta name="description" content="Generate AI-enabled talking avatar and youtube videos!" />
+        <meta name="description" content="Talking Avatar  videos with AI, Text to Video " />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/talkin_logo.png" />
       </Head>
 

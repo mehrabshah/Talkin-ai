@@ -47,7 +47,10 @@ export default function PlanPage() {
     <>
       <Head>
         <title>TALKIN AI PLAN</title>
-        <meta name="description" content="Talkin AI Plan" />
+        
+        <meta name="description" content="Talking Avatar  videos with AI, Text to Video " />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+       
         <link rel="icon" href="/talkin_logo.png" />
       </Head>
      
