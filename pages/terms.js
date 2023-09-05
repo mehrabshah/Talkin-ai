@@ -16,9 +16,10 @@ export default function Home() {
         <meta name="description" content="TALKIN AI Terms" />
         <link rel="icon" href="/talkin_logo.png" />
       </Head>
-
-        <div className='terms-card'>
-            <p className="mb-5 mx-6 py-4 text-sm text-left text-white">
+	 
+	 
+	 <div className='terms-card'>
+            <div className="mb-5 mx-6 py-4 text-sm text-left text-white">
             <h1 className="text-2xl">
 	TALKIN AI Web Site Terms and Conditions of Use
 </h1>
@@ -181,7 +182,7 @@ You and TALKIN AI are independent contractors. Nothing in this Agreement creates
 	<p className="mx-2 py-2"> 23.  <span className="bold">Governing Law and Disputes</span>. This Agreement shall be governed by and construed in accordance with the laws of the State of California without regard to its conflict of laws rules. You agree to submit to the personal and exclusive jurisdiction of the courts located in the U.S. District Court for the Central District of California or the Superior Court of the State of California, County of Los Angeles, and waive any jurisdictional, venue, or inconvenient forum objections to such courts. Notwithstanding the foregoing, we may seek injunctive relief in any court of competent jurisdiction.</p>
 	<p className="mx-2 py-2">24. This Agreement, and any other legal notices published by us in connection with the Software, shall constitute the entire agreement between you and TALKIN AI concerning the Software. In the event of a conflict between this Agreement and any such legal notices, the terms of the applicable notice shall prevail with respect to the subject matter of such notice. No amendment to this Agreement will be binding unless in writing and signed by TALKIN AI. If any provision of this Agreement is deemed invalid by a court of competent jurisdiction, the invalidity of such provision shall not affect the validity of the remaining provisions of this Agreement, which shall remain in full force and effect. No waiver of any term of this Agreement shall be deemed a further or continuing waiver of such term or any other term, and a party’s failure to assert any right or provision under this Agreement shall not constitute a waiver of such right or provision. YOU AGREE THAT ANY CAUSE OF ACTION THAT YOU MAY HAVE ARISING OUT OF OR RELATED TO THE SOFTWARE MUST COMMENCE WITHIN ONE (1) YEAR AFTER THE CAUSE OF ACTION ACCRUES. OTHERWISE, SUCH CAUSE OF ACTION IS PERMANENTLY BARRED.</p>	
 	<p className="mx-2 py-2">25. <span className="bold">Contact Information</span>. If you have any questions, complaints, or claims regarding the Software, please contact us at support@talkin-ai.com.</p>
-			</p>
+			</div>
 
         </div>
 		</>
