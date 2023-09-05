@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import Meta from "../components/Meta";
 import Head from 'next/head';
 import Hero from "../components/Hero";
 import Text2VideoHero from "../components/Text2VideoHero";
@@ -14,13 +15,8 @@ export default function Home() {
   
   return (
     <>
-
-      <Head>
-        <title>TALKIN AI Homepage</title>
-        <meta name="description" content="Talking Avatar  videos with AI, Text to Video " />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/talkin_logo.png" />
-      </Head>
+     <Meta />
+      
 
       <div className="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
         <div className="blur-[106px] h-30 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
