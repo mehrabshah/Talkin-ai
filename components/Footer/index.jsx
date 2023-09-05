@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from "next/image";
 
 
 const Footer = () => {
@@ -9,7 +10,10 @@ const Footer = () => {
                 <div className="flex flex-col justify-center items-center">
 
                     <div className="md:mr-30">
-                        <Link href="/"><img src="/talkinai_logo_white.png" alt="talkin-ai-Logo" className="max-w-2xl w-28 m-0" /></Link>
+                        <Link href="/">
+                            
+                        <Image src="/talkinai_logo_white.png" width="30" height="30" alt="talkin-ai-Logo" className="w-28 m-0"/>
+                            </Link>
                     </div>
 
                    
