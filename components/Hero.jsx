@@ -22,7 +22,7 @@ const Hero = () => {
             <div  >
            
                     
-                <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">TALKIN AI</h1>
+                <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">AIVIDOO</h1>
                     
                 <h2 className="text-center my-4 text-3xl text-white font-semibold md:text-left md:text-4xl md:my-4">
                     AI GENERATED TALKING AVATAR
