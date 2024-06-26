@@ -12,7 +12,7 @@ const Footer = () => {
                     <div className="md:mr-30">
                         <Link href="/">
                             
-                        <Image src="/talkinai_logo_white.png" width="30" height="30" alt="talkin-ai-Logo" className="w-28 m-0"/>
+                        <Image src="/aividoo_logo.png" width="30" height="30" alt="aividoo-Logo" className="w-28 m-0"/>
                             </Link>
                     </div>
 
@@ -25,7 +25,7 @@ const Footer = () => {
                   href="#"
                   className="text-white dark:text-white font-medium text-itemtitle"
                 >
-                  support@talkin-ai.com
+                  support@aividoo.com
                 </a>
                 <h5 className="text-gray mt-4">
                         &copy; TALKIN AI 2023

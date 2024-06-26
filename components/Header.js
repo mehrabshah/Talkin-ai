@@ -24,8 +24,8 @@ const Header = () => {
   <header className={styles.header}>
     <div className={styles.left}>
       <Link href="/" className={styles.logo}>
-        <Image src="/talkinai_logo_white.png" width="80" height="80" alt="Logo" />
-        <span className={styles.appName}>TALKIN AI</span>
+        <Image src="/aividoo_logo.png" width="200" height="80" alt="Logo" />
+        <span className={styles.appName}></span>
       </Link>
     </div>
     <div className={styles.right}>
