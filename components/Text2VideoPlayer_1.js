@@ -2,7 +2,7 @@
 
 import { Video, CloudinaryContext } from "cloudinary-react";
 
-const Text2VideoPlayer = () => {
+const Text2VideoPlayer_1 = () => {
  
   return (
     <CloudinaryContext cloud_name="dbospsdwo" secure>
@@ -23,4 +23,4 @@ const Text2VideoPlayer = () => {
   );
 };
 
-export default Text2VideoPlayer;
+export default Text2VideoPlayer_1;

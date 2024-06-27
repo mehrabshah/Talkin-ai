@@ -22,11 +22,9 @@ const Hero = () => {
             <div  >
            
                     
-                <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">AIVIDOO</h1>
-                    
-                <h2 className="text-center my-4 text-3xl text-white font-semibold md:text-left md:text-4xl md:my-4">
-                    AI GENERATED TALKING AVATAR
-                </h2>
+                
+            <h1 className="text-white dark:text-white font-bold text-4xl md:text-5xl xl:text-6xl">TALKING AVATAR</h1>   
+                
                 <p className="text-center font-normal text-md text-light-gray my-6 mb-8 md:text-left md:text-xl leading-normal">
                 </p>
 

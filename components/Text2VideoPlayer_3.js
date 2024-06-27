@@ -2,13 +2,13 @@
 
 import { Video, CloudinaryContext } from "cloudinary-react";
 
-const Text2VideoPlayer = () => {
+const Text2VideoPlayer_3 = () => {
  
   return (
     <CloudinaryContext cloud_name="dbospsdwo" secure>
       <div className="herovideo-card">
         <Video
-          publicId="talking_avatar/panda_space_5_vtdpmz"
+          publicId="talking_avatar/panda_space_3_objqhv"
           //publicId="trump_rap_qgtuxz"
           autoPlay
           loop
@@ -23,4 +23,4 @@ const Text2VideoPlayer = () => {
   );
 };
 
-export default Text2VideoPlayer;
+export default Text2VideoPlayer_3;
