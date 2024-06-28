@@ -43,11 +43,11 @@ export default function PricingPage() {
   return (
     <>
       <Head>
-        <title>TALKIN AI Pricing</title>
+        <title>AIVIDOO Pricing</title>
         <meta name="description" content="Talking Avatar  videos with AI, Text to Video " />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
-        <link rel="icon" href="/talkin_logo.png" />
+        <link rel="icon" href="/aividoo_logo.png" />
       </Head>
      
       <main>
@@ -87,7 +87,7 @@ export default function PricingPage() {
               </p>
               <button
               className="hero-button  w-full px-10 py-8 flex flex-col text-white text-center"
-             onClick={() => redirectToCheckout({ price: price.id, successUrl: `https://talkin-ai.com/payment/success`, cancelUrl: `https://talkin-ai.com/payment/cancelled`})}
+             onClick={() => redirectToCheckout({ price: price.id, successUrl: `https://aividoo.com/payment/success`, cancelUrl: `https://aividoo.com/payment/cancelled`})}
            >
              Start Plan
            </button>
