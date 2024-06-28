@@ -35,8 +35,6 @@ export default function Home() {
       </div>
       <Text2VideoHero />
       <NewUserTrialHero />
-      <Features />
-
       
       <Testimonials />
     </>
