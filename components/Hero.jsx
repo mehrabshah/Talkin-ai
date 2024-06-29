@@ -28,7 +28,7 @@ const Hero = () => {
                 <p className="text-center font-normal text-md text-light-gray my-6 mb-8 md:text-left md:text-xl leading-normal">
                 </p>
 
-                <Link href="/sign-in"
+                <Link href="/"
                     title="Sign In"
                     className="hero-button flex justify-center items-center gap-3 w-max m-auto mt-8 py-3 px-6 text-sm text-white font-semibold rounded-full active:scale-95 md:text-md md:m-0">
                     <span className="text-xl md:text-2xl"><BsFillPlayCircleFill /></span>
