@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from "next/image";
 
 
 const Footer = () => {
@@ -10,10 +9,7 @@ const Footer = () => {
                 <div className="flex flex-col justify-center items-center">
 
                     <div className="md:mr-30">
-                        <Link href="/">
-                            
-                        <Image src="/aividoo_logo.png" width="30" height="30" alt="aividoo-Logo" className="w-28 m-0"/>
-                            </Link>
+                        <Link href="/"><img src="/aividoo_logo.png" alt="aividoo-Logo" className="max-w-2xl w-28 m-0" /></Link>
                     </div>
 
                    
@@ -54,13 +50,13 @@ const Footer = () => {
                 <h2 className="text-xl font-semibold text-white">Support & Help</h2>
                 <ul className="mt-2 text-center md:text-left">
                         <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Youtube">
-                            <Link target="_blank" href="/contact" rel="noopener noreferrer">
+                            <Link target="_blank" href="/" rel="noopener noreferrer">
 
                                 Contact
                             </Link>
                         </li>
                         <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Twitter">
-                            <Link target="_blank" href="/about">
+                            <Link target="_blank" href="/">
 
                                 About
 
@@ -68,14 +64,14 @@ const Footer = () => {
                         </li>
 
                         <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Twitter">
-                            <Link target="_blank" href="/terms">
+                            <Link target="_blank" href="/">
 
                                 Terms
 
                             </Link>
                         </li>
                         <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Twitter">
-                            <Link target="_blank" href="/privacy-policy">
+                            <Link target="_blank" href="/">
 
                                 Privacy Policy
 

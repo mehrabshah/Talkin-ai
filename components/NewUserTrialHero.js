@@ -47,7 +47,7 @@ export default function NewUserTrial() {
                
                 
                 <Link
-                  href="/sign-up"
+                  href="/"
                   className="hero-button flex justify-center items-center gap-3 w-max m-auto mt-8 py-3 px-6 text-sm text-white font-semibold rounded-full active:scale-95 md:text-md md:m-0">
                     <span className="text-xl md:text-2xl"><BsFillPlayCircleFill /></span>
                     <span>Try For Free</span>
@@ -74,7 +74,7 @@ export default function NewUserTrial() {
               className="animate_left md:w-[70%] lg:w-1/2"
             >
               <h2 className="text-white dark:text-white text-3xl xl:text-sectiontitle4 font-bold mb-8 mx-10 w-11/12">
-                Start New User Trial Today
+              Announcement: New Product Launch Coming Soon
               </h2>
             </motion.div>
           </div>
