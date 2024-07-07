@@ -10,6 +10,10 @@ import Text2VideoPlayer_5 from './Text2VideoPlayer_5';
 import Text2VideoPlayer_6 from './Text2VideoPlayer_6';
 import Text2VideoPlayer_7 from './Text2VideoPlayer_7';
 import Text2VideoPlayer_8 from './Text2VideoPlayer_8';
+import Text2VideoPlayer_9 from './Text2VideoPlayer_9';
+import Text2VideoPlayer_10 from './Text2VideoPlayer_10';
+import Text2VideoPlayer_11 from './Text2VideoPlayer_11';
+import Text2VideoPlayer_12 from './Text2VideoPlayer_12';
 
 import { motion } from "framer-motion";
 
@@ -51,8 +55,9 @@ const Hero = () => {
                
     
        </div>
-       <div className="grid  grid-rows-2 grid-cols-4 gap-0 py-8 place-items-center md:py-10 md:grid-cols-1">
+       <div className="grid  grid-rows-3 grid-cols-4 gap-0 py-8 place-items-center md:py-10 md:grid-cols-1">
             
+      
             
             <div className="video-card  flex justify-center items-center gap-0 mt-0 px-1">
                <Text2VideoPlayer_1 />
@@ -63,14 +68,17 @@ const Hero = () => {
                     
            <div className="video-card  flex justify-center items-center gap-0 mt-0 px-1">
                <Text2VideoPlayer_5 />
-               <Text2VideoPlayer_6 />
-               <Text2VideoPlayer_7 />
-               <Text2VideoPlayer_8 />
-              
-              
+               <Text2VideoPlayer_6 />    
+               <Text2VideoPlayer_12 />
+               <Text2VideoPlayer_8 />     
            </div>
            
-       
+           <div className="video-card  flex justify-center items-center gap-0 mt-0 px-1">
+               <Text2VideoPlayer_9 />
+               <Text2VideoPlayer_10 />
+               <Text2VideoPlayer_7 />
+               <Text2VideoPlayer_11 />  
+           </div>
 
        
         </div>

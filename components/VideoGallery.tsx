@@ -126,7 +126,7 @@ const sliderData = [
     title: "Our Belief",
     description:
       "Artificial Intelligence For Good",
-    location: "TALKIN AI",
+    location: "AIVIDOO",
   },
   {
     img: "/2.png",
