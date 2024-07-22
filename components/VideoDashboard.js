@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import cn from "classnames";
 
 import { useEffect } from 'react';
 import Link from 'next/link';
@@ -37,6 +38,10 @@ export default function Dashboard() {
   const [newUser, setNewUser] = useState(false);
   const [effect, setEffect] = useState(false);
   const [seed, setSeed] = useState();
+  const [loading, setLoading] = useState(false);
+  const [messageId, setMessageId] = useState("");
+  const [image, setImage] = useState(null);
+  const [canShowImage, setCanShowImage] = useState(false);
 
   //get the  3 days lag date from current date 
 
@@ -49,6 +54,20 @@ export default function Dashboard() {
   const { isSignedIn, user } = useUser();
 
 
+  async function submitForm(e) {
+    e.preventDefault();
+    setLoading(true);
+    toast("Generating your image...", { position: "top-center" });
+    const response = await fetch(`/api/image?prompt=${prompt}`);
+    const json = await response.json();
+    setMessageId(json.id);
+  }
+
+  const showLoadingState = loading || (image && !canShowImage);
+  
+  
+  
+  
   const fetchUserUsage = async () => {
     
     const userId = user?.id;
@@ -72,17 +91,17 @@ export default function Dashboard() {
       
       switch (subscription.plan.id) {
         case "price_1NKLt1Dfv2951nlDZgy3rBUp":
-          if (subscriptionUsage < 3 * 60 * 60) {
+          if (subscriptionUsage < 30) {
             setIsOverUsageLimit(false);
           }
           break;
         case "price_1NLlSvDfv2951nlD1Nz9MrRo":
-          if (subscriptionUsage < 10 * 60 * 60) {
+          if (subscriptionUsage < 120) {
             setIsOverUsageLimit(false);
           }
           break;
         case "price_1NLlT8Dfv2951nlDtxCDnigJ":
-          if (subscriptionUsage < 25 * 60 * 60) {
+          if (subscriptionUsage < 300) {
             setIsOverUsageLimit(false);
           }
           break;
@@ -95,7 +114,7 @@ export default function Dashboard() {
       const trialUsage = result?.trialUsage;
       
 
-      if (trialUsage.length > 0) {
+      if (trialUsage.length > 30) {
 			  setIsOverUsageLimit(true);
         setNewUser(false); 
         //errorMessage("You have used new user trial.");
@@ -133,12 +152,11 @@ export default function Dashboard() {
     const video_body = {
       model_name: "dreamlike-art/dreamlike-photoreal-2.0",
       prompt: promptInput,
-      negative_prompt: negativePrompt,
       timestep_t0: 44,
       timestep_t1: 47,
       motion_field_strength_x: 12,
       motion_field_strength_y: 12,
-      video_length: parseInt(videoLength),
+      video_length: 16,
       fps: 4,
       seed: seed
     };
@@ -196,15 +214,18 @@ export default function Dashboard() {
         //const cld_video_url = video_data.secure_url;
         //const cld_video_url = video_data.secure_url;
         //const cld_video_id = video_data.public_id;
+        const cld_video_url = video_data.secure_url;
+
+        //console.log({ cld_video_url });
         
         setVideoUrl(video_data.secure_url);
-        const videoDuration = Math.floor(video_data.duration * 60);
+        //const videoDuration = Math.floor(video_data.duration * 60);
         
 
         const dateCreated = new Date();
 
           //update the database
-        const req_body = {videoDuration, dateCreated };
+        const req_body = {cld_video_url, dateCreated };
         await fetch('/api/add_usage', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -228,111 +249,54 @@ export default function Dashboard() {
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-y-12 md:grid-cols-1 md:gap-x-12 ">
         <div className="">
-        {newUser? (
-              
-              <button
-                className={`${
-                  effect && "animate-wiggle"
-                } hero-button text-white font-bold py-2 px-4 rounded`} onClick={() => {
-                  setEffect(true);
-                }}
-                onAnimationEnd={() => setEffect(false)}
-              >Start Your New User Trial Today</button>
-    
-          ) : null}
-
-
-
-
-          {isOverUsageLimit? 
-            (
-              <Link href="/pricing">
-                <button
-                  className="hero-button text-white font-bold py-2 px-4 rounded"
-                >Buy a Plan</button>
-              </Link>
-            ) :
-            (null) 
-          }
-
-
-          <form onSubmit={(e) => handleOnSubmit(e)}>
-            
-
-
-            <div className="flex flex-col py-5">
-              <label htmlFor="promptInput" className="text-white">
-                Prompt (Required)
-              </label>
-              <textarea
-                rows={2}
-                value={promptInput}
-                onChange={(e) => setPromptInput(e.target.value)}
-                required
-                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                placeholder="A panda dancing on Time Square"
-                type="text"
-                name="promptInput"
-                id="promptInput"
-              />
-            </div>
-
-            <div className="flex flex-col py-5">
-              <label className="text-white" htmlFor="negativePrompt">
-                Negative prompt (Optional)
-              </label>
-              <input
-                type="text"
-                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                name="negativePrompt"
-                placeholder=""
-                id="negativePrompt"
-                value={negativePrompt}
-                onChange={(e) => setNegativePrompt(e.target.value)}
-              />
-            </div>
-
-            <div className="flex flex-col py-5">
-              <label className="text-white" htmlFor="videoLength">
-                Video Length (Seconds)
-              </label>
-              <input
-                value={videoLength}
-                onChange={(e) => setVideoLength(e.target.value)}
-                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
-                name="videoLength"
-                id="videoLength"
-                type="text" 
-                inputmode="numeric" 
-                pattern="[0-9]*"
-                placeholder="Default: 16"
-              />
-            </div>
-           
-            
-
-            {isOverUsageLimit ?
-              (
-                <Link href="/pricing">
-                  <button
-                    className="hero-button text-white font-bold py-2 px-4 rounded"
-                  >Buy a Plan</button>
-                </Link>
-              ) :
-              (<button
-                className={`hero-button w-full text-white font-bold mt-6 py-2 px-4 rounded
-                  ${isGenerating || promptInput === ""
-                    ? "cursor-not-allowed opacity-50"
-                    : ""
-                  }`}
-                type="submit"
-                disabled={isGenerating || promptInput === ""}
-              >
-                {isGenerating ? "Generating..." : "Generate Video"}
-              </button>) 
-            }
-
+      
+        </div>
+      </div>
+      
+      <div className="flex flex-col items-center justify-center">
+      
+          <form
+            className="flex w-full sm:w-auto flex-col sm:flex-row mb-10"
+            onSubmit={(e) => handleOnSubmit(e)}
+          >
+            <input
+              className="shadow-sm text-gray-700 rounded-sm px-3 py-2 mb-4 sm:mb-0 sm:min-w-[600px]"
+              type="text"
+              placeholder="Prompt for Video"
+              onChange={(e) => setPromptInput(e.target.value)}
+            />
+            <button
+              className=" hero-button min-h-[40px] shadow-sm sm:w-[100px] py-2 inline-flex justify-center font-medium items-center px-4 text-gray-100 sm:ml-2 rounded-md hover:bg-gray-700"
+              type="submit"
+              disabled={promptInput === ""}
+            >
+              {showLoadingState && (
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              )}
+              {!showLoadingState ? "Generate" : ""}
+            </button>
           </form>
+          
+          <div className="relative flex w-full items-center justify-center">
           {videoPrediction?.output && (
             <div >
               <video controls muted autoPlay
@@ -342,17 +306,15 @@ export default function Dashboard() {
               />
             </div>
           )}
+          </div>
           <p className="py-3 text-sm opacity-50 text-white">video status: {videoPrediction?.status}</p>
-          <p className="py-3 text-sm opacity-50 text-white">video url: {videoUrl}</p>
+         </div>
 
-        </div>
-      </div>
+
 
 
       <Disclaimer />
       <DiscordButton />
-      <SocialLinkBar url={videoUrl} />
-
       <Text2VideoFAQ />
     </div>
 

@@ -28,6 +28,9 @@ export default function PricingPage() {
     redirectToCheckout,
   } = useSubscription();
 
+  
+  console.log(products);
+  
   if (!isLoaded) {
     return null;
   }
@@ -44,10 +47,8 @@ export default function PricingPage() {
     <>
       <Head>
         <title>AIVIDOO Pricing</title>
-        <meta name="description" content="Talking Avatar  videos with AI, Text to Video " />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        <link rel="icon" href="/aividoo_logo.png" />
+        <meta name="description" content="Talkin AI Pricing" />
+        <link rel="icon" href="/talkin_logo.png" />
       </Head>
      
       <main>
@@ -59,7 +60,7 @@ export default function PricingPage() {
        
        
     <div className="relative pt-20 ml-auto">
-            <div className="lg:w-2/3 text-center mx-auto">
+            <div className="lg:w-3/4 text-center mx-auto">
                 <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Pricing.</h1>
                 <p className="mt-8 text-xl text-gray-700 dark:text-gray-300">Choose Your Plan </p>
                
@@ -72,22 +73,22 @@ export default function PricingPage() {
         <Container>
           <div className="flex w-full items-center justify-center">
             
-           
-          {products.map(({ product, prices }) => (
-        <div key={product.id} className="h-80 w-80 mx-2 bg-white text-black-700 flex flex-col">
-          <h4 className="text-gray-600 text-2xl py-8 font-medium text-center border-b border-gray-300">{product.name}</h4>
-          
+  
+          {products.toReversed().map(({ product, prices }) => (
+            
+        <div key={product.id} className="flex-1 text-xl mt-14 rounded-xl border border-[#cd4a1d]/25 bg-[#30373d] p-10 w-full">
+          <h4 className="text-[#cd4a1d]">{product.name}</h4>
             {prices.map((price) => (
               <div key={price.id}>
               <p className="flex-1 p-8 flex flex-col items-center">
-              <h5 className="text-gray-600 text-2xl py-2 font-medium text-center ">${price.unit_amount/100} </h5>
-              <h5 className="text-gray-600 text-1xl font-medium text-center">Monthly</h5>
+              <h5 className=" text-2xl py-2 font-medium text-center ">${price.unit_amount/100} </h5>
+              <h5 className=" text-1xl font-medium text-center">Monthly</h5>
               
         
               </p>
               <button
-              className="hero-button  w-full px-10 py-8 flex flex-col text-white text-center"
-             onClick={() => redirectToCheckout({ price: price.id, successUrl: `https://aividoo.com/payment/success`, cancelUrl: `https://aividoo.com/payment/cancelled`})}
+              className="my-5 w-full text-black p-5 max-sm:p-2 rounded-3xl bg-[#cd4a1d] text-xl max-sm:text-lg hover:bg-[#fdf2bb] transition-all"
+             onClick={() => redirectToCheckout({ price: price.id, successUrl: `http://localhost:3000/payment/success`, cancelUrl: `http://localhost:3000/payment/cancelled`})}
            >
              Start Plan
            </button>
@@ -97,102 +98,103 @@ export default function PricingPage() {
         </div>
       ))}
           </div>
-        </Container>
-
+          </Container>
         <Container>
           <div className="flex w-full items-center justify-center">
 
             <div
 
-              className="h-80 w-80 mx-2 bg-white text-black-700 flex flex-col"
+              className="flex-1 text-xl mt-14 rounded-xl border border-[#cd4a1d]/25 bg-[#30373d] p-10 w-full"
             >
-              <h2 className="text-gray-600 text-2xl py-8 font-medium text-center border-b border-gray-300">
+              <h4 className="text-[#cd4a1d]">
                 Feature List
-              </h2>
+              </h4>
               <p className="flex-1 p-8 flex flex-col items-left">
-                <span className="text-gray-600 font-bold text-center  text-1xl">
-                  25 mins /month
+                <span className="font-bold text-center  text-1xl">
+                  30 generations /month
 
                 </span>
 
-                <span className="text-gray-600 text-center text-sm">
-                  TalkingAvatar
+                <span className="text-center text-sm">
+                  High priority
                   
                  
 
                 </span>
-                <span className="text-gray-600 text-center text-sm">
-                Text2Video
-
-                </span>
-                <span className="text-gray-600 text-center text-sm">
-                ChatGPT Script Creation
-                </span>
-              </p>
-
-            </div>
-            <div
-
-              className="h-80 w-80 mx-2 bg-white text-black-700 flex flex-col"
-            >
-              <h2 className="text-gray-600 text-2xl py-8 font-medium text-center border-b border-gray-300">
-                Feature List
-              </h2>
-              <p className="flex-1 p-8 flex flex-col items-center">
-                <span className="text-gray-600 font-bold text-center  text-1xl">
-                  10 mins /month
-
-                </span>
-                <span className="text-gray-600 text-center text-sm">
-                TalkingAvatar
-                  
-                  
-
-                </span>
-                <span className="text-gray-600 text-center text-sm">
-                Text2Video
-
-                </span>
-                <span className="text-gray-600 text-center text-sm">
-                ChatGPT Script Creation
-
-                </span>
-
-              </p>
-            </div>
-            <div
-
-              className="h-80 w-80 mx-2 bg-white text-black-700 flex flex-col"
-            >
-              <h2 className="text-gray-600 text-2xl py-8 font-medium text-center border-b border-gray-300">
-                Feature List
-              </h2>
-              <p className="flex-1 p-8 flex flex-col items-center">
-                <span className="text-gray-600 font-bold text-center  text-1xl">
-                  3 mins /month
+                <span className="text-center text-sm">
+                No watermark
 
                 </span>
                 
-                <span className="text-gray-600 text-center text-sm">
-                TalkingAvatar
+              </p>
+
+            </div>
+            <div
+
+              className="flex-1 text-xl mt-14 rounded-xl border border-[#cd4a1d]/25 bg-[#30373d] p-10 w-full"
+            >
+              <h2 className="text-[#cd4a1d]">
+                Feature List
+              </h2>
+              
+              
+              
+              <p className="flex-1 p-8 flex flex-col items-center">
+                <span className="font-bold text-center  text-1xl">
+                  120 generations /month
+
+                </span>
+                <span className="text-center text-sm">
+                High Priority 
+                  
+                  
+
+                </span>
+                <span className="text-center text-sm">
+                No watermark
+
+                </span>
+                
+
+              </p>
+            </div>
+            <div
+
+              className="flex-1 text-xl mt-14 rounded-xl border border-[#cd4a1d]/25 bg-[#30373d] p-10 w-full"
+            >
+              <h2 className="text-[#cd4a1d]">
+                Feature List
+              </h2>
+              <p className="flex-1 p-8 flex flex-col items-center">
+                <span className="font-bold text-center  text-1xl">
+                  300 generations /month
+
+                </span>
+                
+                <span className="text-center text-sm">
+                High priority
                   
                  
 
                 </span>
-                <span className="text-gray-600 text-center text-sm">
-                Text2Video
+                <span className="text-center text-sm">
+                No watermark
 
                 </span>
-                <span className="text-gray-600 text-center text-sm">
-                ChatGPT Script Creation
-
-                </span>
+               
               </p>
             </div>
 
           </div>
         </Container>
+
+
+
         </div>
+         
+        
+         
+         
          <NewUserTrial />
 
 
