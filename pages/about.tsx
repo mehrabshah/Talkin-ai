@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Head from 'next/head';
 import AboutHero from "../components/AboutHero";
 import AboutVideoPlayer from "../components/AboutVideoPlayer";

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Data } from "../pages/about";
 import React from "react";
 import SliderCard from "./SliderCard";

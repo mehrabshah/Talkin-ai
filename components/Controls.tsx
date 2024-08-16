@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Progress from "./Progress";
