@@ -61,6 +61,9 @@ const Header = () => {
                   <li className="p__opensans">
                      <Link href="/pricing">Pricing</Link>
                   </li>
+                 <li className="p__opensans">
+                    <Link href="/plan">Plan</Link>
+                 </li>
                  
         
         </ul>

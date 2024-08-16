@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { useUser } from "@clerk/nextjs";
 import cn from "classnames";
 
@@ -13,6 +13,7 @@ import DiscordButton from './DiscordButton';
 import { BsFillPlayCircleFill } from 'react-icons/bs';
 import { Gate, useSubscription } from "use-stripe-subscription";
 import { findCreation, checkNewUserTrial} from "../utils/functions";
+import SubscriptionContext from "../context/SubscriptionContext";
 
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -47,9 +48,9 @@ export default function Dashboard() {
 
   
  
-  const {
-    subscription,
-  } = useSubscription();
+  // const {
+  //   subscription,
+  // } = useSubscription();
 
   const { isSignedIn, user } = useUser();
 
@@ -131,9 +132,18 @@ export default function Dashboard() {
   
   useEffect(() => {
 
-    fetchUserUsage();
+    // fetchUserUsage();
 
   });
+
+  // updated code subscription check
+  const { 
+    subscriptionData,
+    decreaseText2VideoCount 
+  } = useContext(SubscriptionContext);
+
+  console.log('here is sub data',subscriptionData)
+
   
 
   const handleOnSubmit = async (event) => {

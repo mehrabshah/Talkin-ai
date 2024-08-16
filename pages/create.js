@@ -37,7 +37,7 @@ export default function Home() {
 
         <div className="state-card grid grid-cols-1 gap-6 py-2 place-items-center md:py-2 md:grid-cols-2">
           <div>
-            <h2 className="text-center mx-4 my-4 text-xl text-white font-semibold md:text-left md:text-xl md: mx-2 my-4">
+            <h2 className="text-center text-xl text-white font-semibold md:text-left md:text-xl md: mx-2 my-4">
               Welcome! To generate a talking avatar, you need to:
               <p className="flex-1  flex flex-col items-left my-2">
                 <li className="text-gray-600 font-bold text-left  text-sm">

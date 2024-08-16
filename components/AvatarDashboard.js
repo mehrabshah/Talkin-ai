@@ -12,6 +12,7 @@ import { BsFillPlayCircleFill } from 'react-icons/bs';
 import { Gate, useSubscription } from "use-stripe-subscription";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import SubscriptionContext from '../context/SubscriptionContext';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -47,9 +48,9 @@ export default function Dashboard() {
   const [startDate, setStartDate] =  useState("");
   
 
-  const {
-    subscription,
-  } = useSubscription();
+  // const {
+  //   subscription,
+  // } = useSubscription();
 
   const { isSignedIn, user } = useUser();
 
@@ -114,7 +115,7 @@ export default function Dashboard() {
   }
   useEffect(() => {
 
-    fetchUserUsage();
+    // fetchUserUsage();
     
     });
   
@@ -185,9 +186,7 @@ export default function Dashboard() {
 
   };
 
-
-
-
+  
 
 
   //handle form submit to create avatar and create record in the database
