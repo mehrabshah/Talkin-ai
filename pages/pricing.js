@@ -6,15 +6,129 @@ import Head from 'next/head';
 
 import Container from '../components/Container';
 
-
+import PricingPlans from '../components/Pricing/PricingPlans'
 
 
 //import { useUser } from "@clerk/nextjs";
 
-import { Gate, useSubscription } from "use-stripe-subscription";
+// import { Gate, useSubscription } from "use-stripe-subscription";
 
 import NewUserTrial from "../components/NewUserTrial";
 
+const pricingData = {
+  yearly: [
+    {
+      title: 'Free',
+      price: '$0',
+      description: '',
+      priceId:false,
+      storyBoardCount:10,
+      text2Video:0,
+      features: ['10 StoryBoarder/Image2Video generations']
+    },
+    {
+      title: 'Lite',
+      price: '$95.90',
+      priceId: process.env.NEXT_PUBLIC_Y_LITE,
+      storyBoardCount: 30,
+      text2Video: 0,
+      description: '$7.99/mo $95.90 billed yearly',
+      features: ['30 StoryBoarder/Image2Vide generations','High priority generations']
+    },
+    {
+      title: 'Standard',
+      price: ' $287.90',
+      priceId: process.env.NEXT_PUBLIC_Y_STANDARD,
+      storyBoardCount: 100,
+      text2Video: 10,
+      description: ' $23.99/mo $287.90 billed yearly',
+      features: ['100 StoryBoarder/Image2Video generations', '10 Text2Video generations', 'High priority generations']
+    },
+    {
+      title: 'Plus',
+      price: ' $575.88',
+      priceId: process.env.NEXT_PUBLIC_Y_PLUS,
+      storyBoardCount: 250,
+      text2Video: 10,
+      description: '$47.99/mo $575.88 billed yearly',
+      features: ['250 StoryBoarder/Image2Video generations', '10 Text2Video generations', 'High priority generations']
+    },
+    {
+      title: 'Pro',
+      price: ' $863.9',
+      priceId: process.env.NEXT_PUBLIC_Y_PRO,
+      storyBoardCount: 400,
+      text2Video: 20,
+      description: '$71.99/mo $863.9 billed yearly',
+      features: ['400 StoryBoarder/Image2Video generations', '20 Text2Video generations', 'High priority generations']
+    },
+    {
+      title: 'Premier',
+      price: ' $2879.90',
+      priceId: process.env.NEXT_PUBLIC_Y_PREMIER,
+      storyBoardCount: 1500,
+      text2Video: 50,
+      description: '$239.99/mo $2879.90 billed yearly',
+      features: ['1500 StoryBoarder/Image2Video generations', '50 Text2Video generations', 'High priority generations']
+    },
+  ],
+  monthly: [
+    {
+      title: 'Free',
+      price: '$0',
+      priceId:false,
+      description: '',
+      storyBoardCount: 10,
+      text2Video: 0,
+      features: ['10 StoryBoarder/Image2Video generations']
+    },
+    {
+      title: 'Lite',
+      price: '$9.99',
+      priceId: process.env.NEXT_PUBLIC_M_LITE,
+      description: 'Per month',
+      storyBoardCount: 30,
+      text2Video: 0,
+      features: ['30 StoryBoarder/Image2Vide generations','High priority generations']
+    },
+    {
+      title: 'Standard',
+      price: '$29.99',
+      priceId: process.env.NEXT_PUBLIC_M_STANDARD,
+      description: 'Per month',
+      storyBoardCount: 100,
+      text2Video: 10,
+      features: ['100 StoryBoarder/Image2Video generations', '10 Text2Video generations', 'High priority generations']
+    },
+    {
+      title: 'Plus',
+      price: ' $59.99',
+      priceId: process.env.NEXT_PUBLIC_M_PLUS,
+      description: 'Per month',
+      storyBoardCount: 250,
+      text2Video: 10,
+      features: ['250 StoryBoarder/Image2Video generations', '10 Text2Video generations', 'High priority generations']
+    },
+    {
+      title: 'Pro',
+      price: ' $89.99',
+      priceId: process.env.NEXT_PUBLIC_M_PRO,
+      description: 'Per month',
+      storyBoardCount: 400,
+      text2Video: 20,
+      features: ['400 StoryBoarder/Image2Video generations', '20 Text2Video generations', 'High priority generations']
+    },
+    {
+      title: 'Premier',
+      price: ' $299.99',
+      priceId: process.env.NEXT_PUBLIC_M_PREMIER,
+      description: 'Per month',
+      storyBoardCount: 1500,
+      text2Video: 50,
+      features: ['1500 StoryBoarder/Image2Video generations', '50 Text2Video generations', 'High priority generations']
+    },
+  ]
+};
 
 
 export default function PricingPage() {
@@ -22,18 +136,10 @@ export default function PricingPage() {
   
   //const { isLoaded, isSignedIn, user } = useUser();
 
-  const {
-    isLoaded,
-    products,
-    redirectToCheckout,
-  } = useSubscription();
-
   
-  console.log(products);
   
-  if (!isLoaded) {
-    return null;
-  }
+  
+ 
 
   const alertResponse = async (path) => {
     const res = await fetch(path);
@@ -41,6 +147,9 @@ export default function PricingPage() {
     alert(`Path requested: ${path}\nResponse: ${body}`);
   };
 
+  const handleSubscribe=async (data) => {
+    console.log(data);
+  };
 
 
   return (
@@ -71,10 +180,11 @@ export default function PricingPage() {
         </div>
 
         <Container>
-          <div className="flex w-full items-center justify-center">
+          <div className="flex-1">
+              <PricingPlans handleSubscribe={handleSubscribe} pricingData={pricingData}></PricingPlans>
             
   
-          {products.toReversed().map(({ product, prices }) => (
+          {/* {products.toReversed().map(({ product, prices }) => (
             
         <div key={product.id} className="flex-1 text-xl mt-14 rounded-xl border border-[#cd4a1d]/25 bg-[#30373d] p-10 w-full">
           <h4 className="text-[#cd4a1d]">{product.name}</h4>
@@ -96,10 +206,10 @@ export default function PricingPage() {
             ))}
                            
         </div>
-      ))}
+      ))} */}
           </div>
           </Container>
-        <Container>
+        {/* <Container>
           <div className="flex w-full items-center justify-center">
 
             <div
@@ -186,7 +296,7 @@ export default function PricingPage() {
             </div>
 
           </div>
-        </Container>
+        </Container> */}
 
 
 

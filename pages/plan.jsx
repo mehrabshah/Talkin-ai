@@ -1,6 +1,6 @@
 // pages/pricing.js
 
-import React from 'react';
+import React,{useState} from 'react';
 
 import Head from 'next/head';
 
@@ -10,7 +10,7 @@ import Container from '../components/Container';
 
 //import { useUser } from "@clerk/nextjs";
 
-import { Gate, useSubscription } from "use-stripe-subscription";
+// import { Gate, useSubscription } from "use-stripe-subscription";
 
 
 import NewUserTrial from "../components/NewUserTrial";
@@ -18,6 +18,7 @@ import NewUserTrial from "../components/NewUserTrial";
 
 
 import { motion } from "framer-motion";
+import { useUser } from '@clerk/nextjs';
 
 
 
@@ -28,17 +29,17 @@ export default function PlanPage() {
   
   //const { isLoaded, isSignedIn, user } = useUser();
 
-  const {
-    isLoaded,
-    products,
-    subscription,
-    redirectToCheckout,
-    redirectToCustomerPortal,
-  } = useSubscription();
+  // const {
+  //   isLoaded,
+  //   products,
+   
+  //   redirectToCheckout,
+  //   redirectToCustomerPortal,
+  // } = useSubscription();
+  const [subscription, setSubscription] = useState(null);
 
-  if (!isLoaded) {
-    return null;
-  }
+  const { isLoaded, isSignedIn, user } = useUser();
+  console.log(user.primaryEmailAddress.emailAddress);
 
   
 
@@ -88,7 +89,7 @@ export default function PlanPage() {
           <div className="z-10 flex w-full items-center justify-center">
             
            
-          {products.map(({ product, prices }) => (
+          {/* {products.map(({ product, prices }) => (
         <Gate product={product}>
         <div key={product.id} className="z-10 h-100 w-80 mx-2 bg-white text-black-700 flex flex-col">
           <h4 className="z-10 text-gray-600 text-2xl py-8 font-medium text-center border-b border-gray-300">{product.name}</h4>
@@ -102,7 +103,7 @@ export default function PlanPage() {
          
         </div>
         </Gate>
-      ))}
+      ))} */}
           </div>
         </Container>
      
