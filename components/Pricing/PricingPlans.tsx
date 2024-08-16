@@ -44,7 +44,7 @@ const PricingPlans = ({ pricingData, handleSubscribe }) => {
                                 <div
                                     onClick={() => handleSubscribe(plan)}
                                     key={index}
-                                    className={`group cursor-pointer relative bg-[#30373d00] text-white  mx-auto w-full max-w-sm rounded-2xl border border-solid border-gray-600 hover:border-gray-300 text-center transition-all duration-300 p-3 `}
+                                    className={`group cursor-pointer relative bg-[#fefafa45] text-white  mx-auto w-full max-w-sm rounded-2xl border border-solid border-gray-600 hover:border-gray-300 text-center transition-all duration-300 p-3 `}
                                 >
                                     <div className='flex justify-between mb-1'>
                                         <h3 className={`font-manrope text-xl font-bold  ${plan.popular ? 'text-white' : ''}`}>
@@ -62,7 +62,7 @@ const PricingPlans = ({ pricingData, handleSubscribe }) => {
                                     </div>
                                     <ul className="text-left  list-disc pl-5">
                                         {plan.features.map((feature, idx) => (
-                                            <li key={idx} className="text-sm text-gray-500">
+                                            <li key={idx} className="text-sm text-white">
                                                 {feature}
                                             </li>
                                         ))}

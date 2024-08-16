@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import cn from "classnames";
 
-import { useEffect } from 'react';
+import { useEffect , useContext} from 'react';
 import Link from 'next/link';
 import SocialLinkBar from './SocialLinkBar';
 import { isImage, validateImgSize } from '../utils/fileValidation';
@@ -16,6 +16,7 @@ import { Video, CloudinaryContext } from "cloudinary-react";
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import SubscriptionContext from "../context/SubscriptionContext";
 
 
 
@@ -64,9 +65,7 @@ export default function Dashboard() {
 
   
  
-  const {
-    subscription,
-  } = useSubscription();
+  
 
   const { isSignedIn, user } = useUser();
 
@@ -74,72 +73,13 @@ export default function Dashboard() {
   const showLoadingState = loading || (image && !canShowImage);
   
   
-  const fetchUserUsage = async () => {
-    
-    const userId = user?.id;
-    // check whether subscribed and the usage is not over plan limit
-    if (subscription != null) {
-      
-      
-      const subscriptionStart= subscription.start_date;
+  // updated code subscription check
+  const {
+    subscriptionData,
+    decreaseText2VideoCount
+  } = useContext(SubscriptionContext);
 
-      //setStartDate(subscriptionStart);
-
-      const response = await fetch(`/api/fetch_usage?startDate=${subscriptionStart}`);
-      const result = await response.json();
-      const subscriptionUsage = result?.usage;
-
-      
-      //const response = await fetch(`/api/fetch_usage?subscriptionStart=${subscription?.start_date}`);
-      //const result = await response.json();
-      setUsage(subscriptionUsage);
-      //console.log(result.userUsage);
-      
-      switch (subscription.plan.id) {
-        case "price_1NKLt1Dfv2951nlDZgy3rBUp":
-          if (subscriptionUsage < 30) {
-            setIsOverUsageLimit(false);
-          }
-          break;
-        case "price_1NLlSvDfv2951nlD1Nz9MrRo":
-          if (subscriptionUsage < 120) {
-            setIsOverUsageLimit(false);
-          }
-          break;
-        case "price_1NLlT8Dfv2951nlDtxCDnigJ":
-          if (subscriptionUsage < 300) {
-            setIsOverUsageLimit(false);
-          }
-          break;
-      }
-    }
-    else {
-
-      const response = await fetch(`/api/check_new_user`);
-      const result = await response.json();
-      const trialUsage = result?.trialUsage;
-      
-
-      if (trialUsage > 30) {
-			  setIsOverUsageLimit(true);
-        setNewUser(false); 
-        //errorMessage("You have used new user trial.");
-			
-		  } else {
-         setIsOverUsageLimit(false);
-         setNewUser(true); 
-			   //successMessage("Start your trial today🎉");
-			   
-		  }
-    }
-
-  }
-  
-  useEffect(() => {
-
-    fetchUserUsage();
-
-  });
+  console.log('here is sub data', subscriptionData)
   
   const handleImageChange = (e) => {
     setImageError('');

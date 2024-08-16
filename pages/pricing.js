@@ -1,12 +1,14 @@
 // pages/pricing.js
 
 import React from 'react';
+import { useContext, useState } from 'react';
 
 import Head from 'next/head';
 
 import Container from '../components/Container';
 
 import PricingPlans from '../components/Pricing/PricingPlans'
+import SubscriptionContext from '../context/SubscriptionContext';
 
 
 //import { useUser } from "@clerk/nextjs";
@@ -14,6 +16,7 @@ import PricingPlans from '../components/Pricing/PricingPlans'
 // import { Gate, useSubscription } from "use-stripe-subscription";
 
 import NewUserTrial from "../components/NewUserTrial";
+import { useUser } from '@clerk/nextjs';
 
 const pricingData = {
   yearly: [
@@ -135,8 +138,14 @@ export default function PricingPage() {
   // display plans
   
   //const { isLoaded, isSignedIn, user } = useUser();
+  const { isLoaded, isSignedIn, user } = useUser();
+  const {
 
-  
+    subscriptionData,
+    createCheckoutSession,
+   } = useContext(SubscriptionContext)
+  console.log(subscriptionData);
+  const email = user?.primaryEmailAddress?.emailAddress;
   
   
  
@@ -148,7 +157,28 @@ export default function PricingPage() {
   };
 
   const handleSubscribe=async (data) => {
-    console.log(data);
+    
+    if(subscriptionData.metadata.customerId){
+      console.log(data);
+      if (subscriptionData.metadata.isSubscribed === 'true'){
+        window.alert('You already have a subscription active')
+        return;
+      }
+      if(!data.priceId){
+        window.alert('Please select other plans')
+        return;
+      }
+
+      //checkout the subscription
+      //createCheckoutSession(customerId,priceId)
+      const checkoutRes = await createCheckoutSession(subscriptionData.metadata.customerId,data.priceId)
+      console.log(checkoutRes);
+      window.location.href=checkoutRes.url;
+
+
+    }else{
+      window.alert('Something went wrong, Please reload the page')
+    }
   };
 
 
