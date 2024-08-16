@@ -67,16 +67,6 @@ const PricingPlans = ({ pricingData, handleSubscribe }) => {
                                             </li>
                                         ))}
                                     </ul>
-
-
-                                    {/* <button
-
-                                        
-                                       
-                                        className={`py-2.5 px-5 ${plan.popular ? 'bg-white text-[#cd4a1d]' : 'bg-indigo-50 text-[#cd4a1d]'} shadow-sm rounded-full transition-all duration-500 text-base font-semibold text-center w-fit mx-auto ${plan.popular ? 'group-hover:bg-[#cd4a1d] group-hover:text-white' : 'group-hover:bg-[#cd4a1d] group-hover:text-white'}`}
-                                    >
-                                        Purchase Plan
-                                    </button> */}
                                 </div>
                             ))}
                         </div>
