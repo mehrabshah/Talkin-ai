@@ -46,23 +46,22 @@ const Header = () => {
                   <li className="p__opensans">
                      <Link href="/about">About</Link>
                   </li>
-                  <li className="p__opensans">
-                     <Link href="/create">TalkingAvatar</Link>
-                  </li>
+                 
                   
                   <li className="p__opensans">
                     <Link href="/text2video">Text2Video</Link>
-                   </li>       
+                   </li>  
+                   <li className="p__opensans">
+                     <Link href="/story-board">Story Boarder</Link>
+                  </li> 
+                  <li className="p__opensans">
+                     <Link href="/img2video">Image2Video</Link>
+                  </li>         
+                  
                   <li className="p__opensans">
                      <Link href="/pricing">Pricing</Link>
                   </li>
-                  <li className="p__opensans">
-                     <Link href="/plan">Plan</Link>
-                  </li>
-
-                  <li className="p__opensans">
-                     <Link href="/contact">Contact</Link>
-                  </li>
+                 
         
         </ul>
         <UserButton
