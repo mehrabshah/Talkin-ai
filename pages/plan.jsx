@@ -56,10 +56,10 @@ export default function PlanPage() {
     };
 
     const handleCancel= async()=>{
-        const  confirm = window.confirm('Are you sure you want to cancel this subscription?, It cannot be undone');
+        const  confirm = window.confirm('Are you sure you want to cancel this subscription?, It will cancel after the period end');
        if(confirm) {
            await cancelSubscription(subscriptionData?.metadata?.subscriptionId);
-           window.alert('Subscription cancelled successfully')
+           window.alert('Subscription will cancel automatically after the period end.')
             window.location.reload();
 
        }
