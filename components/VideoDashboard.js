@@ -150,6 +150,7 @@ export default function Dashboard() {
 
     event.preventDefault();
 
+    await decreaseText2VideoCount(user?.primaryEmailAddress?.emailAddress)
     
     //useEffect(()=>{
     //  const ele = document.querySelector('.buble');
