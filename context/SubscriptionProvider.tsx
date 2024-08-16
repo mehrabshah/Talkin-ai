@@ -102,11 +102,13 @@ async function createCheckoutSession(customerId, priceId) {
 
 async function cancelSubscription(subscriptionId) {
     try {
-        const canceledSubscription = await stripe.subscriptions.cancel(subscriptionId);
-        console.log(`Subscription with ID ${subscriptionId} has been canceled.`);
-        return canceledSubscription;
+        const updatedSubscription = await stripe.subscriptions.update(subscriptionId, {
+            cancel_at_period_end: true,
+        });
+        console.log(`Subscription with ID ${subscriptionId} will be canceled at the end of the billing period.`);
+        return updatedSubscription;
     } catch (error) {
-        console.error(`Failed to cancel subscription: ${error.message}`);
+        console.error(`Failed to set cancellation for subscription: ${error.message}`);
         throw error;
     }
 }
