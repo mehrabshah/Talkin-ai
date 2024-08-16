@@ -31,10 +31,10 @@ const Header = () => {
     <div className={styles.right}>
       <SignedOut>
       <div className="app_navbar-login">
-        <Link href="/">Sign in</Link>
+        <Link href="/sign-in">Sign in</Link>
         </div>
         <div className="app_navbar-login">
-        <Link  href="/">Sign up</Link>
+        <Link  href="/sign-up">Sign up</Link>
         </div>
       </SignedOut>
       <SignedIn>
