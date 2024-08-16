@@ -156,22 +156,23 @@ export default function PricingPage() {
     <>
       <Head>
         <title>AIVIDOO Pricing</title>
-        <meta name="description" content="Talkin AI Pricing" />
+        <meta name="description" content="AIVIDOO Pricing" />
         <link rel="icon" href="/talkin_logo.png" />
       </Head>
      
       <main>
       <div className="p-5 mx-auto max-w-4xl">
-      <div className="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
-        <div className="blur-[106px] h-30 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
-        <div className="blur-[106px] h-20 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
-    </div>
+     
        
        
     <div className="relative pt-20 ml-auto">
+    <div className="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
+        <div className="blur-[106px] h-20 bg-gradient-to-r from-yellow-400 to-orange-600 dark:to-indigo-600"></div>
+        <div className="blur-[106px] h-30 bg-gradient-to-r from-orange-600 to-red-400 dark:from-red-700"></div>
+        </div>
             <div className="lg:w-3/4 text-center mx-auto">
                 <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Pricing.</h1>
-                <p className="mt-8 text-xl text-gray-700 dark:text-gray-300">Choose Your Plan </p>
+                <p className="mt-8 text-xl text-[#ccc5b9] dark:text-gray-300">Choose Your Plan </p>
                
                 
             </div>
@@ -305,7 +306,7 @@ export default function PricingPage() {
         
          
          
-         <NewUserTrial />
+        
 
 
         

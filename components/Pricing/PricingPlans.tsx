@@ -13,7 +13,7 @@ const PricingPlans = ({ pricingData, handleSubscribe }) => {
                     <div className="tabs">
                         {/* tabs */}
                         <div className="flex justify-between">
-                            <h1 className='mr-6 text-3xl bold'>Here is the pricing table</h1>
+                            <h1 className='mr-6 text-xl bold'></h1>
                             <div>
                                 {Object.keys(pricingData).map((tab) => (
                                     <button
