@@ -66,7 +66,7 @@ export default function Dashboard() {
   // updated code subscription check
   const {
     subscriptionData,
-    decreaseText2VideoCount
+    decreaseStoryBoardAndImage2VideoCount
   } = useContext(SubscriptionContext);
 
   console.log('here is sub data', subscriptionData)
