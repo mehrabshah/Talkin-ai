@@ -45,10 +45,8 @@ export default function Home() {
     <>
 
       <Head>
-        <title>TALKIN AI About</title>
-        <meta name="description" content="Talking Avatar  videos with AI, Text to Video " />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-       
+        <title>AIVIDOO About</title>
+        <meta name="description" content="AI R&D Company" />
         <link rel="icon" href="/talkin_logo.png" />
       </Head>
 
@@ -62,7 +60,7 @@ export default function Home() {
           transitionData={transitionData}
           currentSlideData={currentSlideData}
         />
-        <div className="  absolute z-20  h-full w-full">
+        <div className="  absolute z-20  h-full w-full brightness-20">
          
           <div className=" flex h-full w-full grid-cols-10 flex-col md:grid">
             <div className=" col-span-4 mb-3 flex h-full flex-1 flex-col justify-end px-5 md:mb-0 md:justify-center md:px-10">
@@ -71,7 +69,7 @@ export default function Home() {
                 currentSlideData={currentSlideData}
               />
             </div>
-            <div className=" col-span-6 flex h-full flex-1 flex-col justify-start p-4 md:justify-center md:p-10">
+            <div className=" col-span-6  flex h-full flex-1 flex-col justify-start p-4 md:justify-center md:p-10">
               <Slides data={data} />
               <Controls
                 currentSlideData={currentSlideData}
@@ -103,7 +101,7 @@ export default function Home() {
 const sliderData = [
   {
     img: "/robo_3.jpeg",
-    location: "TALKIN AI",
+    location: "AIVIDOO",
     description:
       "Enable our users to create engaging and entertaining VIDEOS by utilizing the latest artificial intelligence (AI) technologies.",
      
@@ -114,28 +112,28 @@ const sliderData = [
     title: "Our Technology",
     description:
       "Lip-Sync, Voice-Sync, Stable-Diffusion, ChatGPT Integrated.",
-    location: "TALKIN AI",
+    location: "AIVIDOO",
   },
   {
     img: "/7.png",
     title: "Our People",
     description:
       "Passionate About Creating AI-enabled Tools.",
-    location: "TALKIN AI",
+    location: "AIVIDOO",
   },
   {
     img: "/1.png",
     title: "Our Belief",
     description:
       "Artificial Intelligence For Good",
-    location: "TALKIN AI",
+    location: "AIVIDOO",
   },
   {
     img: "/2.png",
     title: "Our Pledge",
     description:
       "Enable Your Ceativity and Protect Your Privacy",
-    location: "TALKIN AI",
+    location: "AIVIDOO",
   },
 ];
 

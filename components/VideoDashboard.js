@@ -114,7 +114,7 @@ export default function Dashboard() {
       const trialUsage = result?.trialUsage;
       
 
-      if (trialUsage.length > 30) {
+      if (trialUsage > 30) {
 			  setIsOverUsageLimit(true);
         setNewUser(false); 
         //errorMessage("You have used new user trial.");
@@ -266,7 +266,7 @@ export default function Dashboard() {
               onChange={(e) => setPromptInput(e.target.value)}
             />
             <button
-              className=" hero-button min-h-[40px] shadow-sm sm:w-[100px] py-2 inline-flex justify-center font-medium items-center px-4 text-gray-100 sm:ml-2 rounded-md hover:bg-gray-700"
+              className=" hero-button min-h-[40px] shadow-sm sm:w-[100px] py-2 inline-flex justify-center font-medium items-center px-4 text-gray-100 sm:ml-2 rounded-md"
               type="submit"
               disabled={promptInput === ""}
             >

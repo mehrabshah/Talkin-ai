@@ -20,7 +20,7 @@ const AboutHero = () => {
 
             <div>
                 <h2 className="text-center my-4 text-xl text-white font-semibold md:text-center md:text-xl md:my-4">
-                    Talkin.AI  is an AI research and development company. Our mission is to enable our users to create engaging and entertaining services/products by utilizing the latest artificial intelligence (AI) technologies.
+                    AIVIDOO  is an AI research and development company. Our mission is to enable our users to create engaging and entertaining services/products by utilizing the latest artificial intelligence (AI) technologies.
                 </h2>
             </div>
 
