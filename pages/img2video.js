@@ -12,10 +12,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>TALKIN AI Text2Tube - AI Video Generator</title>
-        <meta name="description" content="AI enabled video generator" />
+        <title>AIVIDOO Image to Video Generator</title>
+        <meta name="description" content="AIVIDOO image to video generator" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/talkin_logo.png" />
+        <link rel="icon" href="/aividoo_logo.png" />
        
       </Head>
 

@@ -15,7 +15,6 @@ import SubscriptionContext from '../context/SubscriptionContext';
 
 // import { Gate, useSubscription } from "use-stripe-subscription";
 
-import NewUserTrial from "../components/NewUserTrial";
 import { useUser } from '@clerk/nextjs';
 
 const pricingData = {
@@ -187,7 +186,7 @@ export default function PricingPage() {
       <Head>
         <title>AIVIDOO Pricing</title>
         <meta name="description" content="AIVIDOO Pricing" />
-        <link rel="icon" href="/talkin_logo.png" />
+        <link rel="icon" href="/aividoo_logo.png" />
       </Head>
      
       <main>

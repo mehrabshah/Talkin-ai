@@ -55,80 +55,8 @@ export default function Dashboard() {
   const { isSignedIn, user } = useUser();
 
 
-  async function submitForm(e) {
-    e.preventDefault();
-    setLoading(true);
-    toast("Generating your image...", { position: "top-center" });
-    const response = await fetch(`/api/image?prompt=${prompt}`);
-    const json = await response.json();
-    setMessageId(json.id);
-  }
-
   const showLoadingState = loading || (image && !canShowImage);
   
-  
-  
-  
-  const fetchUserUsage = async () => {
-    
-    const userId = user?.id;
-    // check whether subscribed and the usage is not over plan limit
-    if (subscription != null) {
-      
-      
-      const subscriptionStart= subscription.start_date;
-
-      //setStartDate(subscriptionStart);
-
-      const response = await fetch(`/api/fetch_usage?startDate=${subscriptionStart}`);
-      const result = await response.json();
-      const subscriptionUsage = result?.usage;
-
-      
-      //const response = await fetch(`/api/fetch_usage?subscriptionStart=${subscription?.start_date}`);
-      //const result = await response.json();
-      setUsage(subscriptionUsage);
-      //console.log(result.userUsage);
-      
-      switch (subscription.plan.id) {
-        case "price_1NKLt1Dfv2951nlDZgy3rBUp":
-          if (subscriptionUsage < 30) {
-            setIsOverUsageLimit(false);
-          }
-          break;
-        case "price_1NLlSvDfv2951nlD1Nz9MrRo":
-          if (subscriptionUsage < 120) {
-            setIsOverUsageLimit(false);
-          }
-          break;
-        case "price_1NLlT8Dfv2951nlDtxCDnigJ":
-          if (subscriptionUsage < 300) {
-            setIsOverUsageLimit(false);
-          }
-          break;
-      }
-    }
-    else {
-
-      const response = await fetch(`/api/check_new_user`);
-      const result = await response.json();
-      const trialUsage = result?.trialUsage;
-      
-
-      if (trialUsage > 30) {
-			  setIsOverUsageLimit(true);
-        setNewUser(false); 
-        //errorMessage("You have used new user trial.");
-			
-		  } else {
-         setIsOverUsageLimit(false);
-         setNewUser(true); 
-			   //successMessage("Start your trial today🎉");
-			   
-		  }
-    }
-
-  }
   
   useEffect(() => {
 
@@ -150,8 +78,7 @@ export default function Dashboard() {
 
     event.preventDefault();
 
-    await decreaseText2VideoCount(user?.primaryEmailAddress?.emailAddress)
-    
+  
     //useEffect(()=>{
     //  const ele = document.querySelector('.buble');
     //if (ele) {
@@ -209,6 +136,8 @@ export default function Dashboard() {
       setVideoPrediction(videoPrediction);
       setVideoSrc(videoPrediction.output);
       const video_url = videoPrediction.output;
+      
+      await decreaseText2VideoCount(user?.primaryEmailAddress?.emailAddress)  
 
       try {
 
@@ -243,6 +172,7 @@ export default function Dashboard() {
             body: JSON.stringify(req_body),
           });
         
+       
         //await Router.push('/drafts');
       } catch (error) {
         console.error(error);

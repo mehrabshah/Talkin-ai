@@ -17,9 +17,9 @@ export default function Home() {
     <>
 
       <Head>
-        <title>TALKIN AI Homepage</title>
-        <meta name="description" content="Generate AI-enabled talking avatar and youtube videos!" />
-        <link rel="icon" href="/talkin_logo.png" />
+        <title>AIVIDOO Homepage</title>
+        <meta name="description" content="Create Video StoryBoard with AI" />
+        <link rel="icon" href="/aividoo_logo.png" />
       </Head>
 
       <div className="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
@@ -34,9 +34,7 @@ export default function Home() {
         
       </div>
       <Text2VideoHero />
-      <NewUserTrialHero />
       
-      <Testimonials />
     </>
 
   );

@@ -76,7 +76,7 @@ export default function Dashboard() {
   // updated code subscription check
   const {
     subscriptionData,
-    decreaseStoryBoardAndImage2VideoCount
+    decreaseStoryBoardAndImage2VideoCount,
   } = useContext(SubscriptionContext);
 
   console.log('here is sub data', subscriptionData)
@@ -193,6 +193,7 @@ export default function Dashboard() {
     if (videoPrediction.status == "succeeded") {
       setVideoPrediction(videoPrediction);
       //setVideoSrc(videoPrediction.output);
+      await decreaseStoryBoardAndImage2VideoCount(user?.primaryEmailAddress?.emailAddress) 
       const video_url = videoPrediction.output;
 
       try {

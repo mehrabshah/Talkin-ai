@@ -9,10 +9,6 @@ import Image from "next/image";
 import Container from '../components/Container';
 
 
-import NewUserTrial from "../components/NewUserTrial";
-
-
-
 import { motion } from "framer-motion";
 import { useUser } from '@clerk/nextjs';
 import SubscriptionContext from '../context/SubscriptionContext';
@@ -56,10 +52,10 @@ export default function PlanPage() {
     };
 
     const handleCancel= async()=>{
-        const  confirm = window.confirm('Are you sure you want to cancel this subscription?, It will cancel after the period end');
+        const  confirm = window.confirm('Are you sure you want to cancel this subscription?, It cannot be undone');
        if(confirm) {
            await cancelSubscription(subscriptionData?.metadata?.subscriptionId);
-           window.alert('Subscription will cancel automatically after the period end.')
+           window.alert('Subscription cancelled successfully')
             window.location.reload();
 
        }
@@ -70,12 +66,12 @@ export default function PlanPage() {
     return (
         <>
             <Head>
-                <title>TALKIN AI PLAN</title>
+                <title>AIVIDOO PLAN</title>
 
-                <meta name="description" content="Talking Avatar  videos with AI, Text to Video " />
+                <meta name="description" content="AIVIDOO subscription plan" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-                <link rel="icon" href="/talkin_logo.png" />
+                <link rel="icon" href="/aividoo_logo.png" />
             </Head>
 
             <main>
@@ -98,7 +94,7 @@ export default function PlanPage() {
                     <div className="relative pt-20 ml-auto">
                         <div className="lg:w-2/3 text-center mx-auto">
                             <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Your Plan.</h1>
-                            <p className="mt-8 text-2xl text-gray-700 dark:text-gray-300">Manage Your Plan </p>
+                            <p className="mt-8 text-2xl text-[#ccc5b9] dark:text-gray-300">Manage Your Plan </p>
                         </div>
 
 
@@ -205,10 +201,7 @@ export default function PlanPage() {
 
 
 
-                    {subscriptionData?.metadata?.isSubscribed === 'false' ? (
-                        <NewUserTrial />
-                    ) : null
-                    }
+                    
 
                 </div>
 

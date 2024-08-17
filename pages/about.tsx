@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import Head from 'next/head';
 import AboutHero from "../components/AboutHero";
 import AboutVideoPlayer from "../components/AboutVideoPlayer";
@@ -49,7 +47,7 @@ export default function Home() {
       <Head>
         <title>AIVIDOO About</title>
         <meta name="description" content="AI R&D Company" />
-        <link rel="icon" href="/talkin_logo.png" />
+        <link rel="icon" href="/aividoo_logo.png" />
       </Head>
 
       <main

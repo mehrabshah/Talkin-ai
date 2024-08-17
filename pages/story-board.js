@@ -14,10 +14,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>TALKIN AI Talking Avatar Generator</title>
-        <meta name="description" content="Create AI-enabled Talking Avatar" />
+        <title>AIVIDOO Storyboard Generator</title>
+        <meta name="description" content="Create Storyboard with AI" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/talkin_logo.png" />
+        <link rel="icon" href="/aividoo_logo.png" />
       </Head>
 
       <main className="p-10 mx-auto max-w-4xl">
