@@ -74,17 +74,17 @@ a {
 }
 
 .hero-button.clicked {
-  background-color: #30373d;
+  background-color: #403d39;
 }
 
 
 .hero-button:hover {
-  background-color: #30373d;
+  background-color: #403d39;
 }
 
 
 .upload-button {
-  background: #212129;
+  background: #403d39;
 }
 
 .upload-button.clicked {

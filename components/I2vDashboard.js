@@ -265,9 +265,9 @@ export default function Dashboard() {
           <form onSubmit={(e) => handleOnSubmit(e)}
           >
             
-             <h1>Available generation : {count || 0}</h1>
-            <div className="flex flex-col py-10">
-              <label className="px-2 py-3 text-sm text-white" htmlFor="image">
+             <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">Available generation : {count || 0}</h1>
+            <div className="flex flex-col ">
+              <label className="px-2 py-1 text-sm text-white" htmlFor="image">
                 Select Picture: {"   "}{"    "}
                 <span className="text-sm text-red-500">(jpg/jpeg, Max 1MB) </span>
                 <span className="text-sm text-red-400">*</span>

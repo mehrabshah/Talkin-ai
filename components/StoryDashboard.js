@@ -212,7 +212,7 @@ export default function Dashboard() {
 
             
           
-            <h1>Available generation : {count || 0}</h1>
+            <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">Available generation : {count || 0}</h1>
             <div className="flex flex-col">
             <label className="text-sm text-white">
             Character Description (Required): {"   "}{"    "}
