@@ -118,11 +118,13 @@ export default function PlanPage() {
                     subscriptionData?.metadata?.isSubscribed === 'true'
                     &&
                         <Container>
-                            <SubscriptionManagement
-                                updateSubscriptionPlan={updateSubscriptionPlan}
-                                subscriptionId={subscriptionData?.metadata?.subscriptionId}
-                                currentActivePlan={subscriptionData?.metadata?.activePlan}
-                            />
+                                <div className='z-10 flex w-full items-center justify-center' >
+                                    <SubscriptionManagement
+                                        updateSubscriptionPlan={updateSubscriptionPlan}
+                                        subscriptionId={subscriptionData?.metadata?.subscriptionId}
+                                        currentActivePlan={subscriptionData?.metadata?.activePlan}
+                                    />
+                           </div>
                         </Container>
                    }
 
