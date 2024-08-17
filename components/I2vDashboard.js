@@ -74,12 +74,19 @@ export default function Dashboard() {
   
   
   // updated code subscription check
+  const [count,setCount]=useState(0);
   const {
     subscriptionData,
-    decreaseStoryBoardAndImage2VideoCount,
+    decreaseStoryBoardAndImage2VideoCount
   } = useContext(SubscriptionContext);
 
   console.log('here is sub data', subscriptionData)
+
+  useEffect(() => {
+    setCount(subscriptionData?.metadata?.storyBoardCount)
+    // fetchUserUsage();
+
+  }, [subscriptionData?.metadata?.storyBoardCount]);
   
   const handleImageChange = (e) => {
     setImageError('');
@@ -117,6 +124,11 @@ export default function Dashboard() {
   const handleOnSubmit = async (event) => {
 
     event.preventDefault();
+
+    if (subscriptionData?.metadata?.storyBoardCount == '0') {
+      window.alert('No attempt left , Please purchase a plan');
+      return;
+    }
 
     const form = event.currentTarget;
 
@@ -193,7 +205,8 @@ export default function Dashboard() {
     if (videoPrediction.status == "succeeded") {
       setVideoPrediction(videoPrediction);
       //setVideoSrc(videoPrediction.output);
-      await decreaseStoryBoardAndImage2VideoCount(user?.primaryEmailAddress?.emailAddress) 
+      const updatedCount = await decreaseStoryBoardAndImage2VideoCount(user?.primaryEmailAddress?.emailAddress)
+      setCount(updatedCount?.metadata?.storyBoardCount)
       const video_url = videoPrediction.output;
 
       try {
@@ -252,7 +265,7 @@ export default function Dashboard() {
           <form onSubmit={(e) => handleOnSubmit(e)}
           >
             
-            
+             <h1>Available generation : {count || 0}</h1>
             <div className="flex flex-col py-10">
               <label className="px-2 py-3 text-sm text-white" htmlFor="image">
                 Select Picture: {"   "}{"    "}
@@ -326,7 +339,7 @@ export default function Dashboard() {
             </Box>
             </Container>
             
-            {isOverUsageLimit?
+            {count == 0?
               
               (
                <Link href="/pricing">

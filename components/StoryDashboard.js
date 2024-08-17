@@ -64,12 +64,21 @@ export default function Dashboard() {
 
 
   // updated code subscription check
+
+  const [count, setCount] = useState(0);
+
   const {
     subscriptionData,
-    decreaseStoryBoardAndImage2VideoCount,
+    decreaseStoryBoardAndImage2VideoCount
   } = useContext(SubscriptionContext);
 
   console.log('here is sub data', subscriptionData)
+
+  useEffect(() => {
+    setCount(subscriptionData?.metadata?.storyBoardCount)
+    // fetchUserUsage();
+
+  }, [subscriptionData?.metadata?.storyBoardCount]);
   
   
   const handleImageChange = (e) => {
@@ -110,6 +119,10 @@ export default function Dashboard() {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
 
+    if (subscriptionData?.metadata?.storyBoardCount == '0') {
+      window.alert('No attempt left , Please purchase a plan');
+      return;
+    }
 
     const form = event.currentTarget;
 
@@ -169,7 +182,8 @@ export default function Dashboard() {
     }
     if (storyPrediction.status == "succeeded") {
       setStoryPrediction(storyPrediction);
-      await decreaseStoryBoardAndImage2VideoCount(user?.primaryEmailAddress?.emailAddress) 
+      const updatedCount = await decreaseStoryBoardAndImage2VideoCount(user?.primaryEmailAddress?.emailAddress)
+      setCount(updatedCount?.metadata?.storyBoardCount)
     }
 
 
@@ -198,7 +212,7 @@ export default function Dashboard() {
 
             
           
-
+            <h1>Available generation : {count || 0}</h1>
             <div className="flex flex-col">
             <label className="text-sm text-white">
             Character Description (Required): {"   "}{"    "}
@@ -324,7 +338,7 @@ export default function Dashboard() {
     </Box>
     </Container>
 
-            {isOverUsageLimit?
+            {count == 0?
               
                (
                 <Link href="/pricing">
