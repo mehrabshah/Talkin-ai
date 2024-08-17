@@ -80,6 +80,7 @@ export default function Dashboard() {
 
   }, [subscriptionData?.metadata?.storyBoardCount]);
   
+
   
   const handleImageChange = (e) => {
     setImageError('');
@@ -127,7 +128,38 @@ export default function Dashboard() {
     const form = event.currentTarget;
 
 
+    if (isRefImage) {
+      
+      const image_fileInput = Array.from(form.elements).find(({ name }) => name === 'image');
 
+      const image_formData = new FormData();
+
+      for (const file of image_fileInput.files) {
+      image_formData.append('file', file);
+       }
+
+      image_formData.append('upload_preset', 'app_users');
+
+      const image_data = await fetch('https://api.cloudinary.com/v1_1/dbospsdwo/image/upload', {
+      method: 'POST',
+      body: image_formData
+      }).then(r => r.json());
+
+      const image_url = image_data.secure_url;
+
+
+      var body = {
+        
+        num_ids: numIds,
+        ref_image: image_url,
+        style_name: style,
+        image_width: width,
+        image_height: height,
+        story_description: story,
+        character_description: character,
+        
+      };
+    } else {
     
 
     
@@ -145,7 +177,7 @@ export default function Dashboard() {
       };
     
 
-
+    }
 
 
     const story_response = await fetch("/api/story_predictions", {
@@ -213,6 +245,28 @@ export default function Dashboard() {
             
           
             <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">Available generation : {count || 0}</h1>
+            
+            <div className="flex flex-col ">
+            <label className="px-2 py-1 text-sm text-white">
+        Use Ref Image: <input type="checkbox" name="isRefImage" defaultChecked={false} color="success" />
+      </label>
+      </div>
+            <div className="flex flex-col ">
+              <label className="px-2 py-1 text-sm text-white" htmlFor="image">
+                Reference Image (Optional) {"   "}{"    "}
+                <span className="text-sm text-red-500">(jpg/jpeg, Max 1MB) </span>
+                <span className="text-sm text-red-400">*</span>
+              </label>
+              <input
+                type="file"
+                className="upload-button w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-white-500 my-2 text-white-900"
+                name="image"
+                placeholder="Select Picture"
+                onChange={handleImageChange}
+              />
+              <img src={imageSrc} className="basis-1/2 h-auto w-48 my-5" accept="image/*" />
+            </div>
+            
             <div className="flex flex-col">
             <label className="text-sm text-white">
             Character Description (Required): {"   "}{"    "}
