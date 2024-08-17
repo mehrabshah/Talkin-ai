@@ -85,7 +85,10 @@ export default function Dashboard() {
   const handleOnSubmit = async (event) => {
 
     event.preventDefault();
-
+    if (subscriptionData?.metadata?.text2Video == '0') {
+      window.alert('No attempt left , Please purchase a plan');
+      return;
+    }
   
     //useEffect(()=>{
     //  const ele = document.querySelector('.buble');
