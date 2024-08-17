@@ -65,19 +65,30 @@ export default function Dashboard() {
   });
 
   // updated code subscription check
-  const { 
+  const [count, setCount] = useState(0);
+
+  const {
     subscriptionData,
-    decreaseText2VideoCount 
+    decreaseText2VideoCount
   } = useContext(SubscriptionContext);
 
-  console.log('here is sub data',subscriptionData)
+  console.log('here is sub data', subscriptionData)
+
+  useEffect(() => {
+    setCount(subscriptionData?.metadata?.text2Video)
+    // fetchUserUsage();
+
+  }, [subscriptionData?.metadata?.text2Video]);
 
   
 
   const handleOnSubmit = async (event) => {
 
     event.preventDefault();
-
+    if (subscriptionData?.metadata?.text2Video == '0') {
+      window.alert('No attempt left , Please purchase a plan');
+      return;
+    }
   
     //useEffect(()=>{
     //  const ele = document.querySelector('.buble');
@@ -137,7 +148,9 @@ export default function Dashboard() {
       setVideoSrc(videoPrediction.output);
       const video_url = videoPrediction.output;
       
-      await decreaseText2VideoCount(user?.primaryEmailAddress?.emailAddress)  
+      const updatedCount = await decreaseText2VideoCount(user?.primaryEmailAddress?.emailAddress)
+      setCount(updatedCount?.metadata?.text2Video)  
+
 
       try {
 
@@ -197,9 +210,10 @@ export default function Dashboard() {
       <div className="flex flex-col items-center justify-center">
       
           <form
-            className="flex w-full sm:w-auto flex-col sm:flex-row mb-10"
+            className="space-y-2 w-full mb-10"
             onSubmit={(e) => handleOnSubmit(e)}
           >
+          <h1>Available generation : {count || 0}</h1>
             <input
               className="shadow-sm text-gray-700 rounded-sm px-3 py-2 mb-4 sm:mb-0 sm:min-w-[600px]"
               type="text"

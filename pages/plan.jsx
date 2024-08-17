@@ -12,6 +12,7 @@ import Container from '../components/Container';
 import { motion } from "framer-motion";
 import { useUser } from '@clerk/nextjs';
 import SubscriptionContext from '../context/SubscriptionContext';
+import { useEffect } from 'react';
 
 
 
@@ -61,6 +62,8 @@ export default function PlanPage() {
        }
 
     }
+
+    
 
 
     return (
