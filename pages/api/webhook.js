@@ -209,7 +209,7 @@ export default async function handler(req, res) {
       }
 
       default: {
-        res.status(200).end();
+        res.status(200).json({ success: true });
       }
     }
 
