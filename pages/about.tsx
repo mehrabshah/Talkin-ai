@@ -103,7 +103,7 @@ const sliderData = [
     img: "/robo_3.jpeg",
     location: "AIVIDOO",
     description:
-      "Enable our users to create engaging and entertaining VIDEOS by utilizing the latest artificial intelligence (AI) technologies.",
+      "Revolutionize content creation by utilizing the latest artificial intelligence (AI) technologies.",
      
       title:  "Our mission",
   },
@@ -111,7 +111,7 @@ const sliderData = [
     img: "/robo_2.jpeg",
     title: "Our Technology",
     description:
-      "Lip-Sync, Voice-Sync, Stable-Diffusion, ChatGPT Integrated.",
+      "StoryboardVision, a suite of cutting-edge AI tools, designed to streamline video and image generation while enhancing both education and pre-production process.",
     location: "AIVIDOO",
   },
   {
