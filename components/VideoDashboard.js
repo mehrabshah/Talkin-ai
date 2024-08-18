@@ -269,8 +269,8 @@ export default function Dashboard() {
 
 
       <Disclaimer />
-      <DiscordButton />
-      <Text2VideoFAQ />
+     
+     
     </div>
 
   );

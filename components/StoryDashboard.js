@@ -7,7 +7,7 @@ import { useContext, useEffect } from 'react';
 //import FAQ from './FAQ';
 import Disclaimer from './Disclaimer';
 import SocialLinkBar from './SocialLinkBar';
-import AvatarFAQ from './AvatarFAQ';
+import StoryBoardFAQ from './StoryBoardFAQ';
 import DiscordButton from './DiscordButton';
 import { BsFillPlayCircleFill } from 'react-icons/bs';
 import { Gate, useSubscription } from "use-stripe-subscription";
@@ -227,7 +227,7 @@ export default function Dashboard() {
 
     // post request to creation api to create creation record in the database
    
-    setImage();
+    setImage("");
     
 
   };
@@ -279,7 +279,7 @@ export default function Dashboard() {
                 value={character}
                 onChange={(e) => setCharacter(e.target.value)}
                 name="character"
-                placeholder="Character Description (Required)"
+                placeholder="Character Description (Required) (See instruction below)"
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
               />
             </div>
@@ -297,7 +297,7 @@ export default function Dashboard() {
               value={story}
               onChange={(e) => setStory(e.target.value)}
               name="story"
-              placeholder="Story Description (Required)"
+              placeholder="Story Description (Required) (See instruction below)"
               className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
               />
             </div>
@@ -446,8 +446,8 @@ export default function Dashboard() {
       </div>
 
       <Disclaimer />
-      <DiscordButton />
-      <AvatarFAQ />
+     
+      <StoryBoardFAQ />
 
 
     </div>

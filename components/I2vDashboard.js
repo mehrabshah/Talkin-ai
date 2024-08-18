@@ -53,10 +53,10 @@ export default function Dashboard() {
 
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
-  const [fps, setFps] = useState("");
-  const [motion, setMotion] = useState("");
+  const [fps, setFps] = useState(6);
+  const [motion, setMotion] = useState(80);
   const [seed, setSeed] = useState("");
-  const [numInferenceSteps, setNumInferenceSteps] = useState("");
+  const [numInferenceSteps, setNumInferenceSteps] = useState(9);
 
   
 
@@ -384,8 +384,8 @@ export default function Dashboard() {
                
          
       <Disclaimer />
-      <DiscordButton />
-      <Text2VideoFAQ />
+     
+     
     </div>
 
   );
