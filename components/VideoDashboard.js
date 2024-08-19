@@ -5,15 +5,9 @@ import cn from "classnames";
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import SocialLinkBar from './SocialLinkBar';
-import { isAudio, validateAudioSize, } from '../utils/fileValidation';
 import Disclaimer from './Disclaimer';
-import Text2VideoFAQ from './Text2VideoFAQ';
-import DiscordButton from './DiscordButton';
-import { BsFillPlayCircleFill } from 'react-icons/bs';
-import { Gate, useSubscription } from "use-stripe-subscription";
-import { findCreation, checkNewUserTrial} from "../utils/functions";
 import SubscriptionContext from "../context/SubscriptionContext";
+import TextField from '@mui/material/TextField';
 
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -214,14 +208,24 @@ export default function Dashboard() {
             onSubmit={(e) => handleOnSubmit(e)}
           >
           <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">Available generation : {count || 0}</h1>
-            <input
-              className="shadow-sm text-gray-700 rounded-sm px-3 py-2 mb-4 sm:mb-0 sm:min-w-[600px]"
-              type="text"
-              placeholder="Prompt for Video"
-              onChange={(e) => setPromptInput(e.target.value)}
-            />
+          <div className="flex flex-col">
+            
+          <TextField
+              variant="filled" 
+              color="success"
+              multiline
+              maxRows={5}
+                value={promptInput}
+                onChange={(e) => setPromptInput(e.target.value)}
+                name="promptInput"
+                placeholder="Text Prompt for Video"
+                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+              />
+            
+            
+           
             <button
-              className=" hero-button min-h-[40px] shadow-sm sm:w-[100px] py-2 inline-flex justify-center font-medium items-center px-4 text-gray-100 sm:ml-2 rounded-md"
+              className=" hero-button min-h-[40px] shadow-sm sm: w-[150px] py-2 inline-flex justify-center font-medium items-center px-4 text-gray-100 sm:rounded-md"
               type="submit"
               disabled={promptInput === ""}
             >
@@ -249,6 +253,7 @@ export default function Dashboard() {
               )}
               {!showLoadingState ? "Generate" : ""}
             </button>
+            </div> 
           </form>
           
           <div className="relative flex w-full items-center justify-center">
