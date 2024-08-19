@@ -22,11 +22,11 @@ const MyApp = ({ Component, pageProps }) => {
      <ClerkProvider appearance={{
         baseTheme: dark,
         layout: {
-          helpPageUrl: "https://talkin-ai.com/contact",
+          helpPageUrl: "https://aividoo.com/contact",
 
-          privacyPageUrl: "https://talkin-ai.com/privacy-policy",
+          privacyPageUrl: "https://aividoo.com/privacy-policy",
 
-          termsPageUrl: "https://talkin-ai.com/terms",
+          termsPageUrl: "https://aividoo.com/terms",
         }
       }} >
       <SubscriptionProvider>

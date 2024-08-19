@@ -38,6 +38,15 @@ const policyTerms = [
        
       },
     },
+    {
+      content:
+      "We use a global CDN to prevent network attacks and keep our services available through the globe.",
+      //link: "https://twitter.com/rod_ellison/status/1612513333302775809",
+      author: {
+        name: "Highly available",
+       
+      },
+    },
   ],
   [
     {
@@ -58,15 +67,7 @@ const policyTerms = [
       },
     },
 
-    {
-      content:
-      "We use a global CDN to prevent network attacks and keep our services available through the globe.",
-      //link: "https://twitter.com/rod_ellison/status/1612513333302775809",
-      author: {
-        name: "Highly available",
-       
-      },
-    },
+    
 
 
 
