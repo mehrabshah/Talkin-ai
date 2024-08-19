@@ -2,6 +2,7 @@ import Head from "next/head";
 //import { Roboto } from "@next/font/google";
 import StoryDashboard from "../components/StoryDashboard";
 import { Video, CloudinaryContext } from "cloudinary-react";
+import StoryBoarderBackgroundVideo from '../components/StoryBoarderBackgroundVideo';
 //import AvatarFAQ from '../components/AvatarFAQ';
 
 
@@ -20,7 +21,7 @@ export default function Home() {
         <link rel="icon" href="/aividoo_logo.png" />
       </Head>
 
-      <main className="p-10 mx-auto max-w-4xl">
+      <div className="p-10 mx-auto max-w-4xl">
 
        
 
@@ -44,7 +45,10 @@ export default function Home() {
         
 
         <StoryDashboard />
-      </main>
+        
+      </div>
+      <StoryBoarderBackgroundVideo/>
+      
     </>
   );
 }
