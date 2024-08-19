@@ -78,7 +78,7 @@ export default function Testimonials() {
   return (
     <section
       id="policyTerms"
-      aria-label="TALKIN.AI Privacy Policy"
+      aria-label="AIVIDOO Privacy Policy"
       className="py-10"
     >
       <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
