@@ -11,11 +11,6 @@ export default function Home() {
   return (
     <main className="overflow-hidden max-w-screen">
       
-      <div className="inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
-        <div className="blur-[106px] h-20 bg-gradient-to-r from-yellow-400 to-orange-600 dark:to-indigo-600"></div>
-        <div className="blur-[106px] h-30 bg-gradient-to-r from-orange-600 to-red-400 dark:from-red-700"></div>
-        </div>
-      
       <section className="min-h-screen mb-10 sm:block hidden">
         
 
