@@ -17,6 +17,7 @@ import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import SubscriptionContext from "../context/SubscriptionContext";
+import { toast, ToastContainer } from 'react-toastify';
 
 
 
@@ -33,6 +34,7 @@ export default function Dashboard() {
   
   const [error, setError] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
+  const [videoSrc, setVideoSrc] = useState();
   const [videoPrediction, setVideoPrediction] = useState(null);
 
   const [videoPublicId, setVideoPublicId] = useState();
@@ -204,7 +206,7 @@ export default function Dashboard() {
 
     if (videoPrediction.status == "succeeded") {
       setVideoPrediction(videoPrediction);
-      //setVideoSrc(videoPrediction.output);
+      setVideoSrc(videoPrediction.output);
       const updatedCount = await decreaseStoryBoardAndImage2VideoCount(user?.primaryEmailAddress?.emailAddress)
       setCount(updatedCount?.metadata?.storyBoardCount)
       const video_url = videoPrediction.output;
@@ -363,19 +365,15 @@ export default function Dashboard() {
          
           <div className="relative flex w-full items-center justify-center py-10">
           {videoPublicId != null  && (
-             <CloudinaryContext cloud_name="dbospsdwo" secure>
-             <div className="herovideo-card">
-               <Video
-                 publicId= {videoPublicId}
-                 autoPlay
-                 muted
-                 width="1024"
-                 height="576" 
-                 controls      
-               />
-             </div>
-           </CloudinaryContext>
-            
+             
+             <div >
+              <video controls muted autoPlay
+                //src={prediction.output[prediction.output.length - 1]}
+                src={videoSrc}
+                alt="output"
+              />
+            </div>
+                   
           )}
           </div>
 
