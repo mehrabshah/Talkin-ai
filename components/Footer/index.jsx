@@ -50,13 +50,13 @@ const Footer = () => {
                 <h2 className="text-xl font-semibold text-white">Support & Help</h2>
                 <ul className="mt-2 text-center md:text-left">
                         <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Youtube">
-                            <Link target="_blank" href="/" rel="noopener noreferrer">
+                            <Link target="_blank" href="/contact" rel="noopener noreferrer">
 
                                 Contact
                             </Link>
                         </li>
                         <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Twitter">
-                            <Link target="_blank" href="/">
+                            <Link target="_blank" href="/about">
 
                                 About
 
@@ -64,14 +64,14 @@ const Footer = () => {
                         </li>
 
                         <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Twitter">
-                            <Link target="_blank" href="/">
+                            <Link target="_blank" href="/terms">
 
                                 Terms
 
                             </Link>
                         </li>
                         <li className="text-gray mb-2 w-max m-auto md:mx-0 hover:text-light-gray" title="Twitter">
-                            <Link target="_blank" href="/">
+                            <Link target="_blank" href="/privacy-policy">
 
                                 Privacy Policy
 
