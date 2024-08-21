@@ -29,7 +29,7 @@ module.exports = {
             filter: "blur(0px)",
             zIndex: 0,
             transform:
-              "translateX(0%) translateY(0px) translateZ(-3322.79px) rotateX(0deg)  scale(1) rotateY(-15deg) rotateZ(0deg)",
+              "translateX(0%) translateY(0px) translateZ(-3022.79px) rotateX(0deg)  scale(1) rotateY(-15deg) rotateZ(0deg)",
           },
           "25%": {
             contain: "size layout style",
@@ -37,7 +37,7 @@ module.exports = {
             filter: "blur(0px)",
             zIndex: 100,
             transform:
-              "translateX(-50%) translateY(0px) translateZ(-3322.79px) rotateX(0deg)  scale(1) rotateY(-25deg) rotateZ(0deg)",
+              "translateX(-50%) translateY(0px) translateZ(-2522.79px) rotateX(0deg)  scale(1) rotateY(-25deg) rotateZ(0deg)",
           },
           "60%": {
             contain: "size layout style",
@@ -45,7 +45,7 @@ module.exports = {
             zIndex: 200,
             opacity: 1,
             transform:
-              "translateX(-25%) translateY(0px) translateZ(-2648.23px)  rotateX(0deg) rotateY(-10deg) rotateZ(0deg)",
+              "translateX(-25%) translateY(0px) translateZ(-2048.23px)  rotateX(0deg) rotateY(-10deg) rotateZ(0deg)",
           },
           "75%": {
             contain: "size layout style",
@@ -54,7 +54,7 @@ module.exports = {
             zIndex: 300,
 
             transform:
-              "translateX(0%) translateY(0px) translateZ(-2048.23px)  rotateX(0deg) rotateY(-30deg) rotateZ(0deg)",
+              "translateX(0%) translateY(0px) translateZ(-1648.23px)  rotateX(0deg) rotateY(-30deg) rotateZ(0deg)",
           },
 
           "100%": {
@@ -74,7 +74,7 @@ module.exports = {
             filter: "blur(0px)",
             zIndex: 0,
             transform:
-              "translateX(0%) translateY(0px) translateZ(-3322.79px) rotateX(0deg) scale(1) rotateY(15deg) rotateZ(0deg)", // Mirrored on Y-axis
+              "translateX(0%) translateY(0px) translateZ(-3022.79px) rotateX(0deg) scale(1) rotateY(15deg) rotateZ(0deg)", // Mirrored on Y-axis
           },
           "25%": {
             contain: "size layout style",
@@ -82,7 +82,7 @@ module.exports = {
             filter: "blur(0px)",
             zIndex: 100,
             transform:
-              "translateX(50%) translateY(0px) translateZ(-3322.79px) rotateX(0deg) scale(1) rotateY(25deg) rotateZ(0deg)", // Mirrored on Y-axis
+              "translateX(50%) translateY(0px) translateZ(-2522.79px) rotateX(0deg) scale(1) rotateY(25deg) rotateZ(0deg)", // Mirrored on Y-axis
           },
           "60%": {
             contain: "size layout style",
@@ -90,7 +90,7 @@ module.exports = {
             zIndex: 200,
             opacity: 1,
             transform:
-              "translateX(25%) translateY(0px) translateZ(-2648.23px) rotateX(0deg) rotateY(10deg) rotateZ(0deg)", // Mirrored on Y-axis
+              "translateX(25%) translateY(0px) translateZ(-2048.23px) rotateX(0deg) rotateY(10deg) rotateZ(0deg)", // Mirrored on Y-axis
           },
           "75%": {
             contain: "size layout style",
@@ -98,7 +98,7 @@ module.exports = {
             opacity: 1,
             zIndex: 300,
             transform:
-              "translateX(0%) translateY(0px) translateZ(-2048.23px) rotateX(0deg) rotateY(30deg) rotateZ(0deg)", // Mirrored on Y-axis
+              "translateX(0%) translateY(0px) translateZ(-1648.23px) rotateX(0deg) rotateY(30deg) rotateZ(0deg)", // Mirrored on Y-axis
           },
           "100%": {
             contain: "size layout style",
