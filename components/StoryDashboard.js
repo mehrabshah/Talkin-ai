@@ -6,11 +6,7 @@ import { isImage, isAudio, validateImgSize, validateAudioSize, } from '../utils/
 import { useContext, useEffect } from 'react';
 //import FAQ from './FAQ';
 import Disclaimer from './Disclaimer';
-import SocialLinkBar from './SocialLinkBar';
 import StoryBoardFAQ from './StoryBoardFAQ';
-import DiscordButton from './DiscordButton';
-import { BsFillPlayCircleFill } from 'react-icons/bs';
-import { Gate, useSubscription } from "use-stripe-subscription";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import TextField from '@mui/material/TextField';

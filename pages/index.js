@@ -48,15 +48,7 @@ export default function Home() {
             </video>
           ))}
         </div>
-        <div className="flex items-center py-5 justify-center relative -top-10">
-          <Image
-            src="/assets/images/logo.avif"
-            alt="logo"
-            width={500}
-            height={500}
-            className="max-w-[250px] "
-          />
-        </div>
+       
       </section>
 
       <ColorBlob
