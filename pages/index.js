@@ -1,4 +1,5 @@
 "use client";
+import Head from "next/head";
 import { Camera } from "../components/home/Camera";
 import { ColorBlob } from "../components/home/colorBlob";
 import { Consistency } from "../components/home/Consistency";
@@ -9,6 +10,24 @@ import Image from "next/image";
 
 export default function Home() {
   return (
+    <>
+    <Head>
+<title>AIVIDOO Main</title>
+<meta name="description" content="Create storyboard video with AI." />
+<meta name="keywords" content="AI, Storyboard, Storyboard video, Storyboard with AI, Storyboard video with AI, text to image, image to video, text to video " />
+<meta name="author" content="AIVIDOO" />
+<meta property="og:title" content="AIVIDOO Main Page" />
+<meta property="og:description" content="Create storyboard video with AI" />
+<meta property="og:image" content="/aividoo_logo.png" />
+<meta property="og:url" content="https://www.aividoo.com" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AIVIDOO Main Page" />
+<meta name="twitter:description" content="Create storyboard video with AI" />
+<meta name="twitter:image" content="/aividoo_logo.png" />
+</Head>
+    
+    
+    
     <main className="overflow-hidden max-w-screen">
       
       <section className="min-h-screen mb-10 sm:block hidden">
@@ -72,5 +91,6 @@ export default function Home() {
       <Consistency />
       <Camera />
     </main>
+    </>
   );
 }
