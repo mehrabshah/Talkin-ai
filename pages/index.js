@@ -13,16 +13,16 @@ export default function Home() {
     <>
     <Head>
 <title>AIVIDOO Main</title>
-<meta name="description" content="Create storyboard video with AI." />
-<meta name="keywords" content="AI, Storyboard, Storyboard video, Storyboard with AI, Storyboard video with AI, text to image, image to video, text to video " />
+<meta name="description" content="Create video story with AI." />
+<meta name="keywords" content="best platform for video story creation with AI, create video story with AI, video novel maker, AI-powered storytelling,  text to image, image to video, text to video " />
 <meta name="author" content="AIVIDOO" />
 <meta property="og:title" content="AIVIDOO Main Page" />
-<meta property="og:description" content="Create storyboard video with AI" />
+<meta property="og:description" content="Create video story with AI" />
 <meta property="og:image" content="/aividoo_logo.png" />
 <meta property="og:url" content="https://www.aividoo.com" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="AIVIDOO Main Page" />
-<meta name="twitter:description" content="Create storyboard video with AI" />
+<meta name="twitter:description" content="Create video story with AI" />
 <meta name="twitter:image" content="/aividoo_logo.png" />
 </Head>
     
@@ -81,9 +81,8 @@ export default function Home() {
           <>
             {" "}
             AIVIDOO is redefining content creation and production planning with
-            VideoNarrative, a suite of cutting-edge AI tools, designed to
-            streamline video and image generation while enhancing both education
-            and pre-production process.
+            VideoStory, a suite of cutting-edge AI tools, designed to
+            streamline video story generation while enhancing a wide range of industries and creative processes.
           </>
         }
       />
