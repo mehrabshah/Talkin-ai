@@ -81,7 +81,7 @@ export default function Home() {
           <>
             {" "}
             AIVIDOO is redefining content creation and production planning with
-            StoryboardVision, a suite of cutting-edge AI tools, designed to
+            VideoNarrative, a suite of cutting-edge AI tools, designed to
             streamline video and image generation while enhancing both education
             and pre-production process.
           </>

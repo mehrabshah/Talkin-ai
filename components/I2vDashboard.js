@@ -5,13 +5,8 @@ import cn from "classnames";
 
 import { useEffect , useContext} from 'react';
 import Link from 'next/link';
-import SocialLinkBar from './SocialLinkBar';
 import { isImage, validateImgSize } from '../utils/fileValidation';
 import Disclaimer from './Disclaimer';
-import Text2VideoFAQ from './Text2VideoFAQ';
-import DiscordButton from './DiscordButton';
-import { Gate, useSubscription } from "use-stripe-subscription";
-import { findCreation, checkNewUserTrial} from "../utils/functions";
 import { Video, CloudinaryContext } from "cloudinary-react";
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
