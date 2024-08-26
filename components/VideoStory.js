@@ -153,8 +153,6 @@ export default function Dashboard() {
         num_ids: numIds,
         ref_image: image_url,
         style_name: style,
-        image_width: width,
-        image_height: height,
         story_description: story,
         character_description: character,
         
@@ -169,8 +167,6 @@ export default function Dashboard() {
 
         num_ids: numIds,
         style_name: style,
-        image_width: width,
-        image_height: height,
         story_description: story,
         character_description: character,
 
@@ -180,7 +176,7 @@ export default function Dashboard() {
     }
 
 
-    const story_response = await fetch("/api/story_predictions", {
+    const story_response = await fetch("/api/video_story", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -203,7 +199,7 @@ export default function Dashboard() {
       storyPrediction.status !== "failed"
     ) {
       await sleep(1000);
-      const story_response = await fetch("/api/story_predictions/" + storyPrediction.id);
+      const story_response = await fetch("/api/video_story/" + storyPrediction.id);
       storyPrediction = await story_response.json();
       if (story_response.status !== 200) {
         setError(storyPrediction.detail);
@@ -329,44 +325,8 @@ export default function Dashboard() {
       
         </FormControl>
       
-      <FormControl   sx={{ m: 1, minWidth: 120 }} >
-        <InputLabel id="demo-simple-select-required-label"  >Width</InputLabel>
-        <Select
-          name="width"
-          label="Width"
-          onChange={(e) => setWidth(e.target.value)}
-        >
-          <MenuItem value={1024}>
-            <em>1024</em>
-          </MenuItem>
-          <MenuItem value={960}>960</MenuItem>
-          <MenuItem value={768}>768</MenuItem>
-          <MenuItem value={720}>720</MenuItem>
-          <MenuItem value={640}>640</MenuItem>
-          <MenuItem value={576}>576</MenuItem>
-          <MenuItem value={512}>512</MenuItem>
-        </Select>
-       
-      </FormControl>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-required-label">Height</InputLabel>
-        <Select
-          name="height"
-          label="Heigt"
-          onChange={(e) => setHeight(e.target.value)}
-        >
-          <MenuItem value={576}>
-            <em>576</em>
-          </MenuItem>
-          <MenuItem value={1024}>1024</MenuItem>
-          <MenuItem value={960}>960</MenuItem>
-          <MenuItem value={768}>768</MenuItem>
-          <MenuItem value={720}>720</MenuItem>
-          <MenuItem value={640}>640</MenuItem>
-          <MenuItem value={512}>512</MenuItem>
-        </Select>
-        
-      </FormControl>
+     
+     
       <FormControl sx={{ m: 1, minWidth: 200 }}>
         <InputLabel id="demo-simple-select-required-label">Image Style</InputLabel>
         <Select
@@ -403,9 +363,9 @@ export default function Dashboard() {
               ) : (<button
                 className={`hero-button w-full text-white font-bold py-2 px-4 rounded`}
                 type="submit"
-                disabled={isGenerating || character === "" || story === ""  || style === "" || width === ""  || height === "" || numIds === ""}
+                disabled={isGenerating || character === "" || story === ""  || style === ""  || numIds === ""}
               >
-                {isGenerating ? "Generating..." : "Generate Story Board"}
+                {isGenerating ? "Generating..." : "Generate Video Story"}
               </button>) 
             }
           </form>
@@ -422,11 +382,25 @@ export default function Dashboard() {
             
 
             {storyPrediction?.output && (
-              storyPrediction.output.individual_images.map((img_src)=>(
-              <div >
-                <Image 
+              <div>
+                <video controls muted autoPlay
                   //src={prediction.output[prediction.output.length - 1]}
-                  src={img_src}
+                  src={storyPrediction.output.final_video_story}
+                  width={1024}
+                  height={576}
+                  alt="output"
+                />
+                
+              
+              </div>
+           
+            )}
+            {storyPrediction?.output && (
+              storyPrediction.output.individual_videos.map((video_src)=>(
+              <div >
+                <video controls muted autoPlay
+                  //src={prediction.output[prediction.output.length - 1]}
+                  src={video_src}
                   width={1024}
                   height={576}
                   alt="output"
@@ -435,6 +409,7 @@ export default function Dashboard() {
               </div>
             ))
             )}
+
            
           </div>
         </div>

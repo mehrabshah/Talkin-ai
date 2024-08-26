@@ -22,6 +22,7 @@ const Header = () => {
   return (
 
   <header className={styles.header}>
+
     <div className={styles.left}>
       <Link href="/" className={styles.logo}>
         <Image src="/aividoo_logo.png" width="200" height="80" alt="Logo" />
@@ -47,16 +48,19 @@ const Header = () => {
                      <Link href="/about">About</Link>
                   </li>
                  
-                  
-                  <li className="p__opensans">
-                    <Link href="/text2video">Text2Video</Link>
-                   </li>  
+                   <li className="p__opensans">
+                     <Link href="/video-story">Video Story</Link>
+                  </li> 
                    <li className="p__opensans">
                      <Link href="/story-board">Story Boarder</Link>
                   </li> 
+                  
                   <li className="p__opensans">
                      <Link href="/img2video">Image2Video</Link>
-                  </li>         
+                  </li>  
+                  <li className="p__opensans">
+                    <Link href="/text2video">Text2Video</Link>
+                   </li>         
                   
                   <li className="p__opensans">
                      <Link href="/pricing">Pricing</Link>
@@ -92,7 +96,7 @@ const Header = () => {
 
                     
                   <li className="p__opensans">
-                    <Link href="/text2video">Text2Video</Link>
+                    <Link href="/video-story">Video Story</Link>
                    </li>  
                    <li className="p__opensans">
                      <Link href="/story-board">Story Boarder</Link>
