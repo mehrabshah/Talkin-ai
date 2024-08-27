@@ -2,6 +2,7 @@ import Head from "next/head";
 //import { Roboto } from "@next/font/google";
 import VideoStory from "../components/VideoStory";
 import { Video, CloudinaryContext } from "cloudinary-react";
+import VideoStoryBackgroundVideo from '../components/VideoStoryBackgroundVideo';
 //import AvatarFAQ from '../components/AvatarFAQ';
 
 
@@ -31,9 +32,9 @@ export default function Home() {
         <div className="blur-[106px] h-20 bg-gradient-to-r from-yellow-400 to-orange-600 dark:to-indigo-600"></div>
         <div className="blur-[106px] h-30 bg-gradient-to-r from-orange-600 to-red-400 dark:from-red-700"></div>
         </div>
-            <div className="lg:w-2/3 text-center mx-auto">
+            <div className="lg:w-2/3 text-center mx-auto mb-11">
                 <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Video Story <span className="text-primary dark:text-white"> Generator.</span></h1>
-                <p className="mt-8 text-xl text-[#ccc5b9] dark:text-gray-300">Create Your Video Story in Seconds </p>
+                
                
                 
             </div>
@@ -42,7 +43,7 @@ export default function Home() {
 
 
         
-
+        <VideoStoryBackgroundVideo/>
         <VideoStory />
         
       </div>
