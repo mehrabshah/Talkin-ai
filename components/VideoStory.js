@@ -8,9 +8,6 @@ import { useContext, useEffect } from 'react';
 import Disclaimer from './Disclaimer';
 import SocialLinkBar from './SocialLinkBar';
 import StoryBoardFAQ from './StoryBoardFAQ';
-import DiscordButton from './DiscordButton';
-import { BsFillPlayCircleFill } from 'react-icons/bs';
-import { Gate, useSubscription } from "use-stripe-subscription";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import TextField from '@mui/material/TextField';
@@ -45,8 +42,9 @@ export default function Dashboard() {
   const [character, setCharacter] = useState("");
   const [story, setStory] = useState("");
   const [style, setStyle] = useState("");
-  const [width, setWidth] = useState("");
-  const [height, setHeight] = useState("");
+  const [width, setWidth] = useState(1280);
+  const [height, setHeight] = useState(720);
+  const [aspectRatio, setAspectRatio] = useState("");
   const [numIds, setNumIds] = useState("");
   
   const [isOverUsageLimit, setIsOverUsageLimit] = useState(true);
@@ -155,6 +153,9 @@ export default function Dashboard() {
         style_name: style,
         story_description: story,
         character_description: character,
+        aspect_ratio: aspectRatio,
+        video_width: width,
+        video_height: height,
         
       };
     } else {
@@ -169,6 +170,9 @@ export default function Dashboard() {
         style_name: style,
         story_description: story,
         character_description: character,
+        aspect_ratio: aspectRatio,
+        video_width: width,
+        video_height: height,
 
       };
     
@@ -297,6 +301,10 @@ export default function Dashboard() {
               className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
               />
             </div>
+            
+           
+            
+        
 
             <Container  className="mx-3 py-2">
         <Box sx={{ bgcolor: '#fffcf2', height: '20vh', borderRadius: 1, }} >
@@ -327,7 +335,7 @@ export default function Dashboard() {
       
      
      
-      <FormControl sx={{ m: 1, minWidth: 200 }}>
+      <FormControl sx={{ m: 1, minWidth: 150 }}>
         <InputLabel id="demo-simple-select-required-label">Image Style</InputLabel>
         <Select
           name="style"
@@ -348,6 +356,60 @@ export default function Dashboard() {
 
         </Select>
         </FormControl>
+
+        <FormControl sx={{ m: 1, minWidth: 150 }}>
+        <InputLabel id="demo-simple-select-required-label">Aspect Ratio</InputLabel>
+        <Select
+          name="aspectRatio"
+          label="Aspect Ratio"
+          onChange={(e) => setAspectRatio(e.target.value)}
+        >
+          <MenuItem value="16:9">
+            <em>16:9</em>
+          </MenuItem>
+          <MenuItem value="9:16">9:16</MenuItem>
+        </Select>
+        </FormControl>  
+
+        <FormControl   sx={{ m: 1, minWidth: 120 }} >
+        <InputLabel id="demo-simple-select-required-label"  >Width</InputLabel>
+        <Select
+          name="width"
+          label="Width"
+          onChange={(e) => setWidth(e.target.value)}
+        >
+          <MenuItem value={1280}>
+            <em>1280</em>
+          </MenuItem>
+          <MenuItem value={608}>608</MenuItem>
+          <MenuItem value={720}>720</MenuItem>
+          <MenuItem value={1080}>1080</MenuItem>
+          <MenuItem value={1350}>1350</MenuItem>
+          <MenuItem value={1920}>1920</MenuItem>
+        </Select>
+       
+      </FormControl>
+      
+      <FormControl   sx={{ m: 1, minWidth: 120 }} >
+        <InputLabel id="demo-simple-select-required-label"  >Height</InputLabel>
+        <Select
+          name="height"
+          label="height"
+          onChange={(e) => setHeight(e.target.value)}
+        >
+          <MenuItem value={720}>
+            <em>720</em>
+          </MenuItem>
+          <MenuItem value={608}>608</MenuItem>
+          <MenuItem value={1080}>1080</MenuItem>
+          <MenuItem value={1280}>1280</MenuItem>
+          <MenuItem value={1350}>1350</MenuItem>
+          <MenuItem value={1920}>1920</MenuItem>
+        </Select>
+       
+      </FormControl>
+
+
     </div>
     </Box>
     </Container>
@@ -363,7 +425,7 @@ export default function Dashboard() {
               ) : (<button
                 className={`hero-button w-full text-white font-bold py-2 px-4 rounded`}
                 type="submit"
-                disabled={isGenerating || character === "" || story === ""  || style === ""  || numIds === ""}
+                disabled={isGenerating || character === "" || story === ""  || style === ""  || numIds === "" || aspectRatio === ""}
               >
                 {isGenerating ? "Generating..." : "Generate Video Story"}
               </button>) 
@@ -386,8 +448,8 @@ export default function Dashboard() {
                 <video controls muted autoPlay
                   //src={prediction.output[prediction.output.length - 1]}
                   src={storyPrediction.output.final_video_story}
-                  width={1024}
-                  height={576}
+                  width={width}
+                  height={height}
                   alt="output"
                 />
                 
@@ -401,8 +463,8 @@ export default function Dashboard() {
                 <video controls muted autoPlay
                   //src={prediction.output[prediction.output.length - 1]}
                   src={video_src}
-                  width={1024}
-                  height={576}
+                  width={width}
+                  height={height}
                   alt="output"
                 />
                 
