@@ -82,7 +82,7 @@ export default function Home() {
             {" "}
             AIVIDOO is redefining content creation and production planning with
             VideoStory, a suite of cutting-edge AI tools, designed to
-            streamline video story generation while enhancing a wide range of industries and creative processes.
+            streamline text to video storytelling while enhancing a wide range of industries and creative processes.
           </>
         }
       />
