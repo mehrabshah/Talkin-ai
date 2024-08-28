@@ -23,10 +23,10 @@ const PricingPlans = ({ pricingData, handleSubscribe }) => {
                                         border border-gray-400
                                         
                                         transition-all duration-500  text-gray-400 font-semibold py-3 px-3 lg:px-11 ${activeTab === tab
-                                            ? `bg-[#cd4a1d] text-white 
+                                            ? `bg-[#5BBCFF] text-white 
                                             ${activeTab === 'yearly' ?'rounded-tl-3xl rounded-bl-3xl':'rounded-br-3xl rounded-tr-3xl'}
                                             `
-                                            : `hover:text-[#cd4a1d]
+                                            : `hover:text-[#5BBCFF]
                                             ${activeTab === 'yearly' ? 'rounded-tr-3xl rounded-br-3xl' :'rounded-bl-3xl rounded-tl-3xl'}
                                             `
                                             }`}

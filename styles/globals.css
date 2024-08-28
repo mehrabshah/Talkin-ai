@@ -37,7 +37,7 @@ a {
 
 
 .header1 {
-  color: #cd4a1d;
+  color: #5BBCFF;
   text-decoration: none;
 }
 
@@ -57,7 +57,7 @@ a {
 }
 
 .header-button {
-  background: linear-gradient(to right, #cd4a1d, #cd4a1d);
+  background: linear-gradient(to right, #5BBCFF, #5BBCFF);
 }
 
 
@@ -69,7 +69,7 @@ a {
 }
 
 .hero-button {
-  background: #cd4a1d;
+  background: #5BBCFF;
   justify-content: center;
   align-items: center;
 }
@@ -89,7 +89,7 @@ a {
 }
 
 .upload-button.clicked {
-  background-color: #cd4a1d;
+  background-color: #5BBCFF;
 }
 
 .testimonial-card {
@@ -218,7 +218,7 @@ a {
 
 
 .action-button {
-  background: linear-gradient(to right, #130923, #cd4a1d);
+  background: linear-gradient(to right, #130923, #5BBCFF);
 }
 
 .member-card .avatar-div img {
@@ -266,7 +266,7 @@ a {
   justify-content: center;
   padding: 1rem 0.75rem 1rem 0.75rem;
   align-items: left;
-  color: #cd4a1d;
+  color: #5BBCFF;
 }
 
 
@@ -297,7 +297,7 @@ a {
   justify-content: center;
   padding: 1rem 0.75rem 1rem 0.75rem;
   align-items: center;
-  color: #cd4a1d;
+  color: #5BBCFF;
 }
 
 .navlogo,
@@ -355,7 +355,7 @@ a {
 
 .dropdown-content a:hover {
   background-color: #ddd;
-  color: #cd4a1d;
+  color: #5BBCFF;
 }
 
 .dropdown:hover .dropdown-content {
@@ -492,12 +492,12 @@ a {
 }
 
 .app_navbar-links li:hover {
-  color: #cd4a1d;
+  color: #5BBCFF;
 }
 
 /* Login buttons */
 .app_navbar-login {
-  background: #cd4a1d;
+  background: #5BBCFF;
   height: 40px;
   border-radius: 0.6rem;
   display: flex;
@@ -566,7 +566,7 @@ a {
 
 .app_navbar-smallscreen_links li:hover {
   font-family: var(--color-orange);
-  color: #cd4a1d;
+  color: #5BBCFF;
   
 }
 
@@ -718,3 +718,10 @@ a {
   }
 }
 
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0 !important;
+}
