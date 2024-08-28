@@ -13,16 +13,16 @@ export default function Home() {
     <>
     <Head>
 <title>AIVIDOO Main</title>
-<meta name="description" content="Create video story with AI." />
-<meta name="keywords" content="best platform for video story creation with AI, create video story with AI, video novel maker, AI-powered storytelling,  text to image, image to video, text to video " />
+<meta name="description" content="text to video ai, image to video ai, ai storyteller" />
+<meta name="keywords" content="text to video ai,  image to video ai,  text to video ai free,  ai text to video, text to video generator, photo to video ai, ai video generator from text,  create video story AI,  " />
 <meta name="author" content="AIVIDOO" />
 <meta property="og:title" content="AIVIDOO Main Page" />
-<meta property="og:description" content="Create video story with AI" />
+<meta property="og:description" content="text to video ai, image to video ai, ai storyteller" />
 <meta property="og:image" content="/aividoo_logo.png" />
 <meta property="og:url" content="https://www.aividoo.com" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="AIVIDOO Main Page" />
-<meta name="twitter:description" content="Create video story with AI" />
+<meta name="twitter:description" content="text to video ai, image to video ai, ai storyteller" />
 <meta name="twitter:image" content="/aividoo_logo.png" />
 </Head>
     
