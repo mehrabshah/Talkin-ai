@@ -366,7 +366,7 @@ const SubscriptionManagement = ({ subscriptionId, updateSubscriptionPlan, curren
             </select>
             <button
                 onClick={handlePlanChange}
-                className="bg-[#ce4a1e] text-white py-2 px-4 rounded-lg hover:bg-[#97381e] focus:outline-none focus:ring-2 focus:ring-[#cd4a1d]"
+                className="bg-[#5BBCFF] text-white py-2 px-4 rounded-lg hover:bg-[#8d1e97] focus:outline-none focus:ring-2 focus:ring-[#5BBCFF]"
             >
                 Update Subscription
             </button>
