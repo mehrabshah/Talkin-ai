@@ -6,19 +6,13 @@ import BackgroundVideo from '../components/BackgroundVideo/BackgroundVideo';
 function App() {
   //const videoSource = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
   const videoSource = "https://res.cloudinary.com/dbospsdwo/video/upload/v1724030216/little_prince_and_the_rose_phpw5k.mp4"
+  //const videoSource ="https://res.cloudinary.com/dbospsdwo/video/upload/v1724068251/merida_light_stqswy.mp4"
   const scrollToBottom = () => {
     const bottomEle = document.querySelector("#video-bottom");
     bottomEle.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
-    <>
-     <Head>
-        <title>Contact Us | AIVIDOO</title>
-        <meta name="description" content="contact us with chat or email" />
-        <link rel="icon" href="/aividoo_logo.png" />
-      </Head>
-      <main>
     <div>
       <div style={{ height: '70vh' }}>
         <BackgroundVideo
@@ -43,8 +37,6 @@ function App() {
       </div>
      
     </div>
-    </main>
-    </>
   );
 }
 
