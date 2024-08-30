@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>AIVIDOO Image to Video Generator</title>
-        <meta name="description" content="AIVIDOO image to video generator" />
+        <title>Image to Video Generator | AIVIDOO</title>
+        <meta name="description" content="image to video with AI, photo to video with AI " />
         <meta name="keywords" content="image to video ai,  photo to video ai,  ai image to video, ai video generator from image, image to video ai free,  image to video generator " />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/aividoo_logo.png" />

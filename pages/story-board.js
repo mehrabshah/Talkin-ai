@@ -14,8 +14,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>AIVIDOO Storyboard Generator</title>
-        <meta name="description" content="Create Storyboard with AI" />
+        <title>StoryBoard Generator - Text to Image AI | AIVIDOO</title>
+        <meta name="description" content="create storyboard with AI, transform written scripts into images with character consistency" />
         <meta name="keywords" content="text to image ai,  text to image ai free,  ai storyteller, story telling ai " />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/aividoo_logo.png" />

@@ -184,8 +184,8 @@ export default function PricingPage() {
   return (
     <>
       <Head>
-        <title>AIVIDOO Pricing</title>
-        <meta name="description" content="AIVIDOO Pricing" />
+        <title>Pricing | AIVIDOO</title>
+        <meta name="description" content="pricing, subscription plan" />
         <link rel="icon" href="/aividoo_logo.png" />
       </Head>
      

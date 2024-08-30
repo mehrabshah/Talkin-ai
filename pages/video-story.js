@@ -15,8 +15,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>AIVIDOO Video Story Generator</title>
-        <meta name="description" content="Create Video Story with AI" />
+        <title>Video Story Generator | AIVIDOO</title>
+        <meta name="description" content="create video story with AI " />
         <meta name="keywords" content="text to video ai,  text to video ai free,  ai text to video, text to video generator " />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/aividoo_logo.png" />

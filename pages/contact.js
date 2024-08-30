@@ -12,6 +12,13 @@ function App() {
   }
 
   return (
+    <>
+     <Head>
+        <title>Contact Us | AIVIDOO</title>
+        <meta name="description" content="contact us with chat or email" />
+        <link rel="icon" href="/aividoo_logo.png" />
+      </Head>
+      <main>
     <div>
       <div style={{ height: '70vh' }}>
         <BackgroundVideo
@@ -36,6 +43,8 @@ function App() {
       </div>
      
     </div>
+    </main>
+    </>
   );
 }
 

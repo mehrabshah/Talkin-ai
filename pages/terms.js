@@ -1,5 +1,12 @@
 export default function Page() {
   return (
+    
+    <>
+    <Head>
+        <title>Contact Us | AIVIDOO</title>
+        <meta name="description" content="contact us with chat or email" />
+        <link rel="icon" href="/aividoo_logo.png" />
+      </Head>
     <main className="max-w-[900px] mx-auto text-white relative px-4">
       <section className="flex flex-col gap-6 text-[16px] my-5">
         <h1 className="text-center text-2xl font-bold">
@@ -1608,5 +1615,6 @@ export default function Page() {
         </p>
       </section>
     </main>
+    </>
   );
 }

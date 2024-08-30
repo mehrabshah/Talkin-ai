@@ -69,9 +69,9 @@ export default function PlanPage() {
     return (
         <>
             <Head>
-                <title>AIVIDOO PLAN</title>
+                <title>Manage Your Subscription Plan | AIVIDOO</title>
 
-                <meta name="description" content="AIVIDOO subscription plan" />
+                <meta name="description" content="manage your  subscription plan" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
                 <link rel="icon" href="/aividoo_logo.png" />

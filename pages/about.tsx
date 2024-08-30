@@ -45,8 +45,8 @@ export default function Home() {
     <>
 
       <Head>
-        <title>AIVIDOO About</title>
-        <meta name="description" content="AI R&D Company" />
+        <title>About Us | AIVIDOO</title>
+        <meta name="description" content="AIVIDOO Unveils Next-Gen AI Innovation with VideoStory Suite" />
         <link rel="icon" href="/aividoo_logo.png" />
       </Head>
 

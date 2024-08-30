@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>AIVIDOO Text to Video Generator</title>
+        <title>Text to Video Generator | AIVIDOO</title>
         <meta name="description" content="text to video generator" />
         <meta name="keywords" content="text to video ai,  text to video ai free,  ai text to video, text to video generator " />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

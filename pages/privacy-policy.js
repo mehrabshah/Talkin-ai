@@ -11,7 +11,7 @@ export default function Home() {
     <>
 
       <Head>
-        <title>AIVIDOO Privay Policy</title>
+        <title>Privay Policy | AIVIDOO</title>
         <meta name="description" content="AIVIDOO Privacy Policy" />
         <link rel="icon" href="/aividoo_logo.png" />
       </Head>
