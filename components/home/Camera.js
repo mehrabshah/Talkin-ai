@@ -108,54 +108,6 @@ export const Camera = () => {
                 playsInline
                 autoPlay
                 muted
-                className="rounded-2xl size-full h-[300px] aspect-video object-cover"
-                loop
-              >
-                <source
-                  src="https://gist.github.com/user-attachments/assets/a68e0895-1220-43b8-93f0-48cbda15adda"
-                  type="video/mp4"
-                />
-              </video>
-              <video
-                playsInline
-                autoPlay
-                muted
-                className="rounded-2xl size-full h-[300px] aspect-video object-cover"
-                loop
-              >
-                <source
-                  src="https://gist.github.com/user-attachments/assets/88cfbe2c-65ea-41ac-ac42-07dc4c3a3729"
-                  type="video/mp4"
-                />
-              </video>
-              <video
-                playsInline
-                autoPlay
-                muted
-                loop
-                className="col-span-4 rounded-2xl size-full h-[300px] aspect-video object-cover"
-              >
-                <source
-                  src="https://gist.github.com/user-attachments/assets/e174db28-f360-416a-8bd5-36d0196ca163"
-                  type="video/mp4"
-                />
-              </video>
-              <video
-                playsInline
-                autoPlay
-                muted
-                loop
-                className="col-span-4 rounded-2xl size-full h-[300px] aspect-video object-cover"
-              >
-                <source
-                  src="https://gist.github.com/user-attachments/assets/4f9af994-363c-4688-b9fe-a0a10c25d3ee"
-                  type="video/mp4"
-                />
-              </video>
-              <video
-                playsInline
-                autoPlay
-                muted
                 loop
                 className="col-span-4 rounded-2xl size-full h-[300px] aspect-video object-cover"
               >

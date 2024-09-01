@@ -80,30 +80,7 @@ export const QualityVideos = () => {
                 type="video/mp4"
               />
             </video>
-            <video
-              playsInline
-              autoPlay
-              muted
-              className="rounded-2xl size-full h-[300px] aspect-video object-cover"
-              loop
-            >
-              <source
-                src="https://res.cloudinary.com/dbospsdwo/video/upload/v1724485997/harrypotter_video_dj6b3o.mp4"
-                type="video/mp4"
-              />
-            </video>
-            <video
-              playsInline
-              autoPlay
-              muted
-              loop
-              className="col-span-4 rounded-2xl size-full h-[300px] aspect-video object-cover"
-            >
-              <source
-                src={'https://res.cloudinary.com/dbospsdwo/video/upload/v1724487297/merida_story_ymbnwr.mp4'}
-                type="video/mp4"
-              />
-            </video>
+           
            
           </div>
         </Wrapped>
