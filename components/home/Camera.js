@@ -2,7 +2,7 @@ import Wrapped from "../hoc/Wrapped";
 
 export const Camera = () => {
   return (
-    <Wrapped>
+  
       <section className=" pt-32 pb-8 relative">
         <h1 className="z-1 md:block hidden text-[120px] absolute font-semibold uppercase tracking-[-5%] left-[80px] -translate-x-[50%] top-2/4 -translate-y-2/4 -rotate-90 text-white/10 ">
           Motion
@@ -120,6 +120,6 @@ export const Camera = () => {
         
         </div>
       </section>
-    </Wrapped>
+    
   );
 };
