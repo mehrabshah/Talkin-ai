@@ -7,7 +7,7 @@ export const Consistency = () => {
         Consistency
       </h1>
       <div className="container lg:max-w-[960px] mx-auto text-white md:block hidden z-50 relative">
-        <Wrapped>
+        
           <div className="grid grid-cols-2 gap-10 items-end lg:max-w-[800px] w-full lg:mx-auto">
             <video
               playsInline
@@ -31,8 +31,8 @@ export const Consistency = () => {
               </p>
             </div>
           </div>
-        </Wrapped>
-        <Wrapped>
+  
+        
           <div className="grid grid-cols-7 items-center gap-4 my-4">
             <video
               playsInline
@@ -59,8 +59,8 @@ export const Consistency = () => {
               />
             </video>
           </div>
-        </Wrapped>
-        <Wrapped>
+      
+        
           <div className="grid grid-cols-2 items-start gap-4 px-20">
             <video
               playsInline
@@ -87,7 +87,7 @@ export const Consistency = () => {
               />
             </video>
           </div>
-        </Wrapped>
+    
       </div>
       <div className="max-w-full  md:hidden block mx-auto z-50 relative">
         

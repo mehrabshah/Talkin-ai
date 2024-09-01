@@ -8,7 +8,7 @@ export const Camera = () => {
           Motion
         </h1>
         <div className="container lg:max-w-[1100px] mx-auto text-white md:block hidden z-50 relative">
-          <Wrapped>
+      
             <div className="grid grid-cols-3 items-end gap-4 px-32">
               <video
                 playsInline
@@ -35,9 +35,9 @@ export const Camera = () => {
                 />
               </video>
             </div>
-          </Wrapped>
+          
 
-          <Wrapped>
+        
             <div className="grid grid-cols-2 items-center gap-4 my-4">
               <video
                 playsInline
@@ -64,9 +64,9 @@ export const Camera = () => {
                 />
               </video>
             </div>
-          </Wrapped>
+          
 
-          <Wrapped>
+        
             <div className="grid grid-cols-2 gap-10 items-center px-10">
               <div className="flex flex-col gap-10 mt-10">
                 <h2 className="text-5xl mb-5">
@@ -89,7 +89,7 @@ export const Camera = () => {
                 />
               </video>
             </div>
-          </Wrapped>
+          
         </div>
         <div className="max-w-full  md:hidden block mx-auto z-50 relative">
         

@@ -4,7 +4,7 @@ export const QualityVideos = () => {
   return (
     <section className=" pt-32 pb-8">
       <div className="container lg:max-w-[1024px] mx-auto text-white md:block hidden">
-        <Wrapped>
+        
           <div className="grid grid-cols-2 gap-4 items-center ">
             <h2 className="text-5xl">
               Transform Text into Seamless Narrative Videos 
@@ -26,8 +26,8 @@ export const QualityVideos = () => {
              
             </video>
           </div>
-        </Wrapped>
-        <Wrapped>
+      
+        
           <div className="grid grid-cols-7 items-center gap-4 my-4">
             <video
               playsInline
@@ -58,7 +58,7 @@ export const QualityVideos = () => {
               />
             </video>
           </div>
-        </Wrapped>
+        
       </div>
       <div className="max-w-full  md:hidden block mx-auto ">
         
