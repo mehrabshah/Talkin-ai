@@ -307,7 +307,7 @@ export default function Dashboard() {
         
 
             <Container  className="mx-3 py-2">
-        <Box sx={{ bgcolor: '#fffcf2', height: '20vh', borderRadius: 1, }} >
+        <Box sx={{ bgcolor: '#fffcf2', height: 'flex', borderRadius: 1, }} >
       
 
             <div>

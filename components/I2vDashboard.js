@@ -280,7 +280,7 @@ export default function Dashboard() {
             </div>
 
             <Container className="mx-3 py-2" maxwidth="lg">
-        <Box sx={{ bgcolor: '#fffcf2', height: '30vh', borderRadius: 1, }} >
+        <Box sx={{ bgcolor: '#fffcf2', height: 'flex', borderRadius: 1, }} >
             <div className="flex flex-col">
             <label className="px-2 py-3 text-sm  text-black">
                 Motion (Required)
