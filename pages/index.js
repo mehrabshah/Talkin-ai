@@ -39,34 +39,7 @@ export default function Home() {
         />
       </section>
       <section className="sm:hidden block overflow-hidden py-5">
-        <div className="flex items-center gap-5 flex-nowrap animate-slide_left ">
-          {bannerLeftVideos?.map((video, index) => (
-            <video
-              key={index}
-              loop
-              playsInline
-              autoPlay
-              muted
-              className=" h-[250px] aspect-video object-cover rounded-xl"
-            >
-              <source src={video?.src} type="video/mp4" />
-            </video>
-          ))}
-        </div>
-        <div className="flex items-center gap-5 flex-nowrap animate-slide_right mt-5">
-          {bannerRightVideos?.map((video, index) => (
-            <video
-              key={index}
-              loop
-              playsInline
-              autoPlay
-              muted
-              className=" h-[250px] aspect-video object-cover rounded-xl"
-            >
-              <source src={video?.src} type="video/mp4" />
-            </video>
-          ))}
-        </div>
+       
        
       </section>
 

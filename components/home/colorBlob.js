@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import Wrapped from "../hoc/Wrapped";
 
 export const ColorBlob = ({
   section_id = "color_blob",
@@ -48,7 +50,7 @@ export const ColorBlob = ({
   }, []);
 
   return (
-    <section>
+    <section >
       <div
         className="flex justify-center items-center min-w-screen md:min-h-screen relative "
         ref={targetRef}
@@ -67,14 +69,17 @@ export const ColorBlob = ({
             <div className="animate-color_blobs absolute w-screen h-[100vw]  top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-gradient-conic"></div>
           </div>
         </div>
+        
         <div className="flex flex-col w-full max-w-[900px] relative gap-6 container text-white">
-          <h2 className="text-[clamp(35px,5vw,52px)] mr-auto md:leading-[99%] leading-normal tracking-[-3.6px]">
+          <h2 className="mx-10 text-[clamp(35px,5vw,52px)] mr-auto md:leading-[99%] leading-normal tracking-[-3.6px]">
             {heading}
           </h2>
-          <p className="max-w-[675px] ms-auto text-[clamp(16px,3vw,28px)]  md:leading-[99%]">
+          <p className="mx-10 max-w-[675px] ms-auto text-[clamp(16px,3vw,28px)]  md:leading-[99%]">
             {description}
           </p>
+          <Link href="/sign-up" >
           <button className="mt-[40px] flex uppercase gap-8 max-w-[497px] mx-auto w-full items-center justify-between border-white border border-opacity-20 bg-white bg-opacity-20 transition-all hover:bg-opacity-30 text-balance text-center text-white font-medium tracking-[-0.886px] text-[30px] rounded-full px-10 h-[98px]">
+          
             <span>TRY NOW</span>
             <Image
               src="/assets/svgs/arrow.svg"
@@ -83,8 +88,11 @@ export const ColorBlob = ({
               width={500}
               className="h-12 w-12"
             />
+            
           </button>
+          </Link>
         </div>
+      
       </div>
     </section>
   );
