@@ -92,7 +92,7 @@ export const Camera = () => {
           </Wrapped>
         </div>
         <div className="max-w-full  md:hidden block mx-auto z-50 relative">
-          <Wrapped>
+        
             <div className="sm:w-3/4 sm:mx-auto mb-10 px-5">
               <h2 className="sm:text-5xl text-4xl mb-10 text-center text-white ">
                 Transform Text and Images into Stunning Animation
@@ -101,8 +101,8 @@ export const Camera = () => {
                 Achieve High-Quality Videos with AI Magic.
               </p>
             </div>
-          </Wrapped>
-          <Wrapped>
+        
+        
             <div className="flex items-center flex-nowrap gap-5 overflow-x-auto px-5">
               <video
                 playsInline
@@ -117,7 +117,7 @@ export const Camera = () => {
                 />
               </video>
             </div>
-          </Wrapped>
+        
         </div>
       </section>
     </Wrapped>

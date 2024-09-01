@@ -61,12 +61,12 @@ export const QualityVideos = () => {
         </Wrapped>
       </div>
       <div className="max-w-full  md:hidden block mx-auto ">
-        <Wrapped>
+        
           <h2 className="text-4xl mb-10 text-center text-white sm:w-2/4 sm:mx-auto px-5">
             Transform Text into Seamless Narrative Videos
           </h2>
-        </Wrapped>
-        <Wrapped>
+        
+        
           <div className="flex items-center flex-nowrap gap-5 overflow-x-auto px-5">
             <video
               playsInline
@@ -83,7 +83,6 @@ export const QualityVideos = () => {
            
            
           </div>
-        </Wrapped>
       </div>
     </section>
   );
