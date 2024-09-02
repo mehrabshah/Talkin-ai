@@ -30,7 +30,7 @@ export default function Home() {
     
     <main className="overflow-hidden max-w-screen">
       
-      <section className="min-h-screen mb-10 sm:block hidden">
+      <section className="min-h-screen mb-10 lg:block hidden">
         
 
         <VideoSlider
@@ -38,10 +38,7 @@ export default function Home() {
           right_videos={bannerRightVideos}
         />
       </section>
-      <section className="sm:hidden block overflow-hidden py-5">
-       
-       
-      </section>
+     
 
       <ColorBlob
         heading={
