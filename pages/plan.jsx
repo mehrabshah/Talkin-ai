@@ -142,7 +142,7 @@ export default function PlanPage() {
 
 const SubscriptionTable = ({ data, handleCancel, isSubscribed }) => {
     return (
-        <div className="max-w-lg p-6 bg-white shadow rounded-lg">
+        <div className="max-w-full p-6 bg-white shadow rounded-lg">
             <h3 className="text-xl text-black font-semibold mb-4">Subscription Details</h3>
             <table className="min-w-full bg-white border border-gray-200 rounded-md overflow-hidden">
                 {/*  */}
