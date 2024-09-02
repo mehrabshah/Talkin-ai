@@ -25,7 +25,7 @@ const Header = () => {
 
     <div className={styles.left}>
       <Link href="/" className={styles.logo}>
-      <Image src="/aividoo_logo.png" width="200" height="80" layout="responsive" sizes="(max-width: 768px) 40vw, (max-width: 1200px) 20vw, 15vw" alt="Logo" />
+      <Image src="/aividoo_logo.png" width="200" height="80" layout="responsive" sizes="(max-width: 768px) 30vw, (max-width: 1200px) 20vw, 15vw" alt="Logo" />
         <span className={styles.appName}></span>
       </Link>
     </div>
