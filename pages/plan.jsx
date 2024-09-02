@@ -82,18 +82,6 @@ export default function PlanPage() {
 
 
 
-                    <motion.img
-
-                        alt="Transition Image"
-                        transition={{
-                            opacity: 0,
-                            layout: { duration: 0.6 },
-                        }}
-                        className=" absolute left-0  top-15  z-0   h-full w-full object-cover brightness-50"
-                        src="robo_1.jpeg"
-                    />
-
-
                     <div className="relative pt-20 ml-auto">
                         <div className="lg:w-2/3 text-center mx-auto">
                             <h1 className="text-white dark:text-white font-bold text-5xl md:text-6xl xl:text-7xl">Your Plan.</h1>
@@ -144,13 +132,13 @@ const SubscriptionTable = ({ data, handleCancel, isSubscribed }) => {
     return (
         <div className="max-w-full p-6 bg-white shadow rounded-lg">
             <h3 className="text-xl text-black font-semibold mb-4">Subscription Details</h3>
-            <table className="min-w-full bg-white border border-gray-200 rounded-md overflow-hidden">
+            <table className="max-w-full bg-white border border-gray-200 rounded-md overflow-hidden">
                 {/*  */}
                 <tbody>
                     {Object.entries(data).map(([key, value]) => (
                         <tr key={key} className="border-t border-gray-200">
                             <td className="py-4 px-6 text-sm font-medium text-gray-900">{key}</td>
-                            <td className="py-4 px-6 text-sm text-gray-700">{value}</td>
+                            <td className="py-4 px-6 text-sm text-gray-700 overflow-hidden">{value}</td>
                         </tr>
                     ))}
                 </tbody>
