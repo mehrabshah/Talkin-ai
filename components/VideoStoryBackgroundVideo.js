@@ -17,7 +17,7 @@ function VideoStoryBackgroundVideo() {
 
   return (
     <div>
-      <div style={{ height: '55vh' }}>
+      <div style={{ height: 'flex' }}>
         <BackgroundVideo
           blur={0}
           videoSource={videoSource} >
