@@ -52,7 +52,7 @@ export const ColorBlob = ({
   return (
     <section >
       <div
-        className="flex justify-center items-center min-w-screen md:min-h-screen relative "
+        className="flex mt-10 justify-center items-center min-w-screen md:min-h-screen relative "
         ref={targetRef}
         id={section_id}
       >
