@@ -1,6 +1,4 @@
 import Head from 'next/head';
-import AboutHero from "../components/AboutHero";
-import AboutVideoPlayer from "../components/AboutVideoPlayer";
 import { Righteous } from "next/font/google";
 import { AnimatePresence } from "framer-motion";
 import React from "react";
