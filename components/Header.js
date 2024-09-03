@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from 'react';
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { MdOutlineRestaurantMenu } from 'react-icons/md';
+import { MdOutlineClose  } from 'react-icons/md';
 
 // Header component using <SignedIn> & <SignedOut>.
 //
@@ -84,7 +84,7 @@ const Header = () => {
             <GiHamburgerMenu color="#fff" fontSize={16} onClick={() => setToggleMenu(true)} />
             {toggleMenu && (
                <div className="app_navbar-smallscreen_overlay flex__center slide-bottom">
-                  <MdOutlineRestaurantMenu
+                  <MdOutlineClose
                      fontSize={9}
                      className="overlay__close"
                      onClick={() => setToggleMenu(false)}
@@ -103,19 +103,15 @@ const Header = () => {
                   </li> 
                   <li className="p__opensans">
                      <Link href="/img2video">Image2Video</Link>
-                  </li>         
+                  </li>      
+                  <li className="p__opensans">
+                     <Link href="/text2video">Text2Video</Link>
+                  </li>   
                   
                   <li className="p__opensans">
                      <Link href="/pricing">Pricing</Link>
                   </li>
-                 <li className="p__opensans">
-                    <Link href="/plan">Plan</Link>
-                 </li>
-
-
-                     
-                    
-
+                 
                   </ul>
                </div>
             )}
