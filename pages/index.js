@@ -1,5 +1,6 @@
 "use client";
 import Head from "next/head";
+import Link from "next/link";
 import { Camera } from "../components/home/Camera";
 import { ColorBlob } from "../components/home/colorBlob";
 import { Consistency } from "../components/home/Consistency";
@@ -13,11 +14,15 @@ export default function Home() {
     <>
     <Head>
 <title>Video Story Maker - Text to Video AI | AIVIDOO</title>
-<meta name="description" content="video story maker, text to video AI, transform written scripts into videos with character consistency" />
-<meta name="keywords" content="text to video ai,  image to video ai,  text to video ai free,  ai text to video, text to video generator, photo to video ai, ai video generator from text,  create video story AI,  " />
+<meta name="description" content="AIVIDOO, video story maker, text to video AI, transform written scripts into videos with character consistency" />
+<meta name="keywords" content="AIVIDOO, text to video ai,  image to video ai,  text to video ai free,  ai text to video, text to video generator, photo to video ai, ai video generator from text,  create video story AI,  " />
 <meta name="author" content="AIVIDOO" />
+<Link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"></Link>
+<Link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"></Link>
+<Link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></Link>
+<Link rel="manifest" href="/site.webmanifest"></Link>
 <meta property="og:title" content="Video Story Maker - Text to Video with AI | AIVIDOO" />
-<meta property="og:description" content="Video Story Maker, Text to Video with AI, transform written scripts into videos with character consistency" />
+<meta property="og:description" content="AIVIDOO, Video Story Maker, Text to Video with AI, transform written scripts into videos with character consistency" />
 <meta property="og:image" content="/aividoo_logo.png" />
 <meta property="og:url" content="https://www.aividoo.com" />
 <meta name="twitter:card" content="summary_large_image" />
