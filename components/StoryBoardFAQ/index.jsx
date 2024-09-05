@@ -5,6 +5,10 @@ import Faq from "react-faq-component";
 const data = {
     title: "Instruction (How it works)",
     rows: [
+        {
+            title: "Sample ChatGPT prompt to generate character and scene description for video generation",
+            content: `Please write a fantasy story script in Harry Potter-Style. Please put general character description in the beginning and then scene descriptions. Please limit the number of characters under three. I need 7 scenes. Please make characters' name less than four words, and put the name into []bracket, and collapse the Description and Action of each scene description together. Please only keep the first name of the character, and also put the characters' names in scene description into [] bracket `,
+        },
         
         {
             title: "Character description if you don't use reference image",
@@ -29,6 +33,8 @@ const data = {
             [Harry] sits on a smooth rock by the lake, his expression contemplative. The castle’s spires rise in the distance, silhouetted against the vibrant sky. The sun is setting, casting a warm, golden hue over the serene lake. `,
         },
 
+       
+
     ],
 };
 
@@ -49,7 +55,7 @@ const config = {
 export default function TubeFAQ() {
 
     return (
-        <div className="max-w-7xl w-full h-screen mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl w-full h-auto mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
             <Faq
                 data={data}
