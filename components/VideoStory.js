@@ -279,7 +279,7 @@ export default function Dashboard() {
                 value={character}
                 onChange={(e) => setCharacter(e.target.value)}
                 name="character"
-                placeholder="Character Description (Required) (See instruction below)"
+                placeholder="Example: Harry a boy, is dressed in his Hogwarts uniform: a white shirt, black sweater with the Gryffindor crest, black trousers, and a slightly rumpled black robe."
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
               />
             </div>
@@ -297,7 +297,8 @@ export default function Dashboard() {
               value={story}
               onChange={(e) => setStory(e.target.value)}
               name="story"
-              placeholder="Story Description (Required) (See instruction below)"
+              placeholder="One line one scene, Example: Harry sits on a smooth rock by the lake, his expression contemplative. The castle’s spires rise in the distance, silhouetted against the vibrant sky. The sun is setting, casting a warm, golden hue over the serene lake. 
+"
               className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
               />
             </div>
