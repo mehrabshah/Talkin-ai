@@ -60,7 +60,10 @@ const Header = () => {
                   </li>  
                   <li className="p__opensans">
                     <Link href="/text2video">Text2Video</Link>
-                   </li>         
+                   </li>
+                   <li className="p__opensans">
+                    <Link href="/ai-voice">AI Voice</Link>
+                   </li>       
                   
                   <li className="p__opensans">
                      <Link href="/pricing">Pricing</Link>
