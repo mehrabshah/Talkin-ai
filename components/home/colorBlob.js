@@ -78,9 +78,9 @@ export const ColorBlob = ({
             {description}
           </p>
           <Link href="/sign-up" >
-          <button className="mt-[40px] flex uppercase gap-8 max-w-[497px] mx-auto w-full items-center justify-between border-white border border-opacity-20 bg-white bg-opacity-20 transition-all hover:bg-opacity-30 text-balance text-center text-white font-medium tracking-[-0.886px] text-[30px] rounded-full px-10 h-[98px]">
+          <button className="mt-[40px] flex uppercase gap-8 max-w-[497px] mx-auto w-full items-center justify-between border-white border border-opacity-20 bg-[5BBCFF] bg-opacity-20 transition-all hover:bg-opacity-30 text-balance text-center text-white font-medium tracking-[-0.886px] text-[30px] rounded-full px-10 h-[98px]">
           
-            <span>TRY NOW</span>
+            <span>Free Trial</span>
             <Image
               src="/assets/svgs/arrow.svg"
               alt="arrow"
