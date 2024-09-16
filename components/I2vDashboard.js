@@ -204,45 +204,9 @@ export default function Dashboard() {
       setVideoSrc(videoPrediction.output);
       const updatedCount = await decreaseStoryBoardAndImage2VideoCount(user?.primaryEmailAddress?.emailAddress)
       setCount(updatedCount?.metadata?.storyBoardCount)
-      const video_url = videoPrediction.output;
+      
 
-      try {
-
-        // upload to cloudinary
-        const video_formData = new FormData();
-        video_formData.append('file', video_url);
-        video_formData.append('upload_preset', 'tube_video');
-
-        const video_data = await fetch('https://api.cloudinary.com/v1_1/dbospsdwo/video/upload', {
-          method: 'POST',
-          body: video_formData
-        }).then(r => r.json());
-
-        //const cld_video_url = video_data.secure_url;
-        //const cld_video_url = video_data.secure_url;
-        const cld_video_id = video_data.public_id;
-        
-
-        //console.log({ cld_video_url });
-        
-        setVideoPublicId(cld_video_id);
-        //const videoDuration = Math.floor(video_data.duration * 60);
-        
-
-        const dateCreated = new Date();
-
-          //update the database
-        const req_body = {cld_video_id, dateCreated };
-        await fetch('/api/add_usage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(req_body),
-          });
-        
-        //await Router.push('/drafts');
-      } catch (error) {
-        console.error(error);
-      }
+      
     }
     setImage("");
       
@@ -359,7 +323,7 @@ export default function Dashboard() {
           
          
           <div className="relative flex w-full items-center justify-center py-10">
-          {videoPublicId != null  && (
+          {videoPrediction?.output  && (
              
              <div >
               <video controls muted autoPlay

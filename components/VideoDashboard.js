@@ -146,44 +146,6 @@ export default function Dashboard() {
       setCount(updatedCount?.metadata?.text2Video)  
 
 
-      try {
-
-        // upload to cloudinary
-        const video_formData = new FormData();
-        video_formData.append('file', video_url);
-        video_formData.append('upload_preset', 'tube_video');
-
-        const video_data = await fetch('https://api.cloudinary.com/v1_1/dbospsdwo/video/upload', {
-          method: 'POST',
-          body: video_formData
-        }).then(r => r.json());
-
-        //const cld_video_url = video_data.secure_url;
-        //const cld_video_url = video_data.secure_url;
-        //const cld_video_id = video_data.public_id;
-        const cld_video_url = video_data.secure_url;
-
-        //console.log({ cld_video_url });
-        
-        setVideoUrl(video_data.secure_url);
-        //const videoDuration = Math.floor(video_data.duration * 60);
-        
-
-        const dateCreated = new Date();
-
-          //update the database
-        const req_body = {cld_video_url, dateCreated };
-        await fetch('/api/add_usage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(req_body),
-          });
-        
-       
-        //await Router.push('/drafts');
-      } catch (error) {
-        console.error(error);
-      }
     }
     setPromptInput("");
     setNegativePrompt("");
