@@ -39,8 +39,13 @@ export default function Dashboard() {
   const [videoUrl, setVideoUrl] = useState('');
   const [usage, setUsage] = useState('');
 
-  const [character, setCharacter] = useState("");
-  const [story, setStory] = useState("");
+  
+  const [characters, setCharacters] = useState("");
+  const [idea, setIdea] = useState("");
+  const [numPanels, setNumPanels] = useState("");
+  const [storyDescription, setStoryDescription] = useState("");
+  
+  
   const [style, setStyle] = useState("");
   const [width, setWidth] = useState(1280);
   const [height, setHeight] = useState(720);
@@ -114,6 +119,27 @@ export default function Dashboard() {
   };
 
   
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsGenerating(true);
+    const res = await fetch("/api/returnStoryDescription", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        characters,
+        idea,
+        numPanels,
+      }),
+    });
+    setIsGenerating(false);
+    const data = await res.json();
+    setStoryDescription(data.storyDescription.trim());
+  };
+
+
+
   //handle form submit to create avatar and create record in the database
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -151,8 +177,8 @@ export default function Dashboard() {
         num_ids: numIds,
         ref_image: image_url,
         style_name: style,
-        story_description: story,
-        character_description: character,
+        story_description: storyDescription,
+        character_description: characters,
         aspect_ratio: aspectRatio,
         video_width: width,
         video_height: height,
@@ -168,8 +194,8 @@ export default function Dashboard() {
 
         num_ids: numIds,
         style_name: style,
-        story_description: story,
-        character_description: character,
+        story_description: storyDescription,
+        character_description: characters,
         aspect_ratio: aspectRatio,
         video_width: width,
         video_height: height,
@@ -266,42 +292,121 @@ export default function Dashboard() {
               />
               <img src={imageSrc} className="basis-1/2 h-auto w-48 my-5" accept="image/*" />
             </div>
-            
             <div className="flex flex-col">
-            <label className="text-sm text-white">
-            Character Description (Required): {"   "}{"    "}
-            </label>
-            <TextField
-              variant="filled" 
-              color="success"
-              multiline
-              maxRows={5}
-                value={character}
-                onChange={(e) => setCharacter(e.target.value)}
-                name="character"
-                placeholder="Example: Harry a boy, is dressed in his Hogwarts uniform: a white shirt, black sweater with the Gryffindor crest, black trousers, and a slightly rumpled black robe."
+              <div className="flex mt-10 items-center space-x-3">
+                         <div
+                   style={{ backgroundColor: '#5BBCFF'}}
+                   className="rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-sm">
+                   {1}
+                   </div>
+                        <p className="text-left font-medium flex align-center">
+                            {"Characters"} 
+                        </p>
+                    </div>
+              <textarea
+                type="text"
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+                rows={3}
+                name="characters"
+                placeholder="Characters"
+                id="characters"
+                value={characters}
+                onChange={(e) => setCharacters(e.target.value)}
+                required
               />
             </div>
-            
 
             <div className="flex flex-col">
-            <label className="text-sm text-white" htmlFor="story">
-            Story Description (Required): {"   "}{"    "}
-            </label>
-              <TextField
-              variant="filled" 
-              color="success"
-              multiline
-              maxRows={15}
-              value={story}
-              onChange={(e) => setStory(e.target.value)}
-              name="story"
-              placeholder="One line one scene, Example: Harry sits on a smooth rock by the lake, his expression contemplative. The castle’s spires rise in the distance, silhouetted against the vibrant sky. The sun is setting, casting a warm, golden hue over the serene lake. 
-"
-              className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+                  <div className="flex mt-10 items-center space-x-3">
+                         <div
+            style={{ backgroundColor: '#5BBCFF'}}
+            className="rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-sm">
+            {2}
+        </div>
+                        <p className="text-left font-medium flex align-center">
+                            {"Story Idea"} 
+                        </p>
+                    </div>
+              
+              <input
+                value={idea}
+                onChange={(e) => setIdea(e.target.value)}
+                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+                placeholder="Idea"
+                type="text"
+                name="idea"
+                id="idea"
               />
             </div>
+
+            <div className="flex flex-col">
+                <div className="flex mt-10 items-center space-x-3">
+                         <div
+            style={{ backgroundColor: '#5BBCFF'}}
+            className="rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-sm">
+            {3}
+        </div>
+                        <p className="text-left font-medium flex align-center">
+                            {"Number of  Panels"} 
+                        </p>
+                    </div>  
+             
+
+              <select
+                value={numPanels}
+                onChange={(e) => setNumPanels(e.target.value)}
+                className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+                name="numPanels"
+                id="numPanels"
+              >
+                <option value="default">Select Number of Panels</option>
+                <option value="four">four</option>
+                <option value="five">five</option>
+                <option value="six">six</option>
+                <option value="seven">seven</option>
+                <option value="eight">eight</option>
+                <option value="nine">nine</option>  
+              </select>
+            </div>
+            
+            <button
+              className="bg-[#5BBCFF] w-full hover:bg-blue-700 text-white font-bold mt-6 py-2 px-4 rounded"
+              onClick={handleSubmit}
+              type="submit"
+              disabled={isGenerating || characters === "" || idea === "" || numPanels === ""}
+            >
+              {isGenerating ? "Generating..." : "Generate Story Description"}
+            </button>
+
+            <div className="flex flex-col">
+           
+           <div className="flex mt-10 items-center space-x-3">
+                        <div
+           style={{ backgroundColor: '#5BBCFF'}}
+           className="rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-sm">
+           {4}
+       </div>
+                       <p className="text-left font-medium flex align-center">
+                           {"Story Description"} 
+                       </p>
+                   </div>  
+          
+           
+           <textarea
+             rows={
+               storyDescription === ""
+                 ? 7
+                 : storyDescription.split("\n").length + 12
+             }
+             name="output"
+             value={storyDescription}
+             onChange={(e) => setStoryDescription(e.target.value)}
+             disabled={storyDescription === ""}
+             id="output"
+             placeholder="AI Generated Story Description"
+             className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
+           />
+           </div>
             
            
             
@@ -426,7 +531,7 @@ export default function Dashboard() {
               ) : (<button
                 className={`hero-button w-full text-white font-bold py-2 px-4 rounded`}
                 type="submit"
-                disabled={isGenerating || character === "" || story === ""  || style === ""  || numIds === "" || aspectRatio === ""}
+                disabled={isGenerating || characters === "" || storyDescription === ""  || style === ""  || numIds === "" || aspectRatio === ""}
               >
                 {isGenerating ? "Generating..." : "Generate Video Story"}
               </button>) 
