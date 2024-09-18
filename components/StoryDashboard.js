@@ -522,12 +522,37 @@ export default function Dashboard() {
             <p className="py-3 text-sm opacity-50">Generation Status: {storyPrediction?.status}</p>
             
            
+            
             {storyPrediction?.output && (
+              <div>
+                <Image controls 
+                  //src={prediction.output[prediction.output.length - 1]}
+                  src={storyPrediction.output.final_image_story}
+                  width={width}
+                  height={height}
+                  alt="output"
+                />
+                
               
-              <ImageSlider images={storyPrediction.output.individual_images} />
-              
-             
+              </div>
+           
             )}
+            {storyPrediction?.output && (
+              storyPrediction.output.individual_images.map((image_src)=>(
+              <div >
+                <Image controls 
+                  //src={prediction.output[prediction.output.length - 1]}
+                  src={image_src}
+                  width={width}
+                  height={height}
+                  alt="output"
+                />
+                
+              </div>
+            ))
+            )}
+            
+          
           
           </div>
         </div>
