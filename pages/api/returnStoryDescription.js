@@ -16,15 +16,15 @@ const generateDescription = async ({
           {
             role: "system",
             content:
-              "You are a hiring manager for a company that is looking to hire a new employee. You need to write a job description for a job posting. The job description should be SEO friendly and should highlight the unique features and benefits of the job position.",
+              "You are a screen writer. You need to write scripts for a video production. ",
           },
           {
             role: "user",
             content: `Please create a fantasy story in ${numPanels} panels centered on ${
               idea
-            }. The character description are ${characters}. For each panel, provide a single sentence describing both the setting and the action in fewer than 15 words.
-              Ensure each scene clearly integrates the setting and action into a straightforward sentence using simple language. 
-            Each scene should have a distinct and clear setting. Try to begin each scene description with the character. One scene one row. Panel descriptor and summarization are unnecessary. Single line spacing.",
+            }. The character description are ${characters}. For each panel, try to start each scene with a character and provide a single sentence describing both the setting and the action in fewer than 15 words.
+            Each scene should clearly integrate the setting and action into a simple, straightforward sentence.
+            Each scene must have a distinct and clear setting. Write one sentence per scene, starting a new paragraph for each. There should be no line spacing, only return breaks, and no panel descriptors or summaries. ",
             `,
           },
         ],
