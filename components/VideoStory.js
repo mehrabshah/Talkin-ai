@@ -171,37 +171,68 @@ export default function Dashboard() {
 
       const image_url = image_data.secure_url;
 
-
-      var body = {
+      if (aspectRatio == "16:9") {
+        var body = {
         
-        num_ids: numIds,
+        num_ids: 3,
         ref_image: image_url,
         style_name: style,
         story_description: storyDescription,
         character_description: characters,
         aspect_ratio: aspectRatio,
-        video_width: width,
-        video_height: height,
+        video_width: 1280,
+        video_height: 720,
         
-      };
+      }; }
+      else {
+        var body = {
+        
+          num_ids: 3,
+          ref_image: image_url,
+          style_name: style,
+          story_description: storyDescription,
+          character_description: characters,
+          aspect_ratio: aspectRatio,
+          video_width: 608,
+          video_height: 1080,
+          
+        }; 
+
+      }
     } else {
     
 
     
     // post request to prediction api to create talking avatar
-    
-    var body = {
+    if (aspectRatio == "16:9") {
+      var body = {
 
-        num_ids: numIds,
+        num_ids: 3,
         style_name: style,
         story_description: storyDescription,
         character_description: characters,
         aspect_ratio: aspectRatio,
-        video_width: width,
-        video_height: height,
+        video_width: 1280,
+        video_height: 720,
 
       };
-    
+    } else {
+
+      var body = {
+
+        num_ids: 3,
+        style_name: style,
+        story_description: storyDescription,
+        character_description: characters,
+        aspect_ratio: aspectRatio,
+        video_width: 608,
+        video_height: 1080,
+
+      };
+
+
+
+    }
 
     }
 
@@ -419,28 +450,7 @@ export default function Dashboard() {
             <div>
            
 
-            <FormControl   sx={{ m: 1, minWidth: 200 }} >
-        <InputLabel id="demo-simple-select-required-label" >Number of Characters </InputLabel>
-        <Select
-          name="numIds"
-          label="Number of Characters"
-          onChange={(e) => setNumIds(e.target.value)}
-        >
-          <MenuItem value={1}>
-            <em>1</em>
-          </MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-          <MenuItem value={7}>7</MenuItem>
-        </Select>
-      
-        </FormControl>
-      
-     
-     
+            
       <FormControl sx={{ m: 1, minWidth: 150 }}>
         <InputLabel id="demo-simple-select-required-label">Image Style</InputLabel>
         <Select
@@ -477,45 +487,6 @@ export default function Dashboard() {
         </Select>
         </FormControl>  
 
-        <FormControl   sx={{ m: 1, minWidth: 120 }} >
-        <InputLabel id="demo-simple-select-required-label"  >Width</InputLabel>
-        <Select
-          name="width"
-          label="Width"
-          onChange={(e) => setWidth(e.target.value)}
-        >
-          <MenuItem value={1280}>
-            <em>1280</em>
-          </MenuItem>
-          <MenuItem value={608}>608</MenuItem>
-          <MenuItem value={720}>720</MenuItem>
-          <MenuItem value={1080}>1080</MenuItem>
-          <MenuItem value={1350}>1350</MenuItem>
-          <MenuItem value={1920}>1920</MenuItem>
-        </Select>
-       
-      </FormControl>
-      
-      <FormControl   sx={{ m: 1, minWidth: 120 }} >
-        <InputLabel id="demo-simple-select-required-label"  >Height</InputLabel>
-        <Select
-          name="height"
-          label="height"
-          onChange={(e) => setHeight(e.target.value)}
-        >
-          <MenuItem value={720}>
-            <em>720</em>
-          </MenuItem>
-          <MenuItem value={608}>608</MenuItem>
-          <MenuItem value={1080}>1080</MenuItem>
-          <MenuItem value={1280}>1280</MenuItem>
-          <MenuItem value={1350}>1350</MenuItem>
-          <MenuItem value={1920}>1920</MenuItem>
-        </Select>
-       
-      </FormControl>
-
-
     </div>
     </Box>
     </Container>
@@ -531,7 +502,7 @@ export default function Dashboard() {
               ) : (<button
                 className={`hero-button w-full text-white font-bold py-2 px-4 rounded`}
                 type="submit"
-                disabled={isGenerating || characters === "" || storyDescription === ""  || style === ""  || numIds === "" || aspectRatio === ""}
+                disabled={isGenerating || characters === "" || storyDescription === ""  || style === ""  || aspectRatio === ""}
               >
                 {isGenerating ? "Generating..." : "Generate Video Story"}
               </button>) 
