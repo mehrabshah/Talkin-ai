@@ -527,7 +527,7 @@ export default function Dashboard() {
               <div>
                 <Image controls 
                   //src={prediction.output[prediction.output.length - 1]}
-                  src={storyPrediction.output.final_image_story}
+                  src={storyPrediction.output.comic}
                   width={width}
                   height={height}
                   alt="output"
