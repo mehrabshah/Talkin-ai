@@ -18,7 +18,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import SubscriptionContext from "../context/SubscriptionContext";
-import ImageSlider from "./ImageSlider";
+
 
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
