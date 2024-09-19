@@ -19,6 +19,13 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import SubscriptionContext from "../context/SubscriptionContext";
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+//import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { VscCloudUpload } from "react-icons/vsc";
+
+
+
 
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -69,6 +76,18 @@ export default function Dashboard() {
   // updated code subscription check
 
   const [count, setCount] = useState(0);
+
+  const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
 
   const {
     subscriptionData,
@@ -311,16 +330,27 @@ export default function Dashboard() {
             <div className="flex flex-col ">
               <label className="px-2 py-1 text-sm text-white" htmlFor="image">
                 Reference Image (Optional) {"   "}{"    "}
-                <span className="text-sm text-red-500">(jpg/jpeg, Max 1MB) </span>
+                <span className="text-sm text-red-500">(jpg/jpeg) </span>
                 <span className="text-sm text-red-400">*</span>
               </label>
-              <input
-                type="file"
-                className="upload-button w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-white-500 my-2 text-white-900"
-                name="image"
-                placeholder="Select Picture"
-                onChange={handleImageChange}
-              />
+              <Button
+      component="label"
+      name="image"
+      role={undefined}
+      variant="contained"
+      tabIndex={-1}
+      startIcon={<VscCloudUpload />}
+    >
+      Upload files
+      <VisuallyHiddenInput
+        type="file"
+        onChange={handleImageChange}
+        multiple
+      />
+    </Button>
+              
+              
+              
               <img src={imageSrc} className="basis-1/2 h-auto w-48 my-5" accept="image/*" />
             </div>
             <div className="flex flex-col">
@@ -381,8 +411,7 @@ export default function Dashboard() {
                             {"Number of  Panels"} 
                         </p>
                     </div>  
-             
-
+            
               <select
                 value={numPanels}
                 onChange={(e) => setNumPanels(e.target.value)}
