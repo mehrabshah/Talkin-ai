@@ -369,7 +369,7 @@ export default function Dashboard() {
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
                 rows={3}
                 name="characters"
-                placeholder="Characters"
+                placeholder="Bella, a girl with a slender frame, long auburn hair, and piercing green eyes"
                 id="characters"
                 value={characters}
                 onChange={(e) => setCharacters(e.target.value)}
@@ -430,7 +430,7 @@ export default function Dashboard() {
             </div>
             
             <button
-              className="bg-[#5BBCFF] w-full hover:bg-blue-700 text-white font-bold mt-6 py-2 px-4 rounded"
+              className="hero-button min-h-[40px] shadow-sm sm: w-[250px] py-2 inline-flex justify-center font-medium items-center px-4 text-gray-100 sm:rounded-md"
               onClick={handleSubmit}
               type="submit"
               disabled={isGenerating || characters === "" || idea === "" || numPanels === ""}
