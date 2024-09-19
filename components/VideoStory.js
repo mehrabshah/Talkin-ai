@@ -322,38 +322,7 @@ export default function Dashboard() {
           
             <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">Available generation : {count || 0}</h1>
             
-            <div className="flex flex-col ">
-            <label className="px-2 py-1 text-sm text-white">
-        Use Ref Image: <input type="checkbox" name="isRefImage" defaultChecked={false} color="success" />
-      </label>
-      </div>
-            <div className="flex flex-col ">
-              <label className="px-2 py-1 text-sm text-white" htmlFor="image">
-                Reference Image (Optional) {"   "}{"    "}
-                <span className="text-sm text-red-500">(jpg/jpeg) </span>
-                <span className="text-sm text-red-400">*</span>
-              </label>
-              <Button
-              className="hero-button min-h-[40px] shadow-sm sm: w-[250px] py-2 inline-flex justify-center font-medium items-center px-4 text-gray-100 sm:rounded-md"
-      component="label"
-      role={undefined}
-      variant="contained"
-      tabIndex={-1}
-      startIcon={<VscCloudUpload />}
-    >
-      Upload files
-      <VisuallyHiddenInput
-        type="file"
-        name="image"
-        onChange={handleImageChange}
-        multiple
-      />
-    </Button>
-              
-              
-                   
-              <img src={imageSrc} className="basis-1/2 h-auto w-48 my-5" accept="image/*" />
-            </div>
+            
             <div className="flex flex-col">
               <div className="flex mt-10 items-center space-x-3">
                          <div
@@ -468,20 +437,70 @@ export default function Dashboard() {
              className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
            />
            </div>
-            
            
-            
+           
+           <div className="flex flex-col ">
+           <div className="flex mt-10 items-center space-x-3">
+                         <div
+            style={{ backgroundColor: '#5BBCFF'}}
+            className="rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-sm">
+            {5}
+        </div>
+                        <p className="text-left font-medium flex align-center">
+                            {"Reference Image (Optional)"} 
+                        </p>
+                    </div>  
+
+
+            <label className="px-2 py-1 text-sm text-white">
+        Use Ref Image: <input type="checkbox" name="isRefImage" defaultChecked={false} color="success" />
+      </label>
+      </div>
+            <div className="flex flex-col ">
+              <label className="px-2 py-1 text-sm text-white" htmlFor="image">
+                Reference Image (Optional) {"   "}{"    "}
+                <span className="text-sm text-red-500">(jpg/jpeg) </span>
+                <span className="text-sm text-red-400">*</span>
+              </label>
+              <Button
+              className="hero-button min-h-[40px] shadow-sm sm: w-[250px] py-2 inline-flex justify-center font-medium items-center px-4 text-gray-100 sm:rounded-md"
+      component="label"
+      role={undefined}
+      variant="contained"
+      tabIndex={-1}
+      startIcon={<VscCloudUpload />}
+    >
+      Upload files
+      <VisuallyHiddenInput
+        type="file"
+        name="image"
+        onChange={handleImageChange}
+        multiple
+      />
+    </Button>
+              
+              
+                   
+              <img src={imageSrc} className="basis-1/2 h-auto w-48 my-5" accept="image/*" />
+            </div>
         
 
-            <Container  className="mx-3 py-2">
-        <Box sx={{ bgcolor: '#fffcf2', height: 'flex', borderRadius: 1, }} >
-      
-
+            
+           
             <div>
            
 
-            
-      <FormControl sx={{ m: 1, minWidth: 150 }}>
+            <div className="flex mt-10 items-center space-x-3">
+                         <div
+            style={{ backgroundColor: '#5BBCFF'}}
+            className="rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-sm">
+            {6}
+        </div>
+                        <p className="text-left font-medium flex align-center">
+                            {"Options"} 
+                        </p>
+                    </div>       
+      <FormControl sx={{ m: 1, minWidth: 150, bgcolor: '#5BBCFF', borderRadius: 1 }}>
         <InputLabel id="demo-simple-select-required-label">Image Style</InputLabel>
         <Select
           name="style"
@@ -503,7 +522,7 @@ export default function Dashboard() {
         </Select>
         </FormControl>
 
-        <FormControl sx={{ m: 1, minWidth: 150 }}>
+        <FormControl sx={{ m: 1, minWidth: 150, bgcolor: '#5BBCFF', borderRadius: 1, }}>
         <InputLabel id="demo-simple-select-required-label">Aspect Ratio</InputLabel>
         <Select
           name="aspectRatio"
@@ -518,8 +537,7 @@ export default function Dashboard() {
         </FormControl>  
 
     </div>
-    </Box>
-    </Container>
+   
 
             {count == 0?
               
@@ -539,6 +557,7 @@ export default function Dashboard() {
             }
           </form>
         </div>
+       
 
         <div className="">
           <div className="flex flex-col">
