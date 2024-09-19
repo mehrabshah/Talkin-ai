@@ -335,7 +335,6 @@ export default function Dashboard() {
               </label>
               <Button
       component="label"
-      name="image"
       role={undefined}
       variant="contained"
       tabIndex={-1}
@@ -344,13 +343,14 @@ export default function Dashboard() {
       Upload files
       <VisuallyHiddenInput
         type="file"
+        name="image"
         onChange={handleImageChange}
         multiple
       />
     </Button>
               
               
-              
+                   
               <img src={imageSrc} className="basis-1/2 h-auto w-48 my-5" accept="image/*" />
             </div>
             <div className="flex flex-col">
@@ -461,7 +461,7 @@ export default function Dashboard() {
              name="output"
              value={storyDescription}
              onChange={(e) => setStoryDescription(e.target.value)}
-             disabled={storyDescription === ""}
+             //disabled={storyDescription === ""}
              id="output"
              placeholder="AI Generated Story Description"
              className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
