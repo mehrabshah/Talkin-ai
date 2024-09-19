@@ -242,7 +242,7 @@ const SubscriptionManagement = ({ subscriptionId, updateSubscriptionPlan, curren
             const confirm = window.confirm('Are you sure you want to change your plan?');
             if (confirm){
                 //updateSubscriptionPlan(subscriptionId, selectedPlan)
-                const updateRes = await updateSubscriptionPlan(subscriptionId, selectedPlan)
+                const updateRes = await updateSubscriptionPlan(subscriptionId, selectedPlan,true);
 
                 console.log(updateRes);
                 if(updateRes){
