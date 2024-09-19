@@ -334,6 +334,7 @@ export default function Dashboard() {
                 <span className="text-sm text-red-400">*</span>
               </label>
               <Button
+              className="hero-button min-h-[40px] shadow-sm sm: w-[250px] py-2 inline-flex justify-center font-medium items-center px-4 text-gray-100 sm:rounded-md"
       component="label"
       role={undefined}
       variant="contained"
