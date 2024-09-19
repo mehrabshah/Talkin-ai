@@ -113,93 +113,116 @@ async function cancelSubscription(subscriptionId) {
     }
 }
 
-async function updateSubscriptionPlan(subscriptionId, newPriceId) {
+async function updateSubscriptionPlan(subscriptionId, newPriceId, isUpgrade) {
     try {
         // Retrieve the current subscription
         const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+        const currentPrice = subscription.items.data[0].price.id;
+        const currentItemId = subscription.items.data[0].id;
 
-        // Update the subscription with the new price ID
-        const updatedSubscription = await stripe.subscriptions.update(subscriptionId, {
-            items: [{
-                id: subscription.items.data[0].id,
-                price: newPriceId,
-            }],
-        });
+        // If this is an upgrade, charge immediately
+        if (isUpgrade) {
+            // Cancel the current subscription immediately and apply the new plan
+            const updatedSubscription = await stripe.subscriptions.update(subscriptionId, {
+                cancel_at_period_end: false, // Cancel the current plan immediately
+                items: [{
+                    id: currentItemId,
+                    price: newPriceId,
+                }],
+                proration_behavior: 'create_prorations', // Charge the user immediately for the upgrade
+                billing_cycle_anchor: 'now', // Reset the billing cycle to start immediately
+            });
 
-        const customerId = updatedSubscription.customer;
-        const billingInterval = updatedSubscription.items.data[0].price.recurring.interval;
+            // Metadata update and billing interval calculation
+            const billingInterval = updatedSubscription.items.data[0].price.recurring.interval;
+            let updatedMetadata = {
+                storyBoardCount: '10',
+                text2Video: '0',
+                isSubscribed: 'true',
+                activePlan: 'free',
+                subscriptionId: subscriptionId,
+            };
 
-        // Default metadata structure
-        let updatedMetadata = {
-            storyBoardCount: '10',
-            text2Video: '0',
-            isSubscribed: 'true',
-            activePlan: 'free',
-            subscriptionId: subscriptionId,
-        };
+            // Switch case based on the new price ID
+            switch (newPriceId) {
+                case process.env.NEXT_PUBLIC_Y_LITE:
+                case process.env.NEXT_PUBLIC_M_LITE:
+                    updatedMetadata = {
+                        ...updatedMetadata,
+                        storyBoardCount: '30',
+                        activePlan: `Lite ${billingInterval}`,
+                    };
+                    break;
+                case process.env.NEXT_PUBLIC_Y_STANDARD:
+                case process.env.NEXT_PUBLIC_M_STANDARD:
+                    updatedMetadata = {
+                        ...updatedMetadata,
+                        storyBoardCount: '100',
+                        text2Video: '10',
+                        activePlan: `Standard ${billingInterval}`,
+                    };
+                    break;
+                case process.env.NEXT_PUBLIC_Y_PLUS:
+                case process.env.NEXT_PUBLIC_M_PLUS:
+                    updatedMetadata = {
+                        ...updatedMetadata,
+                        storyBoardCount: '250',
+                        text2Video: '10',
+                        activePlan: `Plus ${billingInterval}`,
+                    };
+                    break;
+                case process.env.NEXT_PUBLIC_Y_PRO:
+                case process.env.NEXT_PUBLIC_M_PRO:
+                    updatedMetadata = {
+                        ...updatedMetadata,
+                        storyBoardCount: '400',
+                        text2Video: '20',
+                        activePlan: `Pro ${billingInterval}`,
+                    };
+                    break;
+                case process.env.NEXT_PUBLIC_Y_PREMIER:
+                case process.env.NEXT_PUBLIC_M_PREMIER:
+                    updatedMetadata = {
+                        ...updatedMetadata,
+                        storyBoardCount: '1500',
+                        text2Video: '50',
+                        activePlan: `Premier ${billingInterval}`,
+                    };
+                    break;
+                default:
+                    break;
+            }
 
-        // Switch case based on the new price ID
-        switch (newPriceId) {
-            case process.env.NEXT_PUBLIC_Y_LITE:
-            case process.env.NEXT_PUBLIC_M_LITE:
-                updatedMetadata = {
-                    ...updatedMetadata,
-                    storyBoardCount: '30',
-                    activePlan: `Lite ${billingInterval}`,
-                };
-                break;
-            case process.env.NEXT_PUBLIC_Y_STANDARD:
-            case process.env.NEXT_PUBLIC_M_STANDARD:
-                updatedMetadata = {
-                    ...updatedMetadata,
-                    storyBoardCount: '100',
-                    text2Video: '10',
-                    activePlan: `Standard ${billingInterval}`,
-                };
-                break;
-            case process.env.NEXT_PUBLIC_Y_PLUS:
-            case process.env.NEXT_PUBLIC_M_PLUS:
-                updatedMetadata = {
-                    ...updatedMetadata,
-                    storyBoardCount: '250',
-                    text2Video: '10',
-                    activePlan: `Plus ${billingInterval}`,
-                };
-                break;
-            case process.env.NEXT_PUBLIC_Y_PRO:
-            case process.env.NEXT_PUBLIC_M_PRO:
-                updatedMetadata = {
-                    ...updatedMetadata,
-                    storyBoardCount: '400',
-                    text2Video: '20',
-                    activePlan: `Pro ${billingInterval}`,
-                };
-                break;
-            case process.env.NEXT_PUBLIC_Y_PREMIER:
-            case process.env.NEXT_PUBLIC_M_PREMIER:
-                updatedMetadata = {
-                    ...updatedMetadata,
-                    storyBoardCount: '1500',
-                    text2Video: '50',
-                    activePlan: `Premier ${billingInterval}`,
-                };
-                break;
-            default:
-                // If the price ID does not match any known packages, do not change the metadata
-                break;
+            // Update the customer's metadata in Stripe
+            await stripe.customers.update(updatedSubscription.customer, {
+                metadata: updatedMetadata,
+            });
+
+            console.log('Subscription upgraded and metadata updated successfully!');
+            return { message: 'Subscription upgraded and charged immediately!' };
+
+        } else {
+            // For downgrades, apply at the end of the billing cycle
+            const updatedSubscription = await stripe.subscriptions.update(subscriptionId, {
+                cancel_at_period_end: false,
+                items: [{
+                    id: currentItemId,
+                    price: newPriceId,
+                }],
+                proration_behavior: 'none', // No immediate charge; plan starts at the next billing cycle
+                billing_cycle_anchor: 'unchanged', // Keep the current cycle intact
+            });
+
+            console.log('Subscription downgrade scheduled at the end of the cycle');
+            return { message: 'Subscription downgrade scheduled successfully!' };
         }
-
-        // Update the customer's metadata in Stripe
-        await stripe.customers.update(customerId, {
-            metadata: updatedMetadata,
-        });
-        return {message:'success'}
-
-        console.log('Subscription and metadata updated successfully!');
     } catch (error) {
         console.error('Error updating subscription:', error);
+        return { message: 'Failed to update subscription', error: error.message };
     }
 }
+
+
 
 
 const MyProvider = ({ children }) => {
