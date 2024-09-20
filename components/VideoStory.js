@@ -23,7 +23,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 //import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { VscCloudUpload } from "react-icons/vsc";
-
+import { VideoStorySlider } from "./sliders/VideoStorySlider";
 
 
 
@@ -581,23 +581,15 @@ export default function Dashboard() {
                 
               
               </div>
+            )}
+<VideoStorySlider
+gallery={storyPrediction?.output?.individual_videos}
+width={width}
+height={height}
+setStoryPrediction={setStoryPrediction}
+/>
            
-            )}
-            {storyPrediction?.output && (
-              storyPrediction.output.individual_videos.map((video_src)=>(
-              <div >
-                <video controls muted autoPlay
-                  //src={prediction.output[prediction.output.length - 1]}
-                  src={video_src}
-                  width={width}
-                  height={height}
-                  alt="output"
-                />
-                
-              </div>
-            ))
-            )}
-
+            
            
           </div>
         </div>
