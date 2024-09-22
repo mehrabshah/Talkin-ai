@@ -1,7 +1,7 @@
 /* Google Font */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("slick-carousel/slick/slick.css");
-@import url("slick-carousel/slick/slick-theme.css");
+@import url("slick-carousel/slick/slick-theme.css"); 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,6 +17,10 @@ body {
   align-items: center;
 }
 
+* {
+  min-height: 0;
+  min-width: 0;
+}
 a {
   color: inherent;
   text-decoration: none;
@@ -544,6 +548,9 @@ a {
 
   .app_navbar-logo img {
     width: 100px;
+  }
+  .video_slider_tabs .css-heg063-MuiTabs-flexContainer {
+    overflow-x: auto;
   }
 }
 
