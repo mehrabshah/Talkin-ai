@@ -77,17 +77,6 @@ export default function Dashboard() {
 
   const [count, setCount] = useState(0);
 
-  const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-  });
 
   const {
     subscriptionData,
@@ -183,7 +172,7 @@ export default function Dashboard() {
 
       image_formData.append('upload_preset', 'app_users');
 
-      const image_data = await fetch("https://api.cloudinary.com/v1_1/dvdxxna6v/image/upload", {
+      const image_data = await fetch( 'https://api.cloudinary.com/v1_1/dvdxxna6v/image/upload', {
       method: 'POST',
       body: image_formData
       }).then(r => r.json());
@@ -462,23 +451,15 @@ export default function Dashboard() {
                 <span className="text-sm text-red-500">(jpg/jpeg) </span>
                 <span className="text-sm text-red-400">*</span>
               </label>
-              <Button
-              className="hero-button min-h-[40px] shadow-sm sm: w-[250px] py-2 inline-flex justify-center font-medium items-center px-4 text-gray-100 sm:rounded-md"
-      component="label"
-      role={undefined}
-      variant="contained"
-      tabIndex={-1}
-      startIcon={<VscCloudUpload />}
-    >
-      Upload files
-      <VisuallyHiddenInput
-        type="file"
-        name="image"
-        onChange={handleImageChange}
-        multiple
-      />
-    </Button>
-              
+              <input
+                type="file"
+                className="hero-button flex rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-white-500 my-2 text-white-900"
+                name="image"
+                placeholder="Select Picture"
+                onChange={handleImageChange}
+              />
+
+             
               
                    
               <img src={imageSrc} className="basis-1/2 h-auto w-48 my-5" accept="image/*" />
@@ -548,7 +529,7 @@ export default function Dashboard() {
                   >Buy a Plan</button>
                 </Link>
               ) : (<button
-                className={`hero-button w-full text-white font-bold py-2 px-4 rounded`}
+                className={`hero-button flex w-full text-white font-bold py-2 px-4 rounded`}
                 type="submit"
                 disabled={isGenerating || characters === "" || storyDescription === ""  || style === ""  || aspectRatio === ""}
               >
@@ -570,23 +551,20 @@ export default function Dashboard() {
             
 
             {storyPrediction?.output && (
-              <div>
+              
                 <video controls muted autoPlay
-                  //src={prediction.output[prediction.output.length - 1]}
                   src={storyPrediction.output.final_video_story}
                   width={width}
                   height={height}
                   alt="output"
                 />
-                
-              
-              </div>
+          
             )}
 <VideoStorySlider
 gallery={storyPrediction?.output?.individual_videos}
+setStoryPrediction={setStoryPrediction}
 width={width}
 height={height}
-setStoryPrediction={setStoryPrediction}
 />
            
             
