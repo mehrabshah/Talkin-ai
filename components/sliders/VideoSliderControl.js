@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import Menu from "@mui/material/Menu";
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoMdMic, IoMdSettings } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { VideoSliderDialog } from "../Dialog/VideoSliderDialog";
@@ -35,7 +35,7 @@ export const VideoSliderControl = ({ setStoryPrediction, index }) => {
   }
   return (
     <>
-      <div className="bg-white rounded-md shadow-md p-3 w-full">
+      <div className="bg-white rounded-md shadow-md md:p-3 p-1.5 w-full">
         <div className="flex items-center justify-end">
           <div className="flex items-center gap-0 relative">
             <>

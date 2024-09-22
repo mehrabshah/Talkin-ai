@@ -1,6 +1,6 @@
 import { Box, Dialog, DialogContent, Tabs, TextField } from "@mui/material";
 import Tab from "@mui/material/Tab";
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoPlayCircleOutline } from "react-icons/io5";
 import { Voices } from "../../data/videovoices";
 
@@ -15,7 +15,7 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
     </div>
   );
 }
@@ -36,8 +36,12 @@ export const VideoSliderDialog = ({ open, handleClose }) => {
       maxWidth="md"
       fullWidth={true}
     >
-      <DialogContent>
-        <Tabs value={openTab} onChange={(event, value) => setOpenTab(value)}>
+      <DialogContent className="md:p-3 p-1">
+        <Tabs
+          value={openTab}
+          onChange={(event, value) => setOpenTab(value)}
+          className="video_slider_tabs"
+        >
           <Tab label="Background Music" {...a11yProps(0)} />
           <Tab label="Voiceover" {...a11yProps(1)} />
           <Tab label="My uploads" {...a11yProps(2)} />
@@ -51,10 +55,9 @@ export const VideoSliderDialog = ({ open, handleClose }) => {
             id="standard-basic"
             label="Search Voices"
             variant="standard"
-            // className="w-full"
             fullWidth
           />
-          <div className="flex items-center justify-between my-3">
+          <div className="flex items-center md:justify-between my-3 flex-wrap gap-3">
             <select className="active:outline-none ">
               <option value="english">English</option>
             </select>

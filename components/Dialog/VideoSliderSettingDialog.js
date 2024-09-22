@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -11,13 +11,7 @@ export const VideoSliderSettingDialog = ({ open, handleClose }) => {
   const [numInferenceSteps, setNumInferenceSteps] = useState(9);
 
   return (
-    <Dialog
-      onClose={handleClose}
-      aria-labelledby="customized-dialog-title"
-      open={open}
-      maxWidth="md"
-      fullWidth={true}
-    >
+    <Dialog onClose={handleClose} open={open} maxWidth="md" fullWidth={true}>
       <DialogTitle>Setting</DialogTitle>
       <DialogContent>
         <Container className="mx-3 py-2" maxwidth="lg">
