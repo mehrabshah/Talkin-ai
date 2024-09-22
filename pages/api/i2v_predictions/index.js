@@ -1,3 +1,5 @@
+// API for Image2Video Prediction
+
 export default async function handler(req, res) {
   const response = await fetch("https://api.replicate.com/v1/predictions", {
     method: "POST",
@@ -8,8 +10,8 @@ export default async function handler(req, res) {
     body: JSON.stringify({
       // Pinned to a specific version of Stable Diffusion
       // See https://replicate.com/talkin-ai/bot/versions
-      //version: "aadac43580241cae38535a3e28c203e51e00f8c59ed6f5fbf23e7731db160a40",
-      version: "23a63ec05d0a8bf905d08bbc1a17d09f6c9d21a971e5322612ad22aafaa692cf",
+      //version: "23a63ec05d0a8bf905d08bbc1a17d09f6c9d21a971e5322612ad22aafaa692cf",
+      version: "a39ae0af80b87b2bf21b40450b3ae6b7a65c59a12b470ab42d7488d4f9b23a90",
       // This is the text prompt that will be submitted by a form on the frontend
       input: req.body,
     }),

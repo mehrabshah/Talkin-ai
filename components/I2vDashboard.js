@@ -13,6 +13,14 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import SubscriptionContext from "../context/SubscriptionContext";
 import { toast, ToastContainer } from 'react-toastify';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+//import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { VscCloudUpload } from "react-icons/vsc";
 
 
 
@@ -54,6 +62,7 @@ export default function Dashboard() {
   const [motion, setMotion] = useState(80);
   const [seed, setSeed] = useState("");
   const [numInferenceSteps, setNumInferenceSteps] = useState(9);
+  const [aspectRatio, setAspectRatio] = useState("");
 
   
 
@@ -72,6 +81,7 @@ export default function Dashboard() {
   
   // updated code subscription check
   const [count,setCount]=useState(0);
+
   const {
     subscriptionData,
     decreaseStoryBoardAndImage2VideoCount
@@ -140,6 +150,7 @@ export default function Dashboard() {
 
     image_formData.append('upload_preset', 'app_users');
 
+    
     const image_data = await fetch("https://api.cloudinary.com/v1_1/dvdxxna6v/image/upload", {
       method: 'POST',
       body: image_formData
@@ -155,8 +166,9 @@ export default function Dashboard() {
    // }
   //})
 
-    // post request to prediction api to create talking avatar
-    const video_body = {
+    // post request to i2v_prediction api for image to video
+    if (aspectRatio == "16:9") {
+      var video_body = {
       image_in: image_url,
       seed: 42,
       motion: motion,
@@ -164,7 +176,17 @@ export default function Dashboard() {
       width: 1024,
       height: 576,
       num_inference_steps: numInferenceSteps,
-    };
+    };}
+    else {
+      var video_body = {
+      image_in: image_url,
+      seed: 42,
+      motion: motion,
+      fps: fps,
+      width: 576,
+      height: 1024,
+      num_inference_steps: numInferenceSteps,
+    };}
 
     const video_response = await fetch("/api/i2v_predictions", {
       method: "POST",
@@ -235,13 +257,28 @@ export default function Dashboard() {
               </label>
               <input
                 type="file"
-                className="upload-button w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-white-500 my-2 text-white-900"
+                className="hero-button flex rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-white-500 my-2 text-white-900"
                 name="image"
                 placeholder="Select Picture"
                 onChange={handleImageChange}
               />
+
               <img src={imageSrc} className="basis-1/2 h-auto w-48 my-5" accept="image/*" />
             </div>
+
+            <FormControl sx={{ m: 1, minWidth: 150, bgcolor: '#5BBCFF', borderRadius: 1, }}>
+        <InputLabel id="demo-simple-select-required-label">Aspect Ratio</InputLabel>
+        <Select
+          name="aspectRatio"
+          label="Aspect Ratio"
+          onChange={(e) => setAspectRatio(e.target.value)}
+        >
+          <MenuItem value="16:9">
+            <em>16:9</em>
+          </MenuItem>
+          <MenuItem value="9:16">9:16</MenuItem>
+        </Select>
+        </FormControl>  
 
             <Container className="mx-3 py-2" maxwidth="lg">
         <Box sx={{ bgcolor: '#fffcf2', height: 'flex', borderRadius: 1, }} >
