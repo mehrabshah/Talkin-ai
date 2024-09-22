@@ -140,7 +140,7 @@ export default function Dashboard() {
 
     image_formData.append('upload_preset', 'app_users');
 
-    const image_data = await fetch('https://api.cloudinary.com/v1_1/dbospsdwo/image/upload', {
+    const image_data = await fetch("https://api.cloudinary.com/v1_1/dvdxxna6v/image/upload", {
       method: 'POST',
       body: image_formData
     }).then(r => r.json());

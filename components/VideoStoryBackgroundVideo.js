@@ -8,7 +8,8 @@ import BackgroundVideo from './BackgroundVideo/BackgroundVideo';
 function VideoStoryBackgroundVideo() {
   //const videoSource = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
   //const videoSource = "https://res.cloudinary.com/dbospsdwo/video/upload/v1724030216/little_prince_and_the_rose_phpw5k.mp4"
-  const videoSource = "https://res.cloudinary.com/dbospsdwo/video/upload/v1724069617/HarryPotter_Demo_g9rpin.mp4"
+  //const videoSource = "https://res.cloudinary.com/dbospsdwo/video/upload/v1724069617/HarryPotter_Demo_g9rpin.mp4"
+  const videoSource = "https://res.cloudinary.com/dvdxxna6v/video/upload/v1726973365/little_prince_video_pd8p1o.mp4";
   //const videoSource ="https://res.cloudinary.com/dbospsdwo/video/upload/v1724068251/merida_light_stqswy.mp4"
   const scrollToBottom = () => {
     const bottomEle = document.querySelector("#video-bottom");
