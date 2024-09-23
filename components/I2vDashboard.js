@@ -167,26 +167,14 @@ export default function Dashboard() {
   //})
 
     // post request to i2v_prediction api for image to video
-    if (aspectRatio == "16:9") {
-      var video_body = {
+    var video_body = {
       image_in: image_url,
       seed: 42,
+      aspect_ratio: aspectRatio,
       motion: motion,
       fps: fps,
-      width: 1024,
-      height: 576,
       num_inference_steps: numInferenceSteps,
-    };}
-    else {
-      var video_body = {
-      image_in: image_url,
-      seed: 42,
-      motion: motion,
-      fps: fps,
-      width: 576,
-      height: 1024,
-      num_inference_steps: numInferenceSteps,
-    };}
+    }
 
     const video_response = await fetch("/api/i2v_predictions", {
       method: "POST",
