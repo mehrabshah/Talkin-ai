@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Slider from "react-slick";
 import { VideoSliderControl } from "./VideoSliderControl";
 
@@ -7,16 +6,22 @@ export const VideoStorySlider = ({
   width,
   height,
   setStoryPrediction,
+  galleryImages,
+  setNumInferenceSteps,
+  setFps,
+  setMotion,
+  handleRegenerateVideo,
+  setImageUrl,
+  activeSlide,
+  setActiveSlide,
 }) => {
-  const [activeSlide, setActiveSlide] = useState(0);
   const settings = {
     customPaging: function (i) {
       return (
-        <a className="md:h-10 h-5 aspect-video block">
-          <video
-            muted
-            src={gallery[i]}
-            className="w-full aspect-video object-cover"
+        <a className="md:h-10 h-5 aspect-square block">
+          <img
+            src={galleryImages[i]}
+            className="w-full h-full object-cover"
             alt="output"
           />
         </a>
@@ -32,19 +37,17 @@ export const VideoStorySlider = ({
     swipeToSlide: false,
     beforeChange: (current, next) => {
       setActiveSlide(next);
+      setImageUrl(galleryImages[next]);
     },
   };
-  console.log({ activeSlide });
+
   return (
     <>
       {gallery && gallery?.length != 0 && (
         <div className="slider-container  mt-5 max-w-full pb-20 video-slider-container min-h-0 min-w-0">
           <Slider {...settings}>
             {gallery?.map((video_src, index) => (
-              <div
-                key={"slider_item" + index}
-                // className="!flex flex-col gap-2 items-center justify-center"
-              >
+              <div key={"slider_item" + index}>
                 <video
                   muted
                   autoPlay
@@ -55,19 +58,16 @@ export const VideoStorySlider = ({
                   width={width}
                   height={height}
                 />
-                {/* <div
-                  onMouseDown={(e) => e.stopPropagation()}
-                  onTouchMove={(e) => e.stopPropagation()}
-                  className="w-full"
-                >
-
-                </div> */}
               </div>
             ))}
           </Slider>
           <VideoSliderControl
             setStoryPrediction={setStoryPrediction}
             index={activeSlide}
+            setMotion={setMotion}
+            setFps={setFps}
+            setNumInferenceSteps={setNumInferenceSteps}
+            handleRegenerateVideo={handleRegenerateVideo}
           />
         </div>
       )}
