@@ -2,38 +2,37 @@ import {
   Button,
   FormControl,
   FormControlLabel,
+  IconButton,
   Radio,
   RadioGroup,
 } from "@mui/material";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-export const StoryIdea = ({
-  idea,
-  setIdea,
-  setActiveStep,
-  numPanels,
-  setNumPanels,
-  handleSubmit,
-}) => {
+export const StoryIdea = ({ setActiveStep, formik, isGenerating }) => {
   return (
     <>
       <h2 className="font-semibold mb-4">Story Idea</h2>
       <input
-        value={idea}
-        onChange={(e) => setIdea(e.target.value)}
+        {...formik?.getFieldProps("idea")}
         className="block w-full rounded-md bg-transparent border border-gray-400 shadow-sm focus:outline-none   sm:text-sm px-4 py-3.5 placeholder-gray-500 my-2 text-white"
         placeholder="Idea"
         type="text"
         name="idea"
         id="idea"
       />
+      {formik?.touched?.idea && formik?.errors?.idea && (
+        <span className="block text-sm text-red-500 font-light mt-2">
+          {formik?.errors?.idea}
+        </span>
+      )}
       <h2 className="font-semibold my-4">Number of Panels</h2>
-      <FormControl>
+      <FormControl className="w-full">
         <RadioGroup
           column
-          className="gap-3"
+          className="gap-3 w-full"
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
-          onChange={(e) => setNumPanels(e?.target?.value)}
+          {...formik.getFieldProps("numPanels")}
         >
           <FormControlLabel
             value="four"
@@ -73,21 +72,32 @@ export const StoryIdea = ({
           />
         </RadioGroup>
       </FormControl>
+      {formik?.touched?.numPanels && formik?.errors?.numPanels && (
+        <span className="block text-sm text-red-500 font-light mt-2">
+          {formik?.errors?.numPanels}
+        </span>
+      )}
       <div className="flex items-center gap-2 mt-4 justify-between">
-        <Button variant="outlined" onClick={() => setActiveStep(3)}>
+        <Button
+          variant="contained"
+          className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff]"
+          onClick={() => setActiveStep(3)}
+        >
           Back
         </Button>
-        <Button
-          variant="outlined"
-          onClick={(e) => {
-            handleSubmit(e);
-            setActiveStep(5);
-          }}
-          disabled={!idea?.length || !numPanels?.length}
-          className="disabled:bg-gray-600 disabled:!text-white"
-        >
-          Next
-        </Button>
+        {!isGenerating ? (
+          <Button
+            variant="contained"
+            onClick={formik?.handleSubmit}
+            className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff]"
+          >
+            Next
+          </Button>
+        ) : (
+          <IconButton className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff] text-white">
+            <AiOutlineLoading3Quarters className="text-white animate-spin" />
+          </IconButton>
+        )}
       </div>
     </>
   );

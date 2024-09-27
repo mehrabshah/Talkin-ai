@@ -2,7 +2,7 @@ export const ImageStyle = [
   {
     title: "No Style",
     image: "/assets/images/no_style.webp",
-    value: null,
+    value: "(No style)",
   },
   {
     title: "Japanese Anime",

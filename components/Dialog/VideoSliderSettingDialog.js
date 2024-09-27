@@ -77,7 +77,14 @@ export const VideoSliderSettingDialog = ({
         </Container>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleRegenerateVideo}>Regenerate</Button>
+        <Button
+          onClick={() => {
+            handleRegenerateVideo();
+            handleClose();
+          }}
+        >
+          Regenerate
+        </Button>
       </DialogActions>
     </Dialog>
   );

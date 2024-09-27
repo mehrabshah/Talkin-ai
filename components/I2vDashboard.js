@@ -28,37 +28,7 @@ export default function Dashboard() {
   const [error, setError] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [videoSrc, setVideoSrc] = useState();
-  const [videoPrediction, setVideoPrediction] = useState({
-    id: "ffd1cx7gysrgp0cj58e976tqr4",
-    model: "talkin-ai/i2v_story",
-    version: "c298663d763898c1f897f48a8537fe3fc4fa63b59a0cda69ec088acfc3ad68cd",
-    input: {
-      aspect_ratio: "16:9",
-      fps: 10,
-      image_in:
-        "https://res.cloudinary.com/dvdxxna6v/image/upload/v1727283390/twsdw0fmjq5rtona70wf.jpg",
-      motion: 80,
-      num_inference_steps: 9,
-      seed: 42,
-    },
-    logs: "converted after karras tensor([7.0000e+02, 3.7299e+02, 1.8675e+02, 8.6664e+01, 3.6584e+01, 1.3678e+01,\n        4.3526e+00, 1.1064e+00, 2.0120e-01, 0.0000e+00], device='cuda:0')\ndenoise currently\ntensor(372.9909, device='cuda:0')\n  0%|          | 0/9 [00:00<?, ?it/s]\ndenoise currently\ntensor(186.7495, device='cuda:0')\n 11%|█         | 1/9 [00:04<00:32,  4.09s/it]\ndenoise currently\ntensor(86.6642, device='cuda:0')\n 22%|██▏       | 2/9 [00:07<00:25,  3.63s/it]\ndenoise currently\ntensor(36.5844, device='cuda:0')\n 33%|███▎      | 3/9 [00:10<00:20,  3.37s/it]\ndenoise currently\ntensor(13.6784, device='cuda:0')\n 44%|████▍     | 4/9 [00:13<00:16,  3.25s/it]\ndenoise currently\ntensor(4.3526, device='cuda:0')\n 56%|█████▌    | 5/9 [00:16<00:13,  3.26s/it]\ndenoise currently\ntensor(1.1064, device='cuda:0')\n 67%|██████▋   | 6/9 [00:20<00:09,  3.27s/it]\ndenoise currently\ntensor(0.2012, device='cuda:0')\n 78%|███████▊  | 7/9 [00:23<00:06,  3.20s/it]\ndenoise currently\ntensor(0., device='cuda:0')\n 89%|████████▉ | 8/9 [00:26<00:03,  3.21s/it]\n100%|██████████| 9/9 [00:29<00:00,  3.16s/it]\n100%|██████████| 9/9 [00:29<00:00,  3.27s/it]\nConverting (0.00) ...\n",
-    output:
-      "https://replicate.delivery/pbxt/dgLffrSvO4t36klVT6aNVQTk7Nl87a3kJweZcc7d4VqZgeBOB/w77P5O6qYN6n3jQoEJCFpqRn.mp4",
-    data_removed: false,
-    error: null,
-    status: "succeeded",
-    created_at: "2024-09-25T16:56:32.758Z",
-    started_at: "2024-09-25T17:01:17.709740596Z",
-    completed_at: "2024-09-25T17:02:05.361774462Z",
-    urls: {
-      cancel:
-        "https://api.replicate.com/v1/predictions/ffd1cx7gysrgp0cj58e976tqr4/cancel",
-      get: "https://api.replicate.com/v1/predictions/ffd1cx7gysrgp0cj58e976tqr4",
-    },
-    metrics: {
-      predict_time: 47.652033887,
-    },
-  });
+  const [videoPrediction, setVideoPrediction] = useState(null);
 
   const [videoPublicId, setVideoPublicId] = useState();
   const [imageSrc, setImageSrc] = useState();
