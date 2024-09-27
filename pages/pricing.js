@@ -26,52 +26,52 @@ const pricingData = {
       priceId:false,
       storyBoardCount:10,
       text2Video:0,
-      features: ['10 StoryBoarder/Image2Video generations']
+      features: ['10 VideoStory/Image2Video generations']
     },
     {
       title: 'Lite',
-      price: '$95.90',
+      price: '$96',
       priceId: process.env.NEXT_PUBLIC_Y_LITE,
-      storyBoardCount: 30,
+      storyBoardCount: 10,
       text2Video: 0,
-      description: '$7.99/mo $95.90 billed yearly',
-      features: ['30 StoryBoarder/Image2Vide generations','High priority generations']
+      description: '$7.99/mo $96 billed yearly',
+      features: ['10 VideoStory/Image2Vide generations','High priority generations']
     },
     {
       title: 'Standard',
-      price: ' $287.90',
+      price: ' $288',
       priceId: process.env.NEXT_PUBLIC_Y_STANDARD,
-      storyBoardCount: 100,
+      storyBoardCount: 40,
       text2Video: 10,
-      description: ' $23.99/mo $287.90 billed yearly',
-      features: ['100 StoryBoarder/Image2Video generations', '10 Text2Video generations', 'High priority generations']
+      description: ' $23.99/mo $288 billed yearly',
+      features: ['40 VideoStory/Image2Video generations', '10 Text2Video generations', 'High priority generations']
     },
     {
       title: 'Plus',
-      price: ' $575.88',
+      price: ' $576',
       priceId: process.env.NEXT_PUBLIC_Y_PLUS,
-      storyBoardCount: 250,
-      text2Video: 10,
-      description: '$47.99/mo $575.88 billed yearly',
-      features: ['250 StoryBoarder/Image2Video generations', '10 Text2Video generations', 'High priority generations']
+      storyBoardCount: 100,
+      text2Video: 30,
+      description: '$47.99/mo $576 billed yearly',
+      features: ['100 VideoStory/Image2Video generations', '30 Text2Video generations', 'Highest priority generations']
     },
     {
       title: 'Pro',
-      price: ' $863.9',
+      price: ' $864',
       priceId: process.env.NEXT_PUBLIC_Y_PRO,
-      storyBoardCount: 400,
-      text2Video: 20,
-      description: '$71.99/mo $863.9 billed yearly',
-      features: ['400 StoryBoarder/Image2Video generations', '20 Text2Video generations', 'High priority generations']
+      storyBoardCount: 200,
+      text2Video: 50,
+      description: '$71.99/mo $864 billed yearly',
+      features: ['200 VideoStory/Image2Video generations', '50 Text2Video generations', 'Highest priority generations']
     },
     {
       title: 'Premier',
-      price: ' $2879.90',
+      price: ' $2878',
       priceId: process.env.NEXT_PUBLIC_Y_PREMIER,
-      storyBoardCount: 1500,
-      text2Video: 50,
-      description: '$239.99/mo $2879.90 billed yearly',
-      features: ['1500 StoryBoarder/Image2Video generations', '50 Text2Video generations', 'High priority generations']
+      storyBoardCount: 700,
+      text2Video: 150,
+      description: '$239.99/mo $2878 billed yearly',
+      features: ['700 VideoStory/Image2Video generations', '150 Text2Video generations', 'Highest priority generations']
     },
   ],
   monthly: [
@@ -82,52 +82,52 @@ const pricingData = {
       description: '',
       storyBoardCount: 10,
       text2Video: 0,
-      features: ['10 StoryBoarder/Image2Video generations']
+      features: ['10 VideoStory/Image2Video generations']
     },
     {
       title: 'Lite',
       price: '$9.99',
       priceId: process.env.NEXT_PUBLIC_M_LITE,
       description: 'Per month',
-      storyBoardCount: 30,
+      storyBoardCount: 10,
       text2Video: 0,
-      features: ['30 StoryBoarder/Image2Vide generations','High priority generations']
+      features: ['10 VideoStory/Image2Vide generations','High priority generations']
     },
     {
       title: 'Standard',
       price: '$29.99',
       priceId: process.env.NEXT_PUBLIC_M_STANDARD,
       description: 'Per month',
-      storyBoardCount: 100,
+      storyBoardCount: 40,
       text2Video: 10,
-      features: ['100 StoryBoarder/Image2Video generations', '10 Text2Video generations', 'High priority generations']
+      features: ['40 VideoStory/Image2Video generations', '10 Text2Video generations', 'High priority generations']
     },
     {
       title: 'Plus',
       price: ' $59.99',
       priceId: process.env.NEXT_PUBLIC_M_PLUS,
       description: 'Per month',
-      storyBoardCount: 250,
-      text2Video: 10,
-      features: ['250 StoryBoarder/Image2Video generations', '10 Text2Video generations', 'High priority generations']
+      storyBoardCount: 100,
+      text2Video: 30,
+      features: ['100 VideoStory/Image2Video generations', '30 Text2Video generations', 'Highest priority generations']
     },
     {
       title: 'Pro',
       price: ' $89.99',
       priceId: process.env.NEXT_PUBLIC_M_PRO,
       description: 'Per month',
-      storyBoardCount: 400,
-      text2Video: 20,
-      features: ['400 StoryBoarder/Image2Video generations', '20 Text2Video generations', 'High priority generations']
+      storyBoardCount: 200,
+      text2Video: 50,
+      features: ['200 VideoStory/Image2Video generations', '50 Text2Video generations', 'Highest priority generations']
     },
     {
       title: 'Premier',
       price: ' $299.99',
       priceId: process.env.NEXT_PUBLIC_M_PREMIER,
       description: 'Per month',
-      storyBoardCount: 1500,
-      text2Video: 50,
-      features: ['1500 StoryBoarder/Image2Video generations', '50 Text2Video generations', 'High priority generations']
+      storyBoardCount: 700,
+      text2Video: 150,
+      features: ['700 VideoStory/Image2Video generations', '150 Text2Video generations', 'Highest priority generations']
     },
   ]
 };
@@ -184,8 +184,8 @@ export default function PricingPage() {
   return (
     <>
       <Head>
-        <title>Pricing | AIVIDOO</title>
-        <meta name="description" content="pricing, subscription plan" />
+        <title>AIVIDOO Pricing</title>
+        <meta name="description" content="AIVIDOO Pricing" />
         <link rel="icon" href="/aividoo_logo.png" />
       </Head>
      
@@ -216,8 +216,8 @@ export default function PricingPage() {
   
           {/* {products.toReversed().map(({ product, prices }) => (
             
-        <div key={product.id} className="flex-1 text-xl mt-14 rounded-xl border border-[#cd4a1d]/25 bg-[#30373d] p-10 w-full">
-          <h4 className="text-[#cd4a1d]">{product.name}</h4>
+        <div key={product.id} className="flex-1 text-xl mt-14 rounded-xl border border-[#5BBCFF]/25 bg-[#30373d] p-10 w-full">
+          <h4 className="text-[#5BBCFF]">{product.name}</h4>
             {prices.map((price) => (
               <div key={price.id}>
               <p className="flex-1 p-8 flex flex-col items-center">
@@ -227,7 +227,7 @@ export default function PricingPage() {
         
               </p>
               <button
-              className="my-5 w-full text-black p-5 max-sm:p-2 rounded-3xl bg-[#cd4a1d] text-xl max-sm:text-lg hover:bg-[#fdf2bb] transition-all"
+              className="my-5 w-full text-black p-5 max-sm:p-2 rounded-3xl bg-[#5BBCFF] text-xl max-sm:text-lg hover:bg-[#fdf2bb] transition-all"
              onClick={() => redirectToCheckout({ price: price.id, successUrl: `http://localhost:3000/payment/success`, cancelUrl: `http://localhost:3000/payment/cancelled`})}
            >
              Start Plan
@@ -244,9 +244,9 @@ export default function PricingPage() {
 
             <div
 
-              className="flex-1 text-xl mt-14 rounded-xl border border-[#cd4a1d]/25 bg-[#30373d] p-10 w-full"
+              className="flex-1 text-xl mt-14 rounded-xl border border-[#5BBCFF]/25 bg-[#30373d] p-10 w-full"
             >
-              <h4 className="text-[#cd4a1d]">
+              <h4 className="text-[#5BBCFF]">
                 Feature List
               </h4>
               <p className="flex-1 p-8 flex flex-col items-left">
@@ -271,9 +271,9 @@ export default function PricingPage() {
             </div>
             <div
 
-              className="flex-1 text-xl mt-14 rounded-xl border border-[#cd4a1d]/25 bg-[#30373d] p-10 w-full"
+              className="flex-1 text-xl mt-14 rounded-xl border border-[#5BBCFF]/25 bg-[#30373d] p-10 w-full"
             >
-              <h2 className="text-[#cd4a1d]">
+              <h2 className="text-[#5BBCFF]">
                 Feature List
               </h2>
               
@@ -300,9 +300,9 @@ export default function PricingPage() {
             </div>
             <div
 
-              className="flex-1 text-xl mt-14 rounded-xl border border-[#cd4a1d]/25 bg-[#30373d] p-10 w-full"
+              className="flex-1 text-xl mt-14 rounded-xl border border-[#5BBCFF]/25 bg-[#30373d] p-10 w-full"
             >
-              <h2 className="text-[#cd4a1d]">
+              <h2 className="text-[#5BBCFF]">
                 Feature List
               </h2>
               <p className="flex-1 p-8 flex flex-col items-center">

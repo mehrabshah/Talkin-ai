@@ -44,7 +44,7 @@ const PricingPlans = ({ pricingData, handleSubscribe }) => {
                                 <div
                                     onClick={() => handleSubscribe(plan)}
                                     key={index}
-                                    className={`group cursor-pointer relative bg-[#fefafa45] text-white  mx-auto w-full max-w-sm rounded-2xl border border-solid border-gray-600 hover:border-gray-300 text-center transition-all duration-300 p-3 `}
+                                    className={`group cursor-pointer relative bg-[#403d39] text-white  mx-auto w-full max-w-sm rounded-2xl border border-solid border-[#5BBCFF] hover:border-gray-300 text-center transition-all duration-300 p-3 `}
                                 >
                                     <div className='flex justify-between mb-1'>
                                         <h3 className={`font-manrope text-xl font-bold  ${plan.popular ? 'text-white' : ''}`}>
