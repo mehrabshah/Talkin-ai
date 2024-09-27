@@ -194,31 +194,31 @@ const getFilteredPlans = (currentActivePlan) => {
             id: process.env.NEXT_PUBLIC_Y_LITE,
             name: 'Lite Yearly',
             activePlan: 'Lite year',
-            description: '$95.90/year'
+            description: '$96/year'
         },
         {
             id: process.env.NEXT_PUBLIC_Y_STANDARD,
             name: 'Standard Yearly',
             activePlan: 'Standard year',
-            description: '$287.90/year'
+            description: '$288/year'
         },
         {
             id: process.env.NEXT_PUBLIC_Y_PLUS,
             name: 'Plus Yearly',
             activePlan: 'Plus year',
-            description: '$575.88/year'
+            description: '$576/year'
         },
         {
             id: process.env.NEXT_PUBLIC_Y_PRO,
             name: 'Pro Yearly',
             activePlan: 'Pro year',
-            description: '$863.90/year'
+            description: '$864/year'
         },
         {
             id: process.env.NEXT_PUBLIC_Y_PREMIER,
             name: 'Premier Yearly',
             activePlan: 'Premier year',
-            description: '$2879.90/year'
+            description: '$2878/year'
         }
     ];
 
