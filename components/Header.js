@@ -47,14 +47,9 @@ const Header = () => {
                   <li className="p__opensans">
                      <Link href="/about">About</Link>
                   </li>
-                 
                    <li className="p__opensans">
                      <Link href="/video-story">Video Story</Link>
                   </li> 
-                   <li className="p__opensans">
-                     <Link href="/story-board">Story Boarder</Link>
-                  </li> 
-                  
                   <li className="p__opensans">
                      <Link href="/img2video">Image2Video</Link>
                   </li>  
@@ -97,9 +92,6 @@ const Header = () => {
                   <li className="p__opensans">
                     <Link href="/video-story">Video Story</Link>
                    </li>  
-                   <li className="p__opensans">
-                     <Link href="/story-board">Story Boarder</Link>
-                  </li> 
                   <li className="p__opensans">
                      <Link href="/img2video">Image2Video</Link>
                   </li>      
