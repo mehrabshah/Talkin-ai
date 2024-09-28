@@ -13,7 +13,14 @@ import { MdDelete } from "react-icons/md";
 import { VideoSliderDialog } from "../Dialog/VideoSliderDialog";
 import { VideoSliderSettingDialog } from "../Dialog/VideoSliderSettingDialog";
 
-export const VideoSliderControl = ({ setStoryPrediction, index }) => {
+export const VideoSliderControl = ({
+  setStoryPrediction,
+  index,
+  handleRegenerateVideo,
+  setNumInferenceSteps,
+  setFps,
+  setMotion,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openModal, setOpenModal] = useState(false);
 
@@ -26,11 +33,10 @@ export const VideoSliderControl = ({ setStoryPrediction, index }) => {
   };
   function handleDeleteScene() {
     setStoryPrediction((current) => {
-      let currentPrediction = current?.output?.individual_videos.splice(
-        index,
-        1
-      );
-      return { ...current, individual_videos: currentPrediction };
+      let currentPrediction = { ...current };
+      currentPrediction?.output?.individual_videos.splice(index, 1);
+      currentPrediction?.output?.individual_images.splice(index, 1);
+      return currentPrediction;
     });
   }
   return (
@@ -136,6 +142,10 @@ export const VideoSliderControl = ({ setStoryPrediction, index }) => {
       <VideoSliderSettingDialog
         open={openModal === "setting"}
         handleClose={() => setOpenModal(false)}
+        setMotion={setMotion}
+        setFps={setFps}
+        setNumInferenceSteps={setNumInferenceSteps}
+        handleRegenerateVideo={handleRegenerateVideo}
       />
     </>
   );

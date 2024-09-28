@@ -38,37 +38,37 @@ export const StoryIdea = ({ setActiveStep, formik, isGenerating }) => {
             value="four"
             control={<Radio className="text-gray-400" />}
             label="Four"
-            className="border border-gray-400 rounded-md m-0"
+            className="border border-gray-400 rounded-md mx-0"
           />
           <FormControlLabel
             value="five"
             control={<Radio className="text-gray-400" />}
             label="Five"
-            className="border border-gray-400 rounded-md m-0"
+            className="border border-gray-400 rounded-md mx-0"
           />
           <FormControlLabel
             value="six"
             control={<Radio className="text-gray-400" />}
             label="Six"
-            className="border border-gray-400 rounded-md m-0"
+            className="border border-gray-400 rounded-md mx-0"
           />
           <FormControlLabel
             value="seven"
             control={<Radio className="text-gray-400" />}
             label="Seven"
-            className="border border-gray-400 rounded-md m-0"
+            className="border border-gray-400 rounded-md mx-0"
           />
           <FormControlLabel
             value="eight"
             control={<Radio className="text-gray-400" />}
             label="Eight"
-            className="border border-gray-400 rounded-md m-0"
+            className="border border-gray-400 rounded-md mx-0"
           />
           <FormControlLabel
             value="nine"
             control={<Radio className="text-gray-400" />}
             label="Nine"
-            className="border border-gray-400 rounded-md m-0"
+            className="border border-gray-400 rounded-md mx-0"
           />
         </RadioGroup>
       </FormControl>
