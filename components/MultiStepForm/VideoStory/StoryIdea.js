@@ -91,7 +91,7 @@ export const StoryIdea = ({ setActiveStep, formik, isGenerating }) => {
             onClick={formik?.handleSubmit}
             className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff]"
           >
-            Next
+            Generate Story
           </Button>
         ) : (
           <IconButton className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff] text-white">
