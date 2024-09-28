@@ -1,15 +1,22 @@
-import { useState } from "react";
-
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Slider from "@mui/material/Slider";
 
-export const VideoSliderSettingDialog = ({ open, handleClose }) => {
-  const [motion, setMotion] = useState(80);
-  const [fps, setFps] = useState(6);
-  const [numInferenceSteps, setNumInferenceSteps] = useState(9);
-
+export const VideoSliderSettingDialog = ({
+  open,
+  handleClose,
+  handleRegenerateVideo,
+  setNumInferenceSteps,
+  setFps,
+  setMotion,
+}) => {
   return (
     <Dialog onClose={handleClose} open={open} maxWidth="md" fullWidth={true}>
       <DialogTitle>Setting</DialogTitle>
@@ -69,6 +76,16 @@ export const VideoSliderSettingDialog = ({ open, handleClose }) => {
           </Box>
         </Container>
       </DialogContent>
+      <DialogActions>
+        <Button
+          onClick={() => {
+            handleRegenerateVideo();
+            handleClose();
+          }}
+        >
+          Regenerate
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 };
