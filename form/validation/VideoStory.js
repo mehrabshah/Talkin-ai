@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export const characterSchema = Yup.object({
-  characters: Yup.string().required("Characters  is required."),
+  characters: Yup.string().required("Character's description is required."),
   image_url: Yup.string(),
 });
 

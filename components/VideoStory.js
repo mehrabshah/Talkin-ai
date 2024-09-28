@@ -90,7 +90,6 @@ export default function Dashboard() {
   //handle form submit to create avatar and create record in the database
   const onSubmit = async (values) => {
     try {
-      setIsGenerating(true);
       const {
         characters,
         numPanels,
@@ -112,7 +111,7 @@ export default function Dashboard() {
         setIsGenerating(false);
         return;
       }
-
+      setIsGenerating(true);
       const body = {
         num_ids: 3,
         style_name,
@@ -156,6 +155,7 @@ export default function Dashboard() {
       if (response?.status == "succeeded") {
         setStoryPrediction(response);
         formik?.resetForm();
+        setActiveStep(1);
         setIsGenerating(false);
         const updatedCount = await decreaseStoryBoardAndImage2VideoCount(
           user?.primaryEmailAddress?.emailAddress
@@ -198,6 +198,7 @@ export default function Dashboard() {
       const video_response = await generateImageToVideo({ body });
 
       let videoPrediction = video_response?.data;
+      console.log({ videoPrediction });
       if (video_response.status !== 201) {
         setError(videoPrediction?.detail);
         setIsGenerating(false);
@@ -205,16 +206,16 @@ export default function Dashboard() {
       }
 
       setStoryPrediction((prev) => {
-        let currentStory = prev?.output?.individual_videos.splice(
+        let currentStory = { ...prev };
+        currentStory?.output?.individual_videos.splice(
           activeSlide,
           1,
           videoPrediction?.output
         );
-        return {
-          ...prev,
-          status: videoPrediction?.status,
-          individual_videos: currentStory,
-        };
+        currentStory.status = videoPrediction?.status;
+
+        console.log({ currentStory });
+        return currentStory;
       });
       while (
         videoPrediction?.status !== "succeeded" &&
@@ -228,48 +229,34 @@ export default function Dashboard() {
 
         if (video_response?.status !== 200) {
           setError(videoPrediction?.detail);
-          setStoryPrediction((prev) => {
-            let currentStory = prev?.output?.individual_videos.splice(
-              activeSlide,
-              1,
-              videoPrediction?.output
-            );
-            return {
-              ...prev,
-              status: videoPrediction?.status,
-              individual_videos: currentStory,
-            };
-          });
+
           setIsGenerating(false);
           return;
         }
 
         setStoryPrediction((prev) => {
-          let currentStory = prev?.output?.individual_videos.splice(
+          let currentStory = { ...prev };
+          currentStory?.output?.individual_videos.splice(
             activeSlide,
             1,
             videoPrediction?.output
           );
-          return {
-            ...prev,
-            status: videoPrediction?.status,
-            individual_videos: currentStory,
-          };
+          currentStory.status = videoPrediction?.status;
+
+          return currentStory;
         });
       }
 
       if (videoPrediction?.status == "succeeded") {
         setStoryPrediction((prev) => {
-          let currentStory = prev?.output?.individual_videos.splice(
+          let currentStory = { ...prev };
+          currentStory?.output?.individual_videos.splice(
             activeSlide,
             1,
             videoPrediction?.output
           );
-          return {
-            ...prev,
-            status: videoPrediction?.status,
-            individual_videos: currentStory,
-          };
+          currentStory.status = videoPrediction?.status;
+          return currentStory;
         });
         setIsGenerating(false);
         const updatedCount = await decreaseStoryBoardAndImage2VideoCount(
@@ -343,6 +330,8 @@ export default function Dashboard() {
         break;
     }
   }, [formik, activeStep]);
+
+  console.log({ storyPrediction });
 
   return (
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">

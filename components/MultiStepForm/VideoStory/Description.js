@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export const Description = ({ setActiveStep, formik, isGenerating }) => {
@@ -33,9 +33,9 @@ export const Description = ({ setActiveStep, formik, isGenerating }) => {
           Back
         </Button>
         {isGenerating ? (
-          <IconButtonnButton className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff] text-white">
+          <IconButton className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff] text-white">
             <AiOutlineLoading3Quarters className="text-white animate-spin" />
-          </IconButtonnButton>
+          </IconButton>
         ) : (
           <Button
             variant="contained"

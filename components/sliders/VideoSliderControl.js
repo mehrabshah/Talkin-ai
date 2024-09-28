@@ -33,11 +33,10 @@ export const VideoSliderControl = ({
   };
   function handleDeleteScene() {
     setStoryPrediction((current) => {
-      let currentPrediction = current?.output?.individual_videos.splice(
-        index,
-        1
-      );
-      return { ...current, individual_videos: currentPrediction };
+      let currentPrediction = { ...current };
+      currentPrediction?.output?.individual_videos.splice(index, 1);
+      currentPrediction?.output?.individual_images.splice(index, 1);
+      return currentPrediction;
     });
   }
   return (
