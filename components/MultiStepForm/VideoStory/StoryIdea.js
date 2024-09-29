@@ -88,7 +88,7 @@ export const StoryIdea = ({ setActiveStep, formik, isGenerating }) => {
         {!isGenerating ? (
           <Button
             variant="contained"
-            onClick={formik?.handleStoryGeneration}
+            onClick={formik?.handleSubmit}
             className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff]"
           >
             Generate Story
