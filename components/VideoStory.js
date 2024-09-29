@@ -337,9 +337,9 @@ export default function Dashboard() {
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-y-12 md:grid-cols-1 md:gap-x-12 ">
         <div className="">
-          <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">
+          <h2 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">
             Available generation : {count || 0}
-          </h1>
+          </h2>
           {stepMemo}
         </div>
 
