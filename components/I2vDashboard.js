@@ -261,7 +261,7 @@ export default function Dashboard() {
              <div className="flex flex-col items-center gap-3 justify-center h-full w-full">
               <MdOutlineCloudUpload className="text-5xl" />
               <p className="text-base">Upload Image</p>
-              <img src={imageSrc} className="basis-1/2 h-auto w-48 my-5" accept="image/*" />
+              <img src={imageSrc} accept="image/*" />
               </div>
           
               
