@@ -124,7 +124,7 @@ export default function Dashboard() {
         character_description: characters,
         aspect_ratio: aspectRatio,
         video_width: aspectRatio === "16:9" ? 1280 : 608,
-        video_height: aspectRatio === "16:9" ? 1080 : 720,
+        video_height: aspectRatio === "16:9" ? 720 : 1080,
         ...(image_url?.length && { ref_image: image_url }),
       };
 
