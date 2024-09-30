@@ -169,7 +169,7 @@ export default function Dashboard() {
             className="space-y-2 w-full mb-10"
             onSubmit={(e) => handleOnSubmit(e)}
           >
-          <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">Available generation : {count || 0}</h1>
+          <h2 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">Available generation : {count || 0}</h2>
           <div className="flex flex-col">
             
           <TextField

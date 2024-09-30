@@ -15,6 +15,7 @@ import SubscriptionContext from "../context/SubscriptionContext";
 import { isImage, validateImgSize } from "../utils/fileValidation";
 import Disclaimer from "./Disclaimer";
 //import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { MdOutlineCloudUpload } from "react-icons/md";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -150,7 +151,7 @@ export default function Dashboard() {
       seed: 42,
       aspect_ratio: aspectRatio,
       motion: motion,
-      fps: fps,
+      fps: 6,
       num_inference_steps: numInferenceSteps,
     };
 
@@ -207,29 +208,32 @@ export default function Dashboard() {
       </div>
 
       <form onSubmit={(e) => handleOnSubmit(e)}>
-        <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">
+        <h2 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">
           Available generation : {count || 0}
-        </h1>
-        <div className="flex flex-col ">
-          <label className="px-2 py-1 text-sm text-white" htmlFor="image">
-            Select Picture: {"   "}
-            {"    "}
-            <span className="text-sm text-red-500">(jpg/jpeg, Max 1MB) </span>
-            <span className="text-sm text-red-400">*</span>
-          </label>
+        </h2>
+        <h2
+          className="px-2 py-1 text-md text-white font-semibold mb-4"
+          htmlFor="image"
+        >
+          Select Image {"   "}
+          {"    "}
+          <span className="text-sm text-red-500">(jpg/jpeg) </span>
+          <span className="text-sm text-red-400">*</span>
+        </h2>
+
+        <div className=" relative h-64  w-full border-2 border-dashed border-gray-400 rounded-md bg-transparent p-5 cursor-pointer">
           <input
             type="file"
-            className="hero-button flex rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-white-500 my-2 text-white-900"
+            className=" flex rounded-md bg-transparent border opacity-0 border-gray-400 shadow-sm  sm:text-sm px-4 py-2 placeholder-white-500 text-white-900 absolute inset-0 w-full h-full"
             name="image"
             placeholder="Select Picture"
             onChange={handleImageChange}
           />
-
-          <img
-            src={imageSrc}
-            className="basis-1/2 h-auto w-48 my-5"
-            accept="image/*"
-          />
+          <div className="flex flex-col items-center gap-3 justify-center h-full w-full">
+            <MdOutlineCloudUpload className="text-5xl" />
+            <p className="text-base">Upload Image</p>
+            <img src={imageSrc} accept="image/*" />
+          </div>
         </div>
 
         <FormControl
@@ -259,7 +263,7 @@ export default function Dashboard() {
               <Slider
                 defaultValue={80}
                 valueLabelDisplay="on"
-                color="success"
+                color="primary"
                 step={10}
                 marks
                 min={10}
@@ -271,29 +275,12 @@ export default function Dashboard() {
 
             <div className="flex flex-col">
               <label className="px-2 py-3 text-sm  text-black">
-                FPS (Required)
-              </label>
-              <Slider
-                defaultValue={6}
-                valueLabelDisplay="on"
-                color="success"
-                step={1}
-                marks
-                min={6}
-                max={25}
-                onChange={(e) => setFps(e.target.value)}
-                name="fps"
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label className="px-2 py-3 text-sm  text-black">
                 Num Inference Steps (Required)
               </label>
               <Slider
                 defaultValue={9}
                 valueLabelDisplay="on"
-                color="success"
+                color="primary"
                 step={1}
                 marks
                 min={5}

@@ -49,6 +49,7 @@ export const VideoStorySlider = ({
             {gallery?.map((video_src, index) => (
               <div key={"slider_item" + index}>
                 <video
+                  controls
                   muted
                   autoPlay
                   src={video_src}

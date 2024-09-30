@@ -68,7 +68,7 @@ export default async function handler(req, res) {
           case process.env.NEXT_PUBLIC_M_LITE:
             updatedMetadata = {
               ...updatedMetadata,
-              storyBoardCount: '30',
+              storyBoardCount: '10',
               activePlan: `Lite ${billingInterval}`,
             };
             break;
@@ -76,7 +76,7 @@ export default async function handler(req, res) {
           case process.env.NEXT_PUBLIC_M_STANDARD:
             updatedMetadata = {
               ...updatedMetadata,
-              storyBoardCount: '100',
+              storyBoardCount: '40',
               text2Video: '10',
               activePlan: `Standard ${billingInterval}`,
             };
@@ -85,8 +85,8 @@ export default async function handler(req, res) {
           case process.env.NEXT_PUBLIC_M_PLUS:
             updatedMetadata = {
               ...updatedMetadata,
-              storyBoardCount: '250',
-              text2Video: '10',
+              storyBoardCount: '100',
+              text2Video: '30',
               activePlan: `Plus ${billingInterval}`,
             };
             break;
@@ -94,8 +94,8 @@ export default async function handler(req, res) {
           case process.env.NEXT_PUBLIC_M_PRO:
             updatedMetadata = {
               ...updatedMetadata,
-              storyBoardCount: '400',
-              text2Video: '20',
+              storyBoardCount: '200',
+              text2Video: '50',
               activePlan: `Pro ${billingInterval}`,
             };
             break;
@@ -103,8 +103,8 @@ export default async function handler(req, res) {
           case process.env.NEXT_PUBLIC_M_PREMIER:
             updatedMetadata = {
               ...updatedMetadata,
-              storyBoardCount: '1500',
-              text2Video: '50',
+              storyBoardCount: '700',
+              text2Video: '150',
               activePlan: `Premier ${billingInterval}`,
             };
             break;
@@ -162,7 +162,7 @@ export default async function handler(req, res) {
           case process.env.NEXT_PUBLIC_M_LITE:
             updatedMetadata = {
               ...updatedMetadata,
-              storyBoardCount: '30',
+              storyBoardCount: '10',
               activePlan: `Lite ${billingInterval}`,
             };
             break;
@@ -170,7 +170,7 @@ export default async function handler(req, res) {
           case process.env.NEXT_PUBLIC_M_STANDARD:
             updatedMetadata = {
               ...updatedMetadata,
-              storyBoardCount: '100',
+              storyBoardCount: '40',
               text2Video: '10',
               activePlan: `Standard ${billingInterval}`,
             };
@@ -179,8 +179,8 @@ export default async function handler(req, res) {
           case process.env.NEXT_PUBLIC_M_PLUS:
             updatedMetadata = {
               ...updatedMetadata,
-              storyBoardCount: '250',
-              text2Video: '10',
+              storyBoardCount: '100',
+              text2Video: '30',
               activePlan: `Plus ${billingInterval}`,
             };
             break;
@@ -188,8 +188,8 @@ export default async function handler(req, res) {
           case process.env.NEXT_PUBLIC_M_PRO:
             updatedMetadata = {
               ...updatedMetadata,
-              storyBoardCount: '400',
-              text2Video: '20',
+              storyBoardCount: '200',
+              text2Video: '50',
               activePlan: `Pro ${billingInterval}`,
             };
             break;
@@ -197,8 +197,8 @@ export default async function handler(req, res) {
           case process.env.NEXT_PUBLIC_M_PREMIER:
             updatedMetadata = {
               ...updatedMetadata,
-              storyBoardCount: '1500',
-              text2Video: '50',
+              storyBoardCount: '700',
+              text2Video: '150',
               activePlan: `Premier ${billingInterval}`,
             };
             break;
