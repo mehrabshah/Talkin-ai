@@ -42,36 +42,42 @@ export const StoryIdea = ({ setActiveStep, formik, isGenerating }) => {
             control={<Radio className="text-white" />}
             label="Four"
             className="border border-gray-400 rounded-md mx-0 flex-1 "
+            style={{ marginInline: "0px !important" }}
           />
           <FormControlLabel
             value="five"
             control={<Radio className="text-white" />}
             label="Five"
             className="border border-gray-400 rounded-md mx-0 flex-1"
+            style={{ marginInline: "0px !important" }}
           />
           <FormControlLabel
             value="six"
             control={<Radio className="text-white" />}
             label="Six"
             className="border border-gray-400 rounded-md mx-0 flex-1"
+            style={{ marginInline: "0px !important" }}
           />
           <FormControlLabel
             value="seven"
             control={<Radio className="text-white" />}
             label="Seven"
             className="border border-gray-400 rounded-md mx-0 flex-1"
+            style={{ marginInline: "0px !important" }}
           />
           <FormControlLabel
             value="eight"
             control={<Radio className="text-white" />}
             label="Eight"
             className="border border-gray-400 rounded-md mx-0 flex-1"
+            style={{ marginInline: "0px !important" }}
           />
           <FormControlLabel
             value="nine"
             control={<Radio className="text-white" />}
             label="Nine"
             className="border border-gray-400 rounded-md mx-0 flex-1"
+            style={{ marginInline: "0px !important" }}
           />
         </RadioGroup>
       </FormControl>
