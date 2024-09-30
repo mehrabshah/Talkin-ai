@@ -41,72 +41,72 @@ export const StoryIdea = ({ setActiveStep, formik, isGenerating }) => {
             value="four"
             control={
               <Radio
-                className="text-white"
+                className="text-white !mx-0"
                 style={{ marginInline: "0px !important" }}
               />
             }
             label="Four"
-            className="border border-gray-400 rounded-md mx-0 flex-1 "
+            className="border border-gray-400 rounded-md !mx-0 flex-1 "
             style={{ marginInline: "0px !important" }}
           />
           <FormControlLabel
             value="five"
             control={
               <Radio
-                className="text-white"
+                className="text-white !mx-0"
                 style={{ marginInline: "0px !important" }}
               />
             }
             label="Five"
-            className="border border-gray-400 rounded-md mx-0 flex-1"
+            className="border border-gray-400 rounded-md !mx-0 flex-1"
             style={{ marginInline: "0px !important" }}
           />
           <FormControlLabel
             value="six"
             control={
               <Radio
-                className="text-white"
+                className="text-white !mx-0"
                 style={{ marginInline: "0px !important" }}
               />
             }
             label="Six"
-            className="border border-gray-400 rounded-md mx-0 flex-1"
+            className="border border-gray-400 rounded-md !mx-0 flex-1"
             style={{ marginInline: "0px !important" }}
           />
           <FormControlLabel
             value="seven"
             control={
               <Radio
-                className="text-white"
+                className="text-white !mx-0"
                 style={{ marginInline: "0px !important" }}
               />
             }
             label="Seven"
-            className="border border-gray-400 rounded-md mx-0 flex-1"
+            className="border border-gray-400 rounded-md !mx-0 flex-1"
             style={{ marginInline: "0px !important" }}
           />
           <FormControlLabel
             value="eight"
             control={
               <Radio
-                className="text-white"
+                className="text-white !mx-0"
                 style={{ marginInline: "0px !important" }}
               />
             }
             label="Eight"
-            className="border border-gray-400 rounded-md mx-0 flex-1"
+            className="border border-gray-400 rounded-md !mx-0 flex-1"
             style={{ marginInline: "0px !important" }}
           />
           <FormControlLabel
             value="nine"
             control={
               <Radio
-                className="text-white"
+                className="text-white !mx-0"
                 style={{ marginInline: "0px !important" }}
               />
             }
             label="Nine"
-            className="border border-gray-400 rounded-md mx-0 flex-1"
+            className="border border-gray-400 rounded-md !mx-0 flex-1"
             style={{ marginInline: "0px !important" }}
           />
         </RadioGroup>
