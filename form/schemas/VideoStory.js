@@ -3,7 +3,7 @@ export const initialValues = {
   characters: "",
   aspectRatio: "16:9",
   image_url: "",
-  style_name: "Japanese Anime",
+  style_name: "(No style)",
   idea: "",
   numPanels: "four",
 };

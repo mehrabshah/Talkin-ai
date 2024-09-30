@@ -1,5 +1,10 @@
 export const ImageStyle = [
   {
+    title: "No Style",
+    image: "/assets/images/no_style.webp",
+    value: "(No style)",
+  },
+  {
     title: "Japanese Anime",
     image: "/assets/images/anime.png",
     value: "Japanese Anime",
@@ -16,8 +21,13 @@ export const ImageStyle = [
   },
   {
     title: "Cinematic",
-    image: "/assets/images/photographic.png",
+    image: "/assets/images/cinematic.jpg",
     value: "Cinematic",
+  },
+  {
+    title: "Photographic",
+    image: "/assets/images/photographic.png",
+    value: "Photographic",
   },
   {
     title: "Comic book",
