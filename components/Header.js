@@ -41,25 +41,25 @@ const Header = () => {
       <SignedIn>
         
       <ul className="app_navbar-links">
-                  <li className="p__opensans">
+                  <li className="p__opensans font-semibold">
                      <Link href="/">Home</Link>
                   </li>
-                  <li className="p__opensans">
+                  <li className="p__opensans font-semibold">
                      <Link href="/about">About</Link>
                   </li>
-                   <li className="p__opensans">
+                   <li className="p__opensans font-semibold">
                      <Link href="/video-story">Video Story</Link>
                   </li> 
-                  <li className="p__opensans">
+                  <li className="p__opensans font-semibold">
                      <Link href="/img2video">Image2Video</Link>
                   </li>  
-                  <li className="p__opensans">
+                  <li className="p__opensans font-semibold">
                     <Link href="/text2video">Text2Video</Link>
                    </li>
-                  <li className="p__opensans">
+                  <li className="p__opensans font-semibold">
                      <Link href="/pricing">Pricing</Link>
                   </li>
-                 <li className="p__opensans">
+                 <li className="p__opensans font-semibold">
                     <Link href="/plan">Plan</Link>
                  </li>
                  
@@ -89,17 +89,17 @@ const Header = () => {
                   >
 
                     
-                  <li className="p__opensans">
+                  <li className="p__opensans font-semibold">
                     <Link href="/video-story">Video Story</Link>
                    </li>  
-                  <li className="p__opensans">
+                  <li className="p__opensans font-semibold">
                      <Link href="/img2video">Image2Video</Link>
                   </li>      
-                  <li className="p__opensans">
+                  <li className="p__opensans font-semibold">
                      <Link href="/text2video">Text2Video</Link>
                   </li>   
                   
-                  <li className="p__opensans">
+                  <li className="p__opensans font-semibold">
                      <Link href="/pricing">Pricing</Link>
                   </li>
                  
