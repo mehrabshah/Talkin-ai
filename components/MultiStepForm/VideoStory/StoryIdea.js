@@ -26,9 +26,13 @@ export const StoryIdea = ({ setActiveStep, formik, isGenerating }) => {
         </span>
       )}
       <h2 className="font-semibold my-4">Number of Panels</h2>
-      <FormControl className="w-full">
+      <FormControl fullWidth>
         <RadioGroup
-          className="gap-3 w-full md:flex-row flex-col"
+          sx={{
+            flexDirection: { md: "row", xs: "column" },
+            flexWrap: "wrap",
+            gap: 1,
+          }}
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
           {...formik.getFieldProps("numPanels")}
