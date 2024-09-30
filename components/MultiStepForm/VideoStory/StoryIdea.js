@@ -28,47 +28,46 @@ export const StoryIdea = ({ setActiveStep, formik, isGenerating }) => {
       <h2 className="font-semibold my-4">Number of Panels</h2>
       <FormControl className="w-full">
         <RadioGroup
-          column
-          className="gap-3 w-full"
+          className="gap-3 w-full md:flex-row flex-col"
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
           {...formik.getFieldProps("numPanels")}
         >
           <FormControlLabel
             value="four"
-            control={<Radio className="text-gray-400" />}
+            control={<Radio className="text-white" />}
             label="Four"
-            className="border border-gray-400 rounded-md mx-0"
+            className="border border-gray-400 rounded-md mx-0 flex-1 "
           />
           <FormControlLabel
             value="five"
-            control={<Radio className="text-gray-400" />}
+            control={<Radio className="text-white" />}
             label="Five"
-            className="border border-gray-400 rounded-md mx-0"
+            className="border border-gray-400 rounded-md mx-0 flex-1"
           />
           <FormControlLabel
             value="six"
-            control={<Radio className="text-gray-400" />}
+            control={<Radio className="text-white" />}
             label="Six"
-            className="border border-gray-400 rounded-md mx-0"
+            className="border border-gray-400 rounded-md mx-0 flex-1"
           />
           <FormControlLabel
             value="seven"
-            control={<Radio className="text-gray-400" />}
+            control={<Radio className="text-white" />}
             label="Seven"
-            className="border border-gray-400 rounded-md mx-0"
+            className="border border-gray-400 rounded-md mx-0 flex-1"
           />
           <FormControlLabel
             value="eight"
-            control={<Radio className="text-gray-400" />}
+            control={<Radio className="text-white" />}
             label="Eight"
-            className="border border-gray-400 rounded-md mx-0"
+            className="border border-gray-400 rounded-md mx-0 flex-1"
           />
           <FormControlLabel
             value="nine"
-            control={<Radio className="text-gray-400" />}
+            control={<Radio className="text-white" />}
             label="Nine"
-            className="border border-gray-400 rounded-md mx-0"
+            className="border border-gray-400 rounded-md mx-0 flex-1"
           />
         </RadioGroup>
       </FormControl>
@@ -91,7 +90,7 @@ export const StoryIdea = ({ setActiveStep, formik, isGenerating }) => {
             onClick={formik?.handleSubmit}
             className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff]"
           >
-            Next
+            Generate Story
           </Button>
         ) : (
           <IconButton className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff] text-white">

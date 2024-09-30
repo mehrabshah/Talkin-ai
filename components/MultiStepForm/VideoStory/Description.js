@@ -9,7 +9,7 @@ export const Description = ({ setActiveStep, formik, isGenerating }) => {
         rows={
           formik?.values?.storyDescription === ""
             ? 12
-            : formik?.values?.storyDescription.split("\n").length + 12
+            : formik?.values?.storyDescription?.split("\n")?.length + 12
         }
         name="output"
         {...formik?.getFieldProps("storyDescription")}

@@ -78,6 +78,8 @@ export const VideoSliderSettingDialog = ({
       </DialogContent>
       <DialogActions>
         <Button
+          variant="contained"
+          className="disabled:bg-gray-600 disabled:!text-white bg-[#5bbcff]"
           onClick={() => {
             handleRegenerateVideo();
             handleClose();

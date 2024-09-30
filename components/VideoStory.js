@@ -6,6 +6,7 @@ import SubscriptionContext from "../context/SubscriptionContext";
 import Disclaimer from "./Disclaimer";
 import StoryBoardFAQ from "./StoryBoardFAQ";
 //import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Backdrop, CircularProgress } from "@mui/material";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { initialValues } from "../form/schemas/VideoStory";
@@ -45,9 +46,10 @@ export default function Dashboard() {
   const [fps, setFps] = useState(6);
   const [numInferenceSteps, setNumInferenceSteps] = useState(9);
   const [image_url, setImageUrl] = useState(
-    storyPrediction?.output?.individual_images[0] ?? ""
+    storyPrediction?.output?.individual_images[0] || ""
   );
   const [activeSlide, setActiveSlide] = useState(0);
+  const [openBackDrop, setOpenBackDrop] = useState(false);
 
   // updated code subscription check
 
@@ -67,11 +69,11 @@ export default function Dashboard() {
     try {
       setIsGenerating(true);
       const response = await generateStoryDescription({
-        body: JSON.stringify({
+        body: {
           characters,
           idea,
           numPanels,
-        }),
+        },
       });
 
       setIsGenerating(false);
@@ -179,9 +181,12 @@ export default function Dashboard() {
   const handleRegenerateVideo = async () => {
     try {
       setIsGenerating(true);
+      setOpenBackDrop(true);
       if (subscriptionData?.metadata?.storyBoardCount == "0") {
         toast.warn("No attempt left , Please purchase a plan");
         setIsGenerating(false);
+        setOpenBackDrop(false);
+
         return;
       }
 
@@ -202,6 +207,7 @@ export default function Dashboard() {
       if (video_response.status !== 201) {
         setError(videoPrediction?.detail);
         setIsGenerating(false);
+        setOpenBackDrop(false);
         return;
       }
 
@@ -231,6 +237,7 @@ export default function Dashboard() {
           setError(videoPrediction?.detail);
 
           setIsGenerating(false);
+          setOpenBackDrop(false);
           return;
         }
 
@@ -259,15 +266,17 @@ export default function Dashboard() {
           return currentStory;
         });
         setIsGenerating(false);
+        setOpenBackDrop(false);
         const updatedCount = await decreaseStoryBoardAndImage2VideoCount(
           user?.primaryEmailAddress?.emailAddress
         );
         setCount(updatedCount?.metadata?.storyBoardCount);
       }
-      setImage("");
+      setImageUrl("");
     } catch (error) {
       toast.error(error?.message);
       setIsGenerating(false);
+      setOpenBackDrop(false);
     }
   };
 
@@ -353,31 +362,44 @@ export default function Dashboard() {
               Generation Status: {storyPrediction?.status}
             </p>
 
-            {storyPrediction?.output && (
-              <video
-                controls
-                muted
-                autoPlay
-                src={storyPrediction.output.final_video_story}
+            <div className="relative">
+              {storyPrediction?.output && (
+                <video
+                  controls
+                  muted
+                  autoPlay
+                  src={storyPrediction.output.final_video_story}
+                  width={width}
+                  height={height}
+                  alt="output"
+                />
+              )}
+              <VideoStorySlider
+                gallery={storyPrediction?.output?.individual_videos}
+                galleryImages={storyPrediction?.output?.individual_images}
+                setStoryPrediction={setStoryPrediction}
                 width={width}
                 height={height}
-                alt="output"
+                setMotion={setMotion}
+                setFps={setFps}
+                setNumInferenceSteps={setNumInferenceSteps}
+                handleRegenerateVideo={handleRegenerateVideo}
+                setImageUrl={setImageUrl}
+                activeSlide={activeSlide}
+                setActiveSlide={setActiveSlide}
               />
-            )}
-            <VideoStorySlider
-              gallery={storyPrediction?.output?.individual_videos}
-              galleryImages={storyPrediction?.output?.individual_images}
-              setStoryPrediction={setStoryPrediction}
-              width={width}
-              height={height}
-              setMotion={setMotion}
-              setFps={setFps}
-              setNumInferenceSteps={setNumInferenceSteps}
-              handleRegenerateVideo={handleRegenerateVideo}
-              setImageUrl={setImageUrl}
-              activeSlide={activeSlide}
-              setActiveSlide={setActiveSlide}
-            />
+              <Backdrop
+                sx={(theme) => ({
+                  color: "#fff",
+                  zIndex: theme.zIndex.drawer + 1,
+                  position: "absolute",
+                })}
+                open={openBackDrop}
+                onClick={() => setOpenBackDrop(false)}
+              >
+                <CircularProgress color="inherit" />
+              </Backdrop>
+            </div>
           </div>
         </div>
       </div>
