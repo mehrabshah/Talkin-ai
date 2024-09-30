@@ -1,11 +1,8 @@
 import { useUser } from "@clerk/nextjs";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { useContext, useEffect, useMemo, useState } from "react";
 //import FAQ from './FAQ';
 import "react-toastify/dist/ReactToastify.css";
 import SubscriptionContext from "../context/SubscriptionContext";
-import Disclaimer from "./Disclaimer";
-import StoryBoardFAQ from "./StoryBoardFAQ";
 import Disclaimer from "./Disclaimer";
 import StoryBoardFAQ from "./StoryBoardFAQ";
 //import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -39,8 +36,6 @@ import { VideoStorySlider } from "./sliders/VideoStorySlider";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const width = 1280;
 const height = 720;
-const width = 1280;
-const height = 720;
 
 export default function Dashboard() {
   const [storyPrediction, setStoryPrediction] = useState(null);
@@ -60,8 +55,6 @@ export default function Dashboard() {
 
   const [count, setCount] = useState(0);
 
-  const { subscriptionData, decreaseStoryBoardAndImage2VideoCount } =
-    useContext(SubscriptionContext);
   const { subscriptionData, decreaseStoryBoardAndImage2VideoCount } =
     useContext(SubscriptionContext);
 
@@ -124,31 +117,6 @@ export default function Dashboard() {
       }
       setIsGenerating(true);
       const body = {
-  const onSubmit = async (values) => {
-    try {
-      const {
-        characters,
-        numPanels,
-        idea,
-        storyDescription,
-        aspectRatio,
-        image_url,
-        style_name,
-      } = values;
-      if (activeStep < 4) {
-        setActiveStep((prev) => ++prev);
-        return;
-      } else if (activeStep === 4) {
-        return handleStoryGeneration({ characters, numPanels, idea });
-      }
-
-      if (subscriptionData?.metadata?.storyBoardCount == "0") {
-        toast.warn("No attempt left , Please purchase a plan");
-        setIsGenerating(false);
-        return;
-      }
-      setIsGenerating(true);
-      const body = {
         num_ids: 3,
         style_name,
         style_name,
@@ -166,6 +134,7 @@ export default function Dashboard() {
       if (storyPrediction?.status !== 201) {
         setError(response?.detail);
         setStoryPrediction(response);
+        setImageUrl(response?.detail?.output?.individual_images[0]);
         setIsGenerating(false);
         return;
       }
@@ -188,12 +157,14 @@ export default function Dashboard() {
         }
 
         setStoryPrediction(response);
+        setImageUrl(response?.output?.individual_images[0]);
       }
       if (response?.status == "succeeded") {
         setStoryPrediction(response);
         formik?.resetForm();
         setActiveStep(1);
         setIsGenerating(false);
+        setImageUrl(response?.output?.individual_images[0]);
         const updatedCount = await decreaseStoryBoardAndImage2VideoCount(
           user?.primaryEmailAddress?.emailAddress
         );
@@ -203,45 +174,6 @@ export default function Dashboard() {
       toast.error(error?.message);
       setIsGenerating(false);
     }
-      while (
-        response?.status !== "succeeded" &&
-        response?.status !== "failed"
-      ) {
-        await sleep(1000);
-
-        storyPrediction = await getGdeneratedVideoStory({
-          id: response?.id,
-        });
-        response = storyPrediction?.data;
-        if (storyPrediction?.status !== 200) {
-          setError(response?.detail);
-          setIsGenerating(false);
-          return;
-        }
-
-        setStoryPrediction(response);
-      }
-      if (response?.status == "succeeded") {
-        setStoryPrediction(response);
-        formik?.resetForm();
-        setActiveStep(1);
-        setIsGenerating(false);
-        const updatedCount = await decreaseStoryBoardAndImage2VideoCount(
-          user?.primaryEmailAddress?.emailAddress
-        );
-        setCount(updatedCount?.metadata?.storyBoardCount);
-      }
-    } catch (error) {
-      toast.error(error?.message);
-      setIsGenerating(false);
-    }
-
-    //const story_url = storyPrediction?.output;
-    //setImageSrc(data.secure_url);
-
-    // post request to prediction api to create talking avatar
-
-    // post request to creation api to create creation record in the database
   };
 
   // regenerate video
@@ -348,7 +280,7 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 1000);
+    window.scrollTo(0, 500);
   }, [activeStep]);
 
   // validation schema
@@ -472,7 +404,6 @@ export default function Dashboard() {
       </div>
 
       <Disclaimer />
-
 
       <StoryBoardFAQ />
     </div>

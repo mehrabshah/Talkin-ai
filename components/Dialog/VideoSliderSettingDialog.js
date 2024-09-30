@@ -5,25 +5,10 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Slider from "@mui/material/Slider";
 
-export const VideoSliderSettingDialog = ({
-  open,
-  handleClose,
-  handleRegenerateVideo,
-  setNumInferenceSteps,
-  setFps,
-  setMotion,
-}) => {
 export const VideoSliderSettingDialog = ({
   open,
   handleClose,
