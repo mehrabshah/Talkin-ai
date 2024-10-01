@@ -195,7 +195,7 @@ export default function Dashboard() {
         seed: 42,
         aspect_ratio: storyPrediction?.input?.aspect_ratio,
         motion: motion,
-        fps: fps,
+        fps: 6,
         num_inference_steps: numInferenceSteps,
       };
 
@@ -380,7 +380,6 @@ export default function Dashboard() {
                 width={width}
                 height={height}
                 setMotion={setMotion}
-                setFps={setFps}
                 setNumInferenceSteps={setNumInferenceSteps}
                 handleRegenerateVideo={handleRegenerateVideo}
                 setImageUrl={setImageUrl}

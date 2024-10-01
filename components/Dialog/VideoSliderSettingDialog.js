@@ -14,7 +14,6 @@ export const VideoSliderSettingDialog = ({
   handleClose,
   handleRegenerateVideo,
   setNumInferenceSteps,
-  setFps,
   setMotion,
 }) => {
   return (
@@ -30,7 +29,7 @@ export const VideoSliderSettingDialog = ({
               <Slider
                 defaultValue={80}
                 valueLabelDisplay="on"
-                color="success"
+                color="primary"
                 step={10}
                 marks
                 min={10}
@@ -39,24 +38,6 @@ export const VideoSliderSettingDialog = ({
                 name="motion"
               />
             </div>
-
-            <div className="flex flex-col">
-              <label className="px-2 py-3 text-sm  text-black">
-                FPS (Required)
-              </label>
-              <Slider
-                defaultValue={6}
-                valueLabelDisplay="on"
-                color="success"
-                step={1}
-                marks
-                min={6}
-                max={25}
-                onChange={(e) => setFps(e.target.value)}
-                name="fps"
-              />
-            </div>
-
             <div className="flex flex-col">
               <label className="px-2 py-3 text-sm  text-black">
                 Num Inference Steps (Required)
@@ -64,7 +45,7 @@ export const VideoSliderSettingDialog = ({
               <Slider
                 defaultValue={9}
                 valueLabelDisplay="on"
-                color="success"
+                color="primary"
                 step={1}
                 marks
                 min={5}
