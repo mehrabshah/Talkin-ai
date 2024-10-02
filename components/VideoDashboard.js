@@ -180,7 +180,7 @@ export default function Dashboard() {
                 value={promptInput}
                 onChange={(e) => setPromptInput(e.target.value)}
                 name="promptInput"
-                placeholder="Text Prompt for Video"
+                placeholder="Text Prompt for Video, e.g., A magical circus with fantastical performers. Piper, a young girl with curly pink hair and a colorful costume, attends the circus. The Ringmaster, a flamboyant character with a top hat and glittering jacket, leads the show."
                 className="block w-full rounded-md bg-white border border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 placeholder-gray-500 my-2 text-gray-900"
               />
             

@@ -69,6 +69,10 @@ export const Character = ({ setActiveStep, formik }) => {
         <span className="text-sm text-red-500">(jpg/jpeg) </span>
         <span className="text-sm text-red-400">*</span>
       </h2>
+      <h3
+        className="px-2 py-1 text-sm text-gray-400  mb-4"
+        htmlFor="image"
+      >You need to put 'img' trigger word follwing the character description, e,g., Harry a boy img, is dressed in his Hogwarts uniform: a white shirt, black sweater with the Gryffindor crest, and a slightly rumpled black rob</h3>
       <div className=" relative h-64  w-full border-2 border-dashed border-gray-400 rounded-md bg-transparent p-5 cursor-pointer">
         {formik?.values?.image_url ? (
           <>

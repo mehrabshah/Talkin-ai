@@ -404,7 +404,7 @@ export default function Dashboard() {
 
       <Disclaimer />
 
-      <StoryBoardFAQ />
+     
     </div>
   );
 }
