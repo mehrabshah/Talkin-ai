@@ -4,7 +4,6 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import SubscriptionContext from "../context/SubscriptionContext";
 import Disclaimer from "./Disclaimer";
-import StoryBoardFAQ from "./StoryBoardFAQ";
 //import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Backdrop, CircularProgress } from "@mui/material";
 import { useFormik } from "formik";
@@ -339,8 +338,6 @@ export default function Dashboard() {
     }
   }, [formik, activeStep]);
 
-  console.log({ storyPrediction });
-
   return (
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-y-12 md:grid-cols-1 md:gap-x-12 ">
@@ -348,7 +345,11 @@ export default function Dashboard() {
           <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">
             Available generation : {count || 0}
           </h1>
-          {stepMemo}
+          {!storyPrediction ||
+          storyPrediction?.status === "starting" ||
+          storyPrediction?.status === "processing"
+            ? stepMemo
+            : null}
         </div>
 
         <div className="">
@@ -361,50 +362,50 @@ export default function Dashboard() {
               Generation Status: {storyPrediction?.status}
             </p>
 
-            <div className="relative">
-              {storyPrediction?.output && (
-                <video
-                  controls
-                  muted
-                  autoPlay
-                  src={storyPrediction.output.final_video_story}
+            {storyPrediction && storyPrediction?.status == "succeeded" ? (
+              <div className="relative">
+                {storyPrediction?.output && (
+                  <video
+                    controls
+                    muted
+                    autoPlay
+                    src={storyPrediction.output.final_video_story}
+                    width={width}
+                    height={height}
+                    alt="output"
+                  />
+                )}
+                <VideoStorySlider
+                  gallery={storyPrediction?.output?.individual_videos}
+                  galleryImages={storyPrediction?.output?.individual_images}
+                  setStoryPrediction={setStoryPrediction}
                   width={width}
                   height={height}
-                  alt="output"
+                  setMotion={setMotion}
+                  setNumInferenceSteps={setNumInferenceSteps}
+                  handleRegenerateVideo={handleRegenerateVideo}
+                  setImageUrl={setImageUrl}
+                  activeSlide={activeSlide}
+                  setActiveSlide={setActiveSlide}
                 />
-              )}
-              <VideoStorySlider
-                gallery={storyPrediction?.output?.individual_videos}
-                galleryImages={storyPrediction?.output?.individual_images}
-                setStoryPrediction={setStoryPrediction}
-                width={width}
-                height={height}
-                setMotion={setMotion}
-                setNumInferenceSteps={setNumInferenceSteps}
-                handleRegenerateVideo={handleRegenerateVideo}
-                setImageUrl={setImageUrl}
-                activeSlide={activeSlide}
-                setActiveSlide={setActiveSlide}
-              />
-              <Backdrop
-                sx={(theme) => ({
-                  color: "#fff",
-                  zIndex: theme.zIndex.drawer + 1,
-                  position: "absolute",
-                })}
-                open={openBackDrop}
-                onClick={() => setOpenBackDrop(false)}
-              >
-                <CircularProgress color="inherit" />
-              </Backdrop>
-            </div>
+                <Backdrop
+                  sx={(theme) => ({
+                    color: "#fff",
+                    zIndex: theme.zIndex.drawer + 1,
+                    position: "absolute",
+                  })}
+                  open={openBackDrop}
+                  onClick={() => setOpenBackDrop(false)}
+                >
+                  <CircularProgress color="inherit" />
+                </Backdrop>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
 
       <Disclaimer />
-
-     
     </div>
   );
 }
