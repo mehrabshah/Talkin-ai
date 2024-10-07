@@ -78,10 +78,10 @@ export default function Dashboard() {
       });
 
       setIsGenerating(false);
-      console.log({ response });
+
       formik.setFieldValue(
         "storyDescription",
-        response?.storyDescription?.trim()
+        response.storyDescription?.replace(/\n+/g, "\n")
       );
       setActiveStep(5);
     } catch (error) {
