@@ -39,6 +39,7 @@ const height = 720;
 export default function Dashboard() {
   const [storyPrediction, setStoryPrediction] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isVideoGenerating, setIsVideoGenerating] = useState(false);
   const { isSignedIn, user } = useUser();
   const [activeStep, setActiveStep] = useState(1);
   const [motion, setMotion] = useState(80);
@@ -111,10 +112,10 @@ export default function Dashboard() {
 
       if (subscriptionData?.metadata?.storyBoardCount == "0") {
         toast.warn("No attempt left , Please purchase a plan");
-        setIsGenerating(false);
+        setIsVideoGenerating(false);
         return;
       }
-      setIsGenerating(true);
+      setIsVideoGenerating(true);
       const body = {
         num_ids: 3,
         style_name,
@@ -134,7 +135,7 @@ export default function Dashboard() {
         setError(response?.detail);
         setStoryPrediction(response);
         setImageUrl(response?.detail?.output?.individual_images[0]);
-        setIsGenerating(false);
+        setIsVideoGenerating(false);
         return;
       }
       setStoryPrediction(response);
@@ -151,7 +152,7 @@ export default function Dashboard() {
         response = storyPrediction?.data;
         if (storyPrediction?.status !== 200) {
           setError(response?.detail);
-          setIsGenerating(false);
+          setIsVideoGenerating(false);
           return;
         }
 
@@ -162,7 +163,7 @@ export default function Dashboard() {
         setStoryPrediction(response);
         formik?.resetForm();
         setActiveStep(1);
-        setIsGenerating(false);
+        setIsVideoGenerating(false);
         setImageUrl(response?.output?.individual_images[0]);
         const updatedCount = await decreaseStoryBoardAndImage2VideoCount(
           user?.primaryEmailAddress?.emailAddress
@@ -171,7 +172,7 @@ export default function Dashboard() {
       }
     } catch (error) {
       toast.error(error?.message);
-      setIsGenerating(false);
+      setIsVideoGenerating(false);
     }
   };
 
@@ -345,11 +346,26 @@ export default function Dashboard() {
           <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">
             Available generation : {count || 0}
           </h1>
-          {!storyPrediction ||
-          storyPrediction?.status === "starting" ||
-          storyPrediction?.status === "processing"
-            ? stepMemo
-            : null}
+          <div className="relative">
+            {!storyPrediction ||
+            storyPrediction?.status === "starting" ||
+            storyPrediction?.status === "processing"
+              ? stepMemo
+              : null}
+            {isVideoGenerating ? (
+              <Backdrop
+                sx={(theme) => ({
+                  color: "#fff",
+                  zIndex: theme.zIndex.drawer + 1,
+                  position: "absolute",
+                })}
+                open={isVideoGenerating}
+                onClick={() => setOpenBackDrop(false)}
+              >
+                <CircularProgress color="inherit" />
+              </Backdrop>
+            ) : null}
+          </div>
         </div>
 
         <div className="">
