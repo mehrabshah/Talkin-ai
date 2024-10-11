@@ -217,7 +217,7 @@ export default function Dashboard() {
           1,
           videoPrediction?.output
         );
-        currentStory.status = videoPrediction?.status;
+        // currentStory.status = videoPrediction?.status;
 
         console.log({ currentStory });
         return currentStory;
@@ -247,7 +247,7 @@ export default function Dashboard() {
             1,
             videoPrediction?.output
           );
-          currentStory.status = videoPrediction?.status;
+          // currentStory.status = videoPrediction?.status;
 
           return currentStory;
         });
@@ -261,7 +261,7 @@ export default function Dashboard() {
             1,
             videoPrediction?.output
           );
-          currentStory.status = videoPrediction?.status;
+
           return currentStory;
         });
         setIsGenerating(false);
@@ -411,7 +411,7 @@ export default function Dashboard() {
                     position: "absolute",
                   })}
                   open={openBackDrop}
-                  onClick={() => setOpenBackDrop(false)}
+                  // onClick={() => setOpenBackDrop(false)}
                 >
                   <CircularProgress color="inherit" />
                 </Backdrop>
