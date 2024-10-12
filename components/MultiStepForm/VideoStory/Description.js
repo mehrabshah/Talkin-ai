@@ -28,7 +28,6 @@ export const Description = ({ setActiveStep, formik, isGenerating }) => {
           variant="contained"
           className="bg-[#5bbcff] disabled:bg-gray-600 disabled:!text-white"
           onClick={() => setActiveStep(4)}
-          disabled={isGenerating}
         >
           Back
         </Button>

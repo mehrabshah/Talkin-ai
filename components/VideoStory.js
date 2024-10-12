@@ -40,6 +40,7 @@ export default function Dashboard() {
   const [storyPrediction, setStoryPrediction] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isVideoGenerating, setIsVideoGenerating] = useState(false);
+  const [isRegerating, setIsRegenetating] = useState(false);
   const { isSignedIn, user } = useUser();
   const [activeStep, setActiveStep] = useState(1);
   const [motion, setMotion] = useState(80);
@@ -161,8 +162,7 @@ export default function Dashboard() {
       }
       if (response?.status == "succeeded") {
         setStoryPrediction(response);
-        formik?.resetForm();
-        setActiveStep(1);
+
         setIsVideoGenerating(false);
         setImageUrl(response?.output?.individual_images[0]);
         const updatedCount = await decreaseStoryBoardAndImage2VideoCount(
@@ -179,11 +179,11 @@ export default function Dashboard() {
   // regenerate video
   const handleRegenerateVideo = async () => {
     try {
-      setIsGenerating(true);
+      setIsRegenetating(true);
       setOpenBackDrop(true);
       if (subscriptionData?.metadata?.storyBoardCount == "0") {
         toast.warn("No attempt left , Please purchase a plan");
-        setIsGenerating(false);
+        setIsRegenetating(false);
         setOpenBackDrop(false);
 
         return;
@@ -205,7 +205,7 @@ export default function Dashboard() {
       console.log({ videoPrediction });
       if (video_response.status !== 201) {
         setError(videoPrediction?.detail);
-        setIsGenerating(false);
+        setIsRegenetating(false);
         setOpenBackDrop(false);
         return;
       }
@@ -235,7 +235,7 @@ export default function Dashboard() {
         if (video_response?.status !== 200) {
           setError(videoPrediction?.detail);
 
-          setIsGenerating(false);
+          setIsRegenetating(false);
           setOpenBackDrop(false);
           return;
         }
@@ -264,7 +264,7 @@ export default function Dashboard() {
 
           return currentStory;
         });
-        setIsGenerating(false);
+        setIsRegenetating(false);
         setOpenBackDrop(false);
         const updatedCount = await decreaseStoryBoardAndImage2VideoCount(
           user?.primaryEmailAddress?.emailAddress
@@ -274,7 +274,7 @@ export default function Dashboard() {
       setImageUrl("");
     } catch (error) {
       toast.error(error?.message);
-      setIsGenerating(false);
+      setIsRegenetating(false);
       setOpenBackDrop(false);
     }
   };
@@ -330,7 +330,7 @@ export default function Dashboard() {
           <Description
             setActiveStep={setActiveStep}
             formik={formik}
-            isGenerating={isGenerating}
+            isGenerating={isVideoGenerating}
           />
         );
 
@@ -347,11 +347,12 @@ export default function Dashboard() {
             Available generation : {count || 0}
           </h1>
           <div className="relative">
-            {!storyPrediction ||
+            {/* {!storyPrediction ||
             storyPrediction?.status === "starting" ||
             storyPrediction?.status === "processing"
               ? stepMemo
-              : null}
+              : null} */}
+            {stepMemo}
             {isVideoGenerating ? (
               <Backdrop
                 sx={(theme) => ({
@@ -381,15 +382,20 @@ export default function Dashboard() {
             {storyPrediction && storyPrediction?.status == "succeeded" ? (
               <div className="relative">
                 {storyPrediction?.output && (
-                  <video
-                    controls
-                    muted
-                    autoPlay
-                    src={storyPrediction.output.final_video_story}
-                    width={width}
-                    height={height}
-                    alt="output"
-                  />
+                  <div className=" w-full grid grid-cols-1 justify-center">
+                    <video
+                      controls
+                      muted
+                      autoPlay
+                      src={storyPrediction.output.final_video_story}
+                      className={` ${
+                        storyPrediction?.input?.aspect_ratio === "16:9"
+                          ? "aspect-[16/9] h-full rounded-md"
+                          : "aspect-[9/16] max-h-[450px] mx-auto object-cover rounded-md"
+                      }`}
+                      alt="output"
+                    />
+                  </div>
                 )}
                 <VideoStorySlider
                   gallery={storyPrediction?.output?.individual_videos}
