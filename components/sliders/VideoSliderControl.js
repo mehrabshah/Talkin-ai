@@ -12,6 +12,7 @@ import { IoMdMic, IoMdSettings } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { VideoSliderDialog } from "../Dialog/VideoSliderDialog";
 import { VideoSliderSettingDialog } from "../Dialog/VideoSliderSettingDialog";
+import { BackgroundDialog } from "../Dialog/BackgroundDialog";
 
 export const VideoSliderControl = ({
   setStoryPrediction,
@@ -79,12 +80,7 @@ export const VideoSliderControl = ({
                   <Typography sx={{ fontSize: 14, fontWeight: 700 }}>
                     Audio
                   </Typography>
-                  <Typography
-                    sx={{ fontSize: 12, fontWeight: 300 }}
-                    className="text-gray-400"
-                  >
-                    Apply to all
-                  </Typography>
+                  
                 </Box>
                 <MenuItem
                   onClick={handleClose}
@@ -121,7 +117,10 @@ export const VideoSliderControl = ({
                   >
                     Background Music
                   </Typography>
-                  <Switch defaultChecked size="small" />
+                  <Switch size="small"
+                     checked={openModal === "background"}
+                     onChange={() => setOpenModal("background")}
+                  />
                   <Checkbox size="small" />
                 </MenuItem>
               </Menu>
@@ -138,7 +137,13 @@ export const VideoSliderControl = ({
       <VideoSliderDialog
         open={openModal === "voice-over"}
         handleClose={() => setOpenModal(false)}
-      />
+      /> 
+     <BackgroundDialog
+      open={openModal === "background"}
+      handleClose={() => setOpenModal(false)}
+    /> 
+      
+
       <VideoSliderSettingDialog
         open={openModal === "setting"}
         handleClose={() => setOpenModal(false)}

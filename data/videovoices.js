@@ -1,4 +1,4 @@
-export const Voices = [
+export const VoicesArray = [
   {
     title: "Abby, female",
     sub_title: "confident naration",

@@ -1,5 +1,5 @@
 import { useUser } from "@clerk/nextjs";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useContext } from "react";
 //import FAQ from './FAQ';
 import "react-toastify/dist/ReactToastify.css";
 import SubscriptionContext from "../context/SubscriptionContext";
@@ -31,6 +31,7 @@ import { ImageOption } from "./MultiStepForm/VideoStory/ImageOption";
 import { ImageRatio } from "./MultiStepForm/VideoStory/ImageRatio";
 import { StoryIdea } from "./MultiStepForm/VideoStory/StoryIdea";
 import { VideoStorySlider } from "./sliders/VideoStorySlider";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const width = 1280;
@@ -39,10 +40,10 @@ const height = 720;
 export default function Dashboard() {
   const [storyPrediction, setStoryPrediction] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [isVideoGenerating, setIsVideoGenerating] = useState(false);
-  const [isRegerating, setIsRegenetating] = useState(false);
   const { isSignedIn, user } = useUser();
   const [activeStep, setActiveStep] = useState(1);
+  const [regenerate, setRegenerates] = useState(true);
+
   const [motion, setMotion] = useState(80);
   const [fps, setFps] = useState(6);
   const [numInferenceSteps, setNumInferenceSteps] = useState(9);
@@ -51,8 +52,11 @@ export default function Dashboard() {
   );
   const [activeSlide, setActiveSlide] = useState(0);
   const [openBackDrop, setOpenBackDrop] = useState(false);
+  const { setItem } = useLocalStorage();
 
   // updated code subscription check
+
+
 
   const [count, setCount] = useState(0);
 
@@ -87,7 +91,6 @@ export default function Dashboard() {
       );
       setActiveStep(5);
     } catch (error) {
-      toast.error(error?.message);
       setIsGenerating(false);
     }
   };
@@ -113,10 +116,10 @@ export default function Dashboard() {
 
       if (subscriptionData?.metadata?.storyBoardCount == "0") {
         toast.warn("No attempt left , Please purchase a plan");
-        setIsVideoGenerating(false);
+        setIsGenerating(false);
         return;
       }
-      setIsVideoGenerating(true);
+      setIsGenerating(true);
       const body = {
         num_ids: 3,
         style_name,
@@ -130,13 +133,14 @@ export default function Dashboard() {
       };
 
       let storyPrediction = await generateVideoStory({ body });
+
       let response = storyPrediction?.data;
 
       if (storyPrediction?.status !== 201) {
         setError(response?.detail);
         setStoryPrediction(response);
         setImageUrl(response?.detail?.output?.individual_images[0]);
-        setIsVideoGenerating(false);
+        setIsGenerating(false);
         return;
       }
       setStoryPrediction(response);
@@ -153,7 +157,7 @@ export default function Dashboard() {
         response = storyPrediction?.data;
         if (storyPrediction?.status !== 200) {
           setError(response?.detail);
-          setIsVideoGenerating(false);
+          setIsGenerating(false);
           return;
         }
 
@@ -162,28 +166,37 @@ export default function Dashboard() {
       }
       if (response?.status == "succeeded") {
         setStoryPrediction(response);
+        formik?.resetForm();
 
-        setIsVideoGenerating(false);
+        setActiveStep(1);
+        setIsGenerating(false);
         setImageUrl(response?.output?.individual_images[0]);
         const updatedCount = await decreaseStoryBoardAndImage2VideoCount(
           user?.primaryEmailAddress?.emailAddress
         );
         setCount(updatedCount?.metadata?.storyBoardCount);
       }
+
+      setItem("videoUrls", storyPrediction.data.output);
+      setItem("FinalvideoUrls", storyPrediction.data.output.final_video_story);
+
+
     } catch (error) {
-      toast.error(error?.message);
-      setIsVideoGenerating(false);
+      setIsGenerating(false);
     }
   };
 
   // regenerate video
   const handleRegenerateVideo = async () => {
+    setRegenerates(false);
+
     try {
-      setIsRegenetating(true);
+      setIsGenerating(true);
       setOpenBackDrop(true);
+
       if (subscriptionData?.metadata?.storyBoardCount == "0") {
         toast.warn("No attempt left , Please purchase a plan");
-        setIsRegenetating(false);
+        setIsGenerating(false);
         setOpenBackDrop(false);
 
         return;
@@ -205,8 +218,9 @@ export default function Dashboard() {
       console.log({ videoPrediction });
       if (video_response.status !== 201) {
         setError(videoPrediction?.detail);
-        setIsRegenetating(false);
+        setIsGenerating(false);
         setOpenBackDrop(false);
+
         return;
       }
 
@@ -217,7 +231,8 @@ export default function Dashboard() {
           1,
           videoPrediction?.output
         );
-        // currentStory.status = videoPrediction?.status;
+
+        currentStory.status = videoPrediction?.status;
 
         console.log({ currentStory });
         return currentStory;
@@ -227,15 +242,17 @@ export default function Dashboard() {
         videoPrediction?.status !== "failed"
       ) {
         await sleep(1000);
+
         const video_response = await getGeneratedImageToVideo({
           id: videoPrediction?.id,
         });
+
         videoPrediction = video_response?.data;
 
         if (video_response?.status !== 200) {
           setError(videoPrediction?.detail);
 
-          setIsRegenetating(false);
+          setIsGenerating(false);
           setOpenBackDrop(false);
           return;
         }
@@ -247,7 +264,7 @@ export default function Dashboard() {
             1,
             videoPrediction?.output
           );
-          // currentStory.status = videoPrediction?.status;
+          currentStory.status = videoPrediction?.status;
 
           return currentStory;
         });
@@ -261,20 +278,21 @@ export default function Dashboard() {
             1,
             videoPrediction?.output
           );
-
+          currentStory.status = videoPrediction?.status;
           return currentStory;
         });
-        setIsRegenetating(false);
+        setIsGenerating(false);
         setOpenBackDrop(false);
+
         const updatedCount = await decreaseStoryBoardAndImage2VideoCount(
           user?.primaryEmailAddress?.emailAddress
         );
         setCount(updatedCount?.metadata?.storyBoardCount);
       }
       setImageUrl("");
+      
     } catch (error) {
-      toast.error(error?.message);
-      setIsRegenetating(false);
+      setIsGenerating(false);
       setOpenBackDrop(false);
     }
   };
@@ -309,64 +327,50 @@ export default function Dashboard() {
   });
 
   // steps
-  const stepMemo = useMemo(() => {
-    switch (activeStep) {
-      case 1:
-        return <ImageOption formik={formik} />;
-      case 2:
-        return <ImageRatio setActiveStep={setActiveStep} formik={formik} />;
-      case 3:
-        return <Character setActiveStep={setActiveStep} formik={formik} />;
-      case 4:
-        return (
-          <StoryIdea
-            setActiveStep={setActiveStep}
-            formik={formik}
-            isGenerating={isGenerating}
-          />
-        );
-      case 5:
-        return (
-          <Description
-            setActiveStep={setActiveStep}
-            formik={formik}
-            isGenerating={isVideoGenerating}
-          />
-        );
 
-      default:
-        break;
+  const stepMemo = useMemo(() => {
+    if (activeStep === 1 && !openBackDrop) {
+      return <ImageOption formik={formik} />;
+    } else if (activeStep === 2 && !openBackDrop) {
+      return <ImageRatio setActiveStep={setActiveStep} formik={formik} />;
+    } else if (activeStep === 3 && !openBackDrop) {
+      return <Character setActiveStep={setActiveStep} formik={formik} />;
+    } else if (activeStep === 4 && !openBackDrop) {
+      return (
+        <StoryIdea
+          setActiveStep={setActiveStep}
+          formik={formik}
+          isGenerating={isGenerating}
+        />
+      );
+    } else if (activeStep === 5 && !openBackDrop) {
+      return (
+        <Description
+          setActiveStep={setActiveStep}
+          formik={formik}
+          isGenerating={isGenerating}
+          status={storyPrediction?.status || "null"}
+        />
+      );
     }
-  }, [formik, activeStep]);
+
+    return null;
+  }, [formik, activeStep, isGenerating, setActiveStep]);
 
   return (
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-y-12 md:grid-cols-1 md:gap-x-12 ">
         <div className="">
-          <h1 className="inline-block  mb-5 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">
+          <h1 className="inline-block  mb-1 text-center border border-gray-400 rounded transition-all duration-500  text-[#ccc5b9] font-semibold py-3 px-3 lg:px-3">
             Available generation : {count || 0}
           </h1>
-          <div className="relative">
-            {/* {!storyPrediction ||
+
+          {(!storyPrediction ||
             storyPrediction?.status === "starting" ||
-            storyPrediction?.status === "processing"
-              ? stepMemo
-              : null} */}
-            {stepMemo}
-            {isVideoGenerating ? (
-              <Backdrop
-                sx={(theme) => ({
-                  color: "#fff",
-                  zIndex: theme.zIndex.drawer + 1,
-                  position: "absolute",
-                })}
-                open={isVideoGenerating}
-                onClick={() => setOpenBackDrop(false)}
-              >
-                <CircularProgress color="inherit" />
-              </Backdrop>
-            ) : null}
-          </div>
+            storyPrediction?.status === "processing") &&
+          regenerate
+            ? stepMemo
+            : null}
         </div>
 
         <div className="">
@@ -375,27 +379,29 @@ export default function Dashboard() {
               Output
             </label>
 
-            <p className="py-3 text-sm opacity-50">
-              Generation Status: {storyPrediction?.status}
-            </p>
+            {!regenerate &&
+              (storyPrediction?.status === "starting" ||
+                storyPrediction?.status === "processing") && (
+                <div className="flex  items-center  ">
+                  <p className=" text-sm opacity-50  mr-4">
+                    Generation Status: {storyPrediction?.status}
+                  </p>{" "}
+                  <CircularProgress color="inherit" />
+                </div>
+              )}
 
             {storyPrediction && storyPrediction?.status == "succeeded" ? (
               <div className="relative">
                 {storyPrediction?.output && (
-                  <div className=" w-full grid grid-cols-1 justify-center">
-                    <video
-                      controls
-                      muted
-                      autoPlay
-                      src={storyPrediction.output.final_video_story}
-                      className={` ${
-                        storyPrediction?.input?.aspect_ratio === "16:9"
-                          ? "aspect-[16/9] h-full rounded-md"
-                          : "aspect-[9/16] max-h-[450px] mx-auto object-cover rounded-md"
-                      }`}
-                      alt="output"
-                    />
-                  </div>
+                  <video
+                    controls
+                    muted
+                    autoPlay
+                    src={storyPrediction.output.final_video_story}
+                    width={width}
+                    height={height}
+                    alt="output"
+                  />
                 )}
                 <VideoStorySlider
                   gallery={storyPrediction?.output?.individual_videos}
@@ -417,8 +423,9 @@ export default function Dashboard() {
                     position: "absolute",
                   })}
                   open={openBackDrop}
-                  // onClick={() => setOpenBackDrop(false)}
+                  onClick={() => setOpenBackDrop(false)}
                 >
+                  {" "}
                   <CircularProgress color="inherit" />
                 </Backdrop>
               </div>

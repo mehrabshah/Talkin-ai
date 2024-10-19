@@ -1,7 +1,8 @@
 import { Box, Dialog, DialogContent, Typography } from "@mui/material";
-import VoiceOver from "../../components/VoiceOver";
+import VoiceOver from "../VoiceOver";
+import BackgroundMusic from "../BackgroundMusic";
 
-export const VideoSliderDialog = ({ open, handleClose }) => {
+export const BackgroundDialog = ({ open, handleClose }) => {
   return (
     <Dialog
       onClose={handleClose}
@@ -12,8 +13,8 @@ export const VideoSliderDialog = ({ open, handleClose }) => {
     >
       <DialogContent className="md:p-3 p-1">
       <Box p={2}> 
-        <VoiceOver />
-        </Box>
+          <BackgroundMusic/>
+          </Box>
       </DialogContent>
     </Dialog>
   );

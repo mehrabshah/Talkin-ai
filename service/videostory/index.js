@@ -1,5 +1,4 @@
-import axios from "axios";
-
+import axios from "../../lib/axios";
 export const generateStoryDescription = async ({ body }) => {
   try {
     const response = await axios.post("/api/returnStoryDescription", body);
@@ -8,6 +7,10 @@ export const generateStoryDescription = async ({ body }) => {
     throw new Error(error);
   }
 };
+
+
+
+
 
 export const generateVideoStory = async ({ body, id = "" }) => {
   try {
