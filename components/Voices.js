@@ -21,8 +21,6 @@ function Voices({setActiveStep}) {
   const { blobToBase64 } = useBlobBase64();
   const { setItem } = useLocalStorage();
 
-  
-
   useEffect(() => {
     async function getVoices() {
       try {
@@ -49,7 +47,7 @@ function Voices({setActiveStep}) {
     setAudioUrls([])
 
     const sentences = storyDescription
-      .split(".")
+      .split("\n")
       .filter((sentence) => sentence.trim() !== "");
 
     try {
@@ -105,7 +103,6 @@ function Voices({setActiveStep}) {
           </MenuItem>
         ))}
       </Select>
-
       <div className="flex  justify-end">
         <Button
           variant="contained"

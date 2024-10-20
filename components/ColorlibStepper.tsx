@@ -13,12 +13,11 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Typography from "@mui/material/Typography";
 import FlagIcon from "@mui/icons-material/Flag";
 
-// Custom styled StepConnector with gradient for active/completed steps
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 50,
     [theme.breakpoints.down("sm")]: {
-      top: 20, // Adjust this value as needed for smaller screens
+      top: 20, 
     },
   },
   [`&.${stepConnectorClasses.active}`]: {
@@ -42,7 +41,6 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   },
 }));
 
-// Custom styled icon component
 const ColorlibStepIconRoot = styled("div")<{
   ownerState: { completed?: boolean; active?: boolean };
 }>(({ theme, ownerState }) => ({
@@ -71,11 +69,9 @@ const ColorlibStepIconRoot = styled("div")<{
   },
 }));
 
-// Function for custom step icons
 function ColorlibStepIcon(props: StepIconProps) {
   const { active, completed } = props;
 
-  // Define icons for steps
   const icons: { [index: string]: React.ReactElement } = {
     1: <FlagIcon />,
     2: <HourglassEmptyIcon />,
@@ -90,7 +86,6 @@ function ColorlibStepIcon(props: StepIconProps) {
   );
 }
 
-// Main Stepper component
 export default function ColorlibStepper({ activeStepper, steps }) {
   return (
     <Stepper
@@ -104,7 +99,7 @@ export default function ColorlibStepper({ activeStepper, steps }) {
             <Typography
               sx={{
                 color: "white",
-                fontSize: { xs: "0.8rem", sm: "1rem" }, // Smaller font size on xs screens
+                fontSize: { xs: "0.8rem", sm: "1rem" }, 
               }}
             >
               {label}

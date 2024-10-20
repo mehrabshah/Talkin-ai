@@ -1,5 +1,4 @@
-import { Box, Dialog, DialogContent, Typography } from "@mui/material";
-import VoiceOver from "../VoiceOver";
+import { Box, Dialog, DialogContent } from "@mui/material";
 import BackgroundMusic from "../BackgroundMusic";
 
 export const BackgroundDialog = ({ open, handleClose }) => {

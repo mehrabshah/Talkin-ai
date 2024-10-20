@@ -1,4 +1,4 @@
-import { Box, Dialog, DialogContent, Typography } from "@mui/material";
+import { Box, Dialog, DialogContent } from "@mui/material";
 import VoiceOver from "../../components/VoiceOver";
 
 export const VideoSliderDialog = ({ open, handleClose }) => {

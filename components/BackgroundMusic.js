@@ -1,4 +1,3 @@
-// components/BackgroundMusic.js
 import React, { useState } from "react";
 import { Gallery } from "../data/Gallery";
 import { Radio, FormControlLabel, Button } from "@mui/material";
@@ -17,7 +16,6 @@ function BackgroundMusic() {
       const formData = new FormData();
       formData.append("audio", file);
 
-      // Make a POST request to upload the file
       const response = await fetch("/api/upload_file", {
         method: "POST",
         body: formData,
@@ -25,7 +23,7 @@ function BackgroundMusic() {
 
       if (response.ok) {
         const result = await response.json();
-        const trackPath = result.path; // Path of the uploaded track
+        const trackPath = result.path; 
         setUploadedTracks((prevTracks) => [
           ...prevTracks,
           { name: file.name, path: trackPath },
@@ -59,7 +57,6 @@ function BackgroundMusic() {
           />
         </div>
       </div>
-
       <div>
         <h1 className="font-bold">Uploaded Music</h1>
         <div className="grid grid-cols-1 gap-4 my-8">
@@ -82,7 +79,6 @@ function BackgroundMusic() {
           ))}
         </div>
       </div>
-
       <div>
         <h1 className="font-bold">Gallery</h1>
         <div className="flex flex-col my-8">

@@ -1,20 +1,20 @@
 import React, { useContext, useEffect } from "react";
-import { useRouter } from 'next/router'; // Import the useRouter hook
+import { useRouter } from "next/router"; 
 import { AudioContext } from "../context/AudioContext";
-import useLocalStorage from '../hooks/useLocalStorage';
+import useLocalStorage from "../hooks/useLocalStorage";
 
 function AiVoiceOver() {
   const { audioUrls } = useContext(AudioContext);
   const { setItem } = useLocalStorage();
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter(); 
 
   useEffect(() => {
     setItem("audioUrls", audioUrls);
   }, [audioUrls, setItem]);
 
-  // Function to navigate to /final-video
+
   const navigateToFinalVideo = () => {
-  setItem("SelectedOption","VoiceOver")
+    setItem("SelectedOption", "VoiceOver");
     router.push("/final-video");
   };
 
@@ -26,11 +26,14 @@ function AiVoiceOver() {
           Your browser does not support the audio tag.
         </audio>
       ))}
-
-      {/* Add the button to navigate */}
-      <button onClick={navigateToFinalVideo} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
-        Go to Final Video
-      </button>
+      <div className=" flex justify-end">
+        <button
+          onClick={navigateToFinalVideo}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Generate Final Video
+        </button>
+      </div>
     </div>
   );
 }
