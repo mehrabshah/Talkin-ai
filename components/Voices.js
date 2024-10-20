@@ -11,6 +11,8 @@ import { StoryContext } from "../context/StoryContext";
 import { AudioContext } from '../context/AudioContext';
 import useBlobBase64 from '../hooks/useBlobBase64';
 import useLocalStorage from "../hooks/useLocalStorage";
+import { toast, ToastContainer } from "react-toastify";
+
 
 function Voices({setActiveStep}) {
   const [voices, setVoices] = useState([]);
@@ -82,7 +84,7 @@ function Voices({setActiveStep}) {
       setActiveStep(3)
     } catch (error) {
       setLoading(false);
-      console.log("Error:", error);
+      toast.error("We encountered an issue.Please Try Again");
       throw new Error("Failed to fetch api");
     } finally {
       setLoading(false);
@@ -90,6 +92,7 @@ function Voices({setActiveStep}) {
   };
 
   return (
+    <div>
     <FormControl fullWidth>
       <InputLabel>Select a Voice</InputLabel>
       <Select
@@ -116,6 +119,8 @@ function Voices({setActiveStep}) {
         </Button>
       </div>
     </FormControl>
+    <ToastContainer />
+    </div>
   );
 }
 
