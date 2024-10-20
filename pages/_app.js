@@ -1,7 +1,11 @@
 import "../styles/globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
+
 import { dark } from "@clerk/themes";
+import { StoryProvider } from "../context/StoryContext";
+import { AudioProvider } from "../context/AudioContext";
+
 import dynamic from "next/dynamic";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -26,7 +30,11 @@ const MyApp = ({ Component, pageProps }) => {
       <SubscriptionProvider>
         <Layout>
           <CrispWithNoSSR />
-          <Component {...pageProps} />
+            <AudioProvider>
+              <StoryProvider>
+                <Component {...pageProps} />
+              </StoryProvider>
+            </AudioProvider>
           <ToastContainer
             position="top-right"
             autoClose={5000}

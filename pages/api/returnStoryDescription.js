@@ -29,12 +29,18 @@ const generateDescription = async ({ characters, idea, numPanels }) => {
     const data = await response.json();
 
     return data.choices[0].message.content;
+
   } catch (err) {
     console.error(err);
+    return "We encountered an issue while generating the story. Please try again later.";
+
   }
 };
 
 export default async function handler(req, res) {
+
+
+  
   const { characters, idea, numPanels } = req.body;
 
   const storyDescription = await generateDescription({
@@ -43,7 +49,13 @@ export default async function handler(req, res) {
     numPanels,
   });
 
-  res.status(200).json({
-    storyDescription,
-  });
+  if (storyDescription) {
+    res.status(200).json({ storyDescription });
+  } else {
+    res.status(500).json({
+      message: "We encountered an issue generating the story. Please try again later.",
+    });
+  }
+
+
 }

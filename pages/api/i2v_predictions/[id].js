@@ -8,6 +8,15 @@ export default async function handler(req, res) {
       },
     }
   );
+
+  if (response.status === 401) {
+    const errorResponse = await response.json();
+    console.error("Authorization Error:", errorResponse);
+    res.status(401).json({ message: "You are not authorized. Please log in and try again." });
+    return;
+  }
+
+
   if (response.status !== 200) {
     let error = await response.json();
     res.statusCode = 500;

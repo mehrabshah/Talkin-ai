@@ -1,20 +1,26 @@
 export default async function handler(req, res) {
-  const response = await fetch(
-    "https://api.replicate.com/v1/predictions/" + req.query.id,
-    {
-      headers: {
-        Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  if (response.status !== 200) {
-    let error = await response.json();
-    res.statusCode = 500;
-    res.end(JSON.stringify({ detail: error.detail }));
-    return;
-  }
+  try {
+    const response = await fetch(
+      "https://api.replicate.com/v1/predictions/" + req.query.id,
+      {
+        headers: {
+          Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-  const prediction = await response.json();
-  res.end(JSON.stringify(prediction));
+    if (response.status !== 200) {
+      const error = await response.json();
+      res.status(500).json({ message: "Something went wrong. Please try again later." });
+      return;
+    }
+
+    const prediction = await response.json();
+    res.status(200).json(prediction);
+
+  } catch (error) {
+    console.error("Error fetching prediction:", error);
+    res.status(500).json({ message: "We encountered an issue processing your request. Please try again later." });
+  }
 }
