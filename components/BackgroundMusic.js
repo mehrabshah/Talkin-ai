@@ -3,6 +3,10 @@ import { Gallery } from "../data/Gallery";
 import { Radio, FormControlLabel, Button } from "@mui/material";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useRouter } from "next/router";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 function BackgroundMusic() {
   const router = useRouter();
@@ -35,6 +39,10 @@ function BackgroundMusic() {
   };
 
   const generateFinalVideo = () => {
+    if (!selectedTrack) {
+      toast.error("Please select a background track before proceeding."); 
+      return;
+    }
     setItem("SelectedOption", "BackgroundVoice");
     router.push("/final-video");
   };
