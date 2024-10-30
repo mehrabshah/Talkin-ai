@@ -40,6 +40,29 @@ function Voices({setActiveStep}) {
     getVoices();
   }, []);
 
+
+  const getSilentAudioBlob = async () => {
+    try {
+      const response = await fetch("/api/silent_audio");
+      if (!response.ok) throw new Error("Failed to fetch silent audio");
+      
+      const data = await response.json();
+      const base64Audio = data.audioData;
+      
+      const responseBlob = await fetch(base64Audio);
+      const blob = await responseBlob.blob();
+      
+      return blob;
+    } catch (error) {
+      console.error("Error fetching silent audio blob:", error);
+      return null;
+    }
+  };
+  
+  
+  
+  
+  
   const handleSelectVoice = (event) => {
     setSelectedVoice(event.target.value);
   };
@@ -50,38 +73,48 @@ function Voices({setActiveStep}) {
 
     const sentences = storyDescription
       .split("\n")
-      .filter((sentence) => sentence.trim() !== "");
 
     try {
       const audioStringsArray = [];
 
       for (const sentence of sentences) {
         const trimmedSentence = sentence.trim();
-
-        const response = await fetch("/api/elevenlabs", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            message: trimmedSentence,
-            voice: selectedVoice,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Something went wrong");
+        let audioBase64;
+    
+        if (trimmedSentence == "") {
+          audioBase64 = "silent_audio"
+        } else {
+          const response = await fetch("/api/elevenlabs", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              message: trimmedSentence,
+              voice: selectedVoice,
+            }),
+          });
+    
+          if (!response.ok) {
+            throw new Error("Something went wrong");
+          }
+    
+          const blob = await response.blob();
+          audioBase64 = await blobToBase64(blob);
+          const url = URL.createObjectURL(blob);
+          setAudioUrls((prevAudioUrls) => [...prevAudioUrls, url]);
         }
-         const blob = await response.blob();
-         const audioBase64=await blobToBase64(blob)
-         audioStringsArray.push(audioBase64); 
-        const url = URL.createObjectURL(blob);
-        setAudioUrls((prevAudioUrls) => [...prevAudioUrls, url]);
+    
+        audioStringsArray.push(audioBase64);
         await new Promise((resolve) => setTimeout(resolve, 1000));
-
       }
+    
+
+
       setItem("Base64Audio", audioStringsArray);
       setActiveStep(3)
+
+      
     } catch (error) {
       setLoading(false);
       toast.error("We encountered an issue.Please Try Again");

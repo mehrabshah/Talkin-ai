@@ -11,20 +11,32 @@ function VoiceOverDescription({ setActiveStep }) {
   const videoUrlsCount = videoUrlsarray.individual_videos.length;
 
   const handleChange = (e) => {
-    setStoryDescription(e.target.value);
+    const inputValue = e.target.value;
+    const newLines = (inputValue.match(/\n/g) || []).length;
+  
+    if (newLines <= 3) {
+      setStoryDescription(inputValue);
+    } else {
+      const allowedText = inputValue.split("\n").slice(0, videoUrlsCount-1).join("\n");
+      setStoryDescription(allowedText);
+    }
   };
+  
+    
 
   const handleNext = () => {
+
     const lineCount = storyDescription
       .split("\n")
-      .filter((line) => line.trim() !== "").length;
 
-    if (videoUrlsCount !== lineCount) {
+
+    if (videoUrlsCount !== lineCount.length) {
       setErrorMessage(
         `Please enter ${videoUrlsCount} sentences for ${videoUrlsCount} video clips`
       );
       return;
     }
+
     setActiveStep(2);
   };
 
@@ -32,11 +44,7 @@ function VoiceOverDescription({ setActiveStep }) {
     <>
       <h2 className="font-semibold mb-4">Story Description</h2>
       <textarea
-        rows={
-          storyDescription === ""
-            ? 12
-            : storyDescription.split("\n").length + 12
-        }
+        rows={videoUrlsCount}
         name="output"
         value={storyDescription}
         onChange={handleChange}

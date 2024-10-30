@@ -155,20 +155,31 @@ export default async function handler(req, res) {
   
     const tempFilePaths = [];
     const mergedVideoPaths = [];
+    let audioFilePath = ""
   
     try {
       for (let i = 0; i < audio.length; i++) {
         // Generate temporary filenames for audio and video
+       
+       if(audio[i]=="silent_audio"){
+        
+          audioFilePath = path.join(process.cwd(), 'public', 'silent.mp3');
+       }
+       else
+       {
         const audioFileName = `audio-${uuidv4()}.mp3`;
-        const audioFilePath = path.join(process.cwd(), 'public', audioFileName);
+           audioFilePath = path.join(process.cwd(), 'public', audioFileName);
+         // Save audio from base64
+         const base64Audio = audio[i].replace(/^data:application\/octet-stream;base64,/, "");
+         fs.writeFileSync(audioFilePath, base64Audio, { encoding: 'base64' });
+
+       }
         const videoFileName = `video-${uuidv4()}.mp4`;
         const videoFilePath = path.join(process.cwd(), 'public', videoFileName);
         const outputVideoWithAudioPath = path.join(process.cwd(), 'public', `output-${uuidv4()}.mp4`);
         const outputLoopedVideoPath = path.join(process.cwd(), 'public', `looped-${uuidv4()}.mp4`);
   
-        // Save audio from base64
-        const base64Audio = audio[i].replace(/^data:application\/octet-stream;base64,/, "");
-        fs.writeFileSync(audioFilePath, base64Audio, { encoding: 'base64' });
+       
   
         // Download the video from the provided URL and save it
         const response = await axios({

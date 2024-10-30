@@ -179,8 +179,7 @@ export default function Dashboard() {
 
       setItem("videoUrls", storyPrediction.data.output);
       setItem("FinalvideoUrls", storyPrediction.data.output.final_video_story);
-
-
+      
     } catch (error) {
       setIsGenerating(false);
     }
