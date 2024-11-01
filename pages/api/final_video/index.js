@@ -112,29 +112,32 @@ function cleanUp(files) {
     });
 }
 export function concatenateVideos(videoPaths, outputPath) {
-    return new Promise((resolve, reject) => {
-      const fileListPath = path.join(process.cwd(), 'public', `filelist-${uuidv4()}.txt`);
-  
-      // Create a text file that lists all the video paths to concatenate
-      const fileListContent = videoPaths.map(video => `file '${video}'`).join('\n');
-      fs.writeFileSync(fileListPath, fileListContent);
-  
-      // Use fluent-ffmpeg to concatenate the videos
-      ffmpeg()
-        .input(fileListPath)
-        .inputOptions('-f', 'concat', '-safe', '0')
-        .outputOptions('-c', 'copy')  // Copy the codec for faster processing
-        .on('end', () => {
-          fs.unlinkSync(fileListPath); // Clean up the temporary file list
-          resolve(outputPath);
-        })
-        .on('error', (err) => {
-          fs.unlinkSync(fileListPath); // Clean up even if there's an error
-          reject(err);
-        })
-        .save(outputPath);
-    });
-  }
+  return new Promise((resolve, reject) => {
+    const fileListPath = path.join(process.cwd(), 'public', `filelist-${uuidv4()}.txt`);
+
+
+    // Create a text file that lists all the video paths to concatenate
+    const fileListContent = videoPaths.map(video => `file '${video}'`).join('\n');
+    fs.writeFileSync(fileListPath, fileListContent);
+
+
+    // Use fluent-ffmpeg to concatenate the videos
+    ffmpeg()
+      .input(fileListPath)
+      .inputOptions('-f', 'concat', '-safe', '0')
+      .outputOptions('-c:v', 'copy') // Copy the video codec
+      .outputOptions('-c:a', 'aac') // Re-encode audio to ensure proper mixing
+      .on('end', () => {
+        fs.unlinkSync(fileListPath); // Clean up the temporary file list
+        resolve(outputPath);
+      })
+      .on('error', (err) => {
+        fs.unlinkSync(fileListPath); // Clean up even if there's an error
+        reject(err);
+      })
+      .save(outputPath);
+  });
+}
 /**
  * Main processing function to orchestrate the media processing.
  * 
@@ -143,11 +146,13 @@ export function concatenateVideos(videoPaths, outputPath) {
  */
 
 export default async function handler(req, res) {
+
     if (req.method !== "POST") {
       return res.status(405).json({ message: "Method not allowed" });
     }
   
     const { audio, video } = req.body;
+
   
     if (!audio || !video || audio.length !== video.length || audio.length !== 4) {
       return res.status(400).json({ message: "Four audio and video pairs are required" });
@@ -155,31 +160,20 @@ export default async function handler(req, res) {
   
     const tempFilePaths = [];
     const mergedVideoPaths = [];
-    let audioFilePath = ""
   
     try {
       for (let i = 0; i < audio.length; i++) {
         // Generate temporary filenames for audio and video
-       
-       if(audio[i]=="silent_audio"){
-        
-          audioFilePath = path.join(process.cwd(), 'public', 'silent.mp3');
-       }
-       else
-       {
         const audioFileName = `audio-${uuidv4()}.mp3`;
-           audioFilePath = path.join(process.cwd(), 'public', audioFileName);
-         // Save audio from base64
-         const base64Audio = audio[i].replace(/^data:application\/octet-stream;base64,/, "");
-         fs.writeFileSync(audioFilePath, base64Audio, { encoding: 'base64' });
-
-       }
+        const audioFilePath = path.join(process.cwd(), 'public', audioFileName);
         const videoFileName = `video-${uuidv4()}.mp4`;
         const videoFilePath = path.join(process.cwd(), 'public', videoFileName);
         const outputVideoWithAudioPath = path.join(process.cwd(), 'public', `output-${uuidv4()}.mp4`);
         const outputLoopedVideoPath = path.join(process.cwd(), 'public', `looped-${uuidv4()}.mp4`);
   
-       
+        // Save audio from base64
+        const base64Audio = audio[i].replace(/^data:application\/octet-stream;base64,/, "");
+        fs.writeFileSync(audioFilePath, base64Audio, { encoding: 'base64' });
   
         // Download the video from the provided URL and save it
         const response = await axios({
@@ -207,7 +201,9 @@ export default async function handler(req, res) {
         }
   
         // Merge the final video (looped if needed) with the audio
-        await mergeAudioVideo(finalVideoPath, audioFilePath, outputVideoWithAudioPath);
+       const merge_audio=await mergeAudioVideo(finalVideoPath, audioFilePath, outputVideoWithAudioPath);
+       console.log("merge_audio",merge_audio)
+
   
         // Store the merged video path for concatenation later
         mergedVideoPaths.push(outputVideoWithAudioPath);
@@ -218,14 +214,15 @@ export default async function handler(req, res) {
           tempFilePaths.push(finalVideoPath); // Add looped video if it was created
         }
       }
+
   
       // Now concatenate all the merged videos into one
       const finalConcatenatedVideoPath = path.join(process.cwd(), 'public', `final-output-${uuidv4()}.mp4`);
       await concatenateVideos(mergedVideoPaths, finalConcatenatedVideoPath);
   
       // Cleanup temporary files
-      tempFilePaths.forEach(filePath => fs.unlinkSync(filePath));
-      mergedVideoPaths.forEach(filePath => fs.unlinkSync(filePath));
+      // tempFilePaths.forEach(filePath => fs.unlinkSync(filePath));
+      // mergedVideoPaths.forEach(filePath => fs.unlinkSync(filePath));
   
       // Return the final concatenated video without the /public/ prefix
       res.status(200).json({ 
